@@ -1,0 +1,184 @@
+package com.jdbc.lifegame.controller;
+import static com.jdbc.lifegame.view.DisplayMsg.displayAchievement;
+import static com.jdbc.lifegame.view.DisplayMsg.displayNoData;
+
+import java.util.List;
+
+import com.jdbc.lifegame.model.vo.Achievement;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+import com.jdbc.lifegame.service.AchievementService;
+
+public class AchievementController {
+	AchievementService as = new AchievementService();
+	private boolean isAlreadyAchieved = false;
+	
+	public AchievementController() {
+		super();
+	}
+	
+	public void showAchievedList(String accessId) {
+		List<Achievement> achieveList = as.showAchievedList(accessId);
+		if(achieveList.isEmpty()) {
+			displayNoData("업적이 존재하지 않습니다.");
+		}else {
+			displayAchievement(achieveList, "업적 리스트");
+		}
+	}
+	
+	public void initUserAchievements(String userId) {
+	    int result = as.initUserAchievements(userId);
+	    if(result > 0) {
+	        System.out.println("업적 초기화 완료: " + result + "개 업적 등록");
+	    } else {
+	        System.out.println("업적 초기화 실패");
+	    }
+	}
+	
+	public boolean checkAchievements(LifeCharacter life, String endReason) {
+	    boolean hasNewAchievements = false;
+	    
+	    if (checkAchievement1(life, endReason)) hasNewAchievements = true; // 꽃다운 나이에... 안타깝네
+	    if (checkAchievement2(life)) hasNewAchievements = true; // 인생사 공수레 공수거
+	    if (checkAchievement3(life)) hasNewAchievements = true; // 나는야 건물주
+	    if (checkAchievement4(life)) hasNewAchievements = true; // 편한 일이 최고야
+	    if (checkAchievement5(life)) hasNewAchievements = true; // 임직원 외길 인생
+	    if (checkAchievement6(life)) hasNewAchievements = true; // 백만장자
+	    if (checkAchievement7(life)) hasNewAchievements = true; // 억소리나는 인생
+	    if (checkAchievement8(life)) hasNewAchievements = true; // 천재
+	    if (checkAchievement9(life)) hasNewAchievements = true; // 금강불괴
+	    if (checkAchievement10(life)) hasNewAchievements = true; // 노가다의 신
+	    if (checkAchievement11(life)) hasNewAchievements = true; // 짐종국
+	    if (checkAchievement12(life)) hasNewAchievements = true; // Do you Know Club
+	    if (checkAchievement13(life)) hasNewAchievements = true; // 로또 주식회사 파산
+	    if (checkAchievement14(life)) hasNewAchievements = true; // 떡상 가즈아!!! 
+	    
+	    return hasNewAchievements;
+	}
+
+	// 개별 업적 체크 메서드들
+	private boolean checkAchievement1(LifeCharacter life, String endReason) {
+	    if(endReason.contains("사망") && life.getAge() < 30)
+	    	return updateAchievement(life.getUserId(), 1);
+	    	
+	    return false;
+	}
+
+	private boolean checkAchievement2(LifeCharacter life) {
+	    // 인생사 공수레 공수거 (최종 자산 0원)
+	    if (life.getMoney() == 0) {
+	        return updateAchievement(life.getUserId(), 2);
+	    }
+	    return false;
+	}
+
+	private boolean checkAchievement3(LifeCharacter life) {
+	    // 나는야 건물주 (아파트, 빌딩, 호텔 모두 보유)
+	    if (life.isHasApartment() && life.isHasBuilding() && life.isHasHotel()) {
+	        return updateAchievement(life.getUserId(), 3);
+	    }
+	    return false;
+	}
+
+	private boolean checkAchievement4(LifeCharacter life) {
+	    // 편한 일이 최고야 (아르바이트 경력 50년 이상)
+	    if (life.getPartTimeExp() >= 50) {
+	        return updateAchievement(life.getUserId(), 4);
+	    }
+	    return false;
+	}
+
+	private boolean checkAchievement5(LifeCharacter life) {
+	    // 임직원 외길 인생 (회사원 경력 50년 이상, 임원 및 창업자 0년)
+	    if (life.getEmployeeExp() >= 50 && life.getExecutiveExp() == 0 && life.getEntrepreneurExp() == 0) {
+	        return updateAchievement(life.getUserId(), 5);
+	    }
+	    return false;
+	}
+
+	private boolean checkAchievement6(LifeCharacter life) {
+	    // 백만장자 (최종 자산 10억원 이상)
+	    if (life.getMoney() >= 100000) {
+	        return updateAchievement(life.getUserId(), 6);
+	    }
+	    return false;
+	}
+
+	private boolean checkAchievement7(LifeCharacter life) {
+	    // 억소리나는 인생 (최종 자산 100억원 이상)
+	    if (life.getMoney() >= 1000000) {
+	        return updateAchievement(life.getUserId(), 7);
+	    }
+	    return false;
+	}
+	
+	private boolean checkAchievement8(LifeCharacter life) {
+	    // 천재 (지능 300 이상)
+	    if (life.getIntelligence() >= 300) {
+	        return updateAchievement(life.getUserId(), 8);
+	    }
+	    return false;
+	}
+	
+	private boolean checkAchievement9(LifeCharacter life) {
+	    // 금강불괴 ( 게임 종료 시 체력이 600 이상이면 달성 )
+	    if (life.getIntelligence() >= 300) {
+	        return updateAchievement(life.getUserId(), 9);
+	    }
+	    return false;
+	}
+	
+	private boolean checkAchievement10(LifeCharacter life) {
+	    // 10. 노가다의 신 ( 게임 종료 시 노가다의 경력이 75 이상이면 달성 )
+	    if (life.getIntelligence() >= 300) {
+	        return updateAchievement(life.getUserId(), 10);
+	    }
+	    return false;
+	}
+	
+	private boolean checkAchievement11(LifeCharacter life) {
+	    // 11. 짐종국 ( 게임 종료 시 트레이너 경력이 40 이상이면 달성 )
+	    if (life.getIntelligence() >= 300) {
+	        return updateAchievement(life.getUserId(), 11);
+	    }
+	    return false;
+	}
+	
+	private boolean checkAchievement12(LifeCharacter life) {
+		// 12. Do you Know Club ( 게임 종료 시 운동선수 경력이 30 이상이고 최종 재산이 150억 이상이면 달성 )
+	    if (life.getIntelligence() >= 300) {
+	        return updateAchievement(life.getUserId(), 12);
+	    }
+	    return false;
+	}
+	
+	private boolean checkAchievement13(LifeCharacter life) {
+	    // 13. 로또 주식회사 파산 ( 게임 종료 시 운 스탯이 1990 이상 ) 
+	    if (life.getIntelligence() >= 300) {
+	        return updateAchievement(life.getUserId(), 13);
+	    }
+	    return false;
+	}
+	
+	private boolean checkAchievement14(LifeCharacter life) {
+	    // 14. 떡상 가즈아!!!!! ( 게임 종료 시 보유 주식 총 가치 100억 이상 )  
+	    if (life.getIntelligence() >= 300) {
+	        return updateAchievement(life.getUserId(), 14);
+	    }
+	    return false;
+	}
+	
+	private boolean updateAchievement(String userId, int achievementId) {
+	    // 이미 달성했는지 확인
+	    if (isAlreadyAchieved(userId, achievementId)) {
+	        return false; // 이미 달성한 업적
+	    }
+	    
+	    // 새로 달성한 업적 업데이트
+	    int result = as.updateAchievement(userId, achievementId);
+	    return result > 0;
+	}
+	
+	private boolean isAlreadyAchieved(String userId, int achievementId) {
+	    return as.isAlreadyAchieved(userId, achievementId);
+	}
+}

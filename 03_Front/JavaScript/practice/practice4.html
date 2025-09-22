@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         
+    </style>
+</head>
+<body>
+    <form action="">    <!-- form태그 안의 버튼의 type은 기본적으로 submit?-->
+        <fieldset>
+            <legend>회원가입</legend>
+            아이디 <input type="text" name="id" onkeyup="checkId"> <br>
+            비밀번호 <input type="text" name="pwd"> <br>
+            비밀번호 확인 <input type="text" name="pwd"> <br>
+            이름 <input type="text" name="userName"> <br> 
+            <button>회원가입</button>
+        
+        </fieldset> 
+    </form>
+    
+    <script>
+        /**
+         * 라이브러리에서는 keydown 이벤트를 더 많이 사용한다
+         * - 모바일은 os에 따라 키보드 이벤트와 충돌할 수 있기 때문이다. 
+         */
+        function checkId(_this, ev){
+            setTimeout(() => {
+                
+            }, 0);
+        }   
+        function signUpSubmit(){
+            const id = document.querySelector('input[name=id]');
+            const pw = document.getElementsByName('pwd');
+            const name = document.querySelector('input[name=userName]');
+
+        }
+    </script>
+</body>
+</html>

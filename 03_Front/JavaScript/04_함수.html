@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .area{
+            border: 1px solid black;
+            width: 500px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>함수(function)</h1>
+    
+    <h3>선언적 함수</h3>
+    <pre>
+        function 함수명(매개변수 ...){
+            함수 호출 시 실행할 코드
+
+            [return 결과값;]
+        }
+    </pre>
+
+    <button onclick="test1()">실행</button>
+    <div id="area" class="area1"></div>
+
+    <script>
+        function test1(){
+            document.querySelector('#area1').innerHTML += "test1함수 실행됨<br>"
+        }
+    </script>
+
+    <br>
+
+    <h3>익명함수</h3>
+
+    <pre>
+        변수|속성 = function(){
+                        함수 호출 시 실행할 코드
+                        ...
+                        [return 결과값;]
+                    }
+    </pre>
+
+    <button id="btn">이벤트로 속성으로 실행</button>
+    <button onclick="test2()">변수로 실행</button>
+    <div id="area2" class="area"></div>
+    <script>
+        let test2 = function(){
+            document.getElementById('area2').innerHTML = '익명함수를 변수에 담아서 실행';
+        }
+
+        let btn = document.getElementById('btn');
+        btn.onclick = function(){
+            document.getElementById('area2').innerHTML = '이벤트 핸들러로 실행';
+        }
+
+        // 이벤트 : 브라우저에서 발생하는 모든 동작(click, keyup, drag, load...)
+        // 이벤트 핸들러 : 특정 이벤트가 발생했을 때 실행되는 함수
+    </script>
+
+    <hr>
+
+    <h2>함수의 매개변수</h2>
+    <button onclick="test3('wwd', 15, '경기도 고양시')">실행확인</button>
+    
+    <div id="area3" class="area"></div>
+    <script>
+        function test3(name, age, address){
+            document.getElementById('area3').innerHTML = name +" "+age+" "+address;
+            document.getElementById('area3').innerHTML = name +" "+age+" "+address;
+        }
+    </script>
+
+    <br>
+
+    <h2>함수, 객체를 매개변수로 활용</h2>
+    <script>
+
+        // 아이디, 비밀번호를 전달해서 유저정보 가져오기
+        function login(userInfo, callback){
+            // 로그인 정보를 가지고 서버에 전달
+            // 결과에 따라서 로그인 성공
+
+            console.log('서버에 요청')
+            setTimeout(function(){  // 서버에 요청을 보내고 3초정도 후에 응답이 왔다고 가정
+                // 서버에서 응답 성공 후 user정보 반환
+                let serverReturnInfo = {
+                    userId : 'user01',
+                    userPwd : 'pass01',
+                    name : '홍길동',
+                    age : 20
+                }
+                
+                callback(serverReturnInfo)
+
+            }, 3000); // 첫번째 인자로 전달된 함수는 두번째 인자의 시간만큼 딜레이 후 실행된다. (ms단위)
+            console.log('함수 실행 후')
+        }
+
+        let id = 'user01';
+        let pwd = 'pass01';
+        login({
+            userId : id,
+            userPwd : pwd
+        }, function(returnInfo){
+            console.log('서버에서 응답받은 유저정보 : ', returnInfo);
+        });
+    
+    </script>
+
+    <br>
+
+    <!-- 스코프 : 이름을 어디서 찾을 것인가?-->
+
+    <!-- 🔥this : 🔥사용시점의 스코프를 가르킨다(나를 누가 호출했는가)🔥-->
+    <!-- inline에서의 this를 사용 시 사용한 태그 요소를 객체 요소로 전달-->
+    <button onclick="test4(this)">this 테스트1</button>  <!-- 인라인 이벤트에서 this를 사용시 항상 현재 요소 자신을 가르킨다-->
+    <button onclick="test4(this.innerHTML)">this 테스트2</button>
+    <input type="button" value="this 테스트3" onclick="test4(this.value)">
+    <button onclick="test4(this.id)" id="btn-4">this 테스트4</button>
+    
+    <script>
+        // console.log(this);  
+        function test4(_this){
+            console.log('_this : ', _this);
+            console.log('this : ', this);  // this는 전역객체 window를 가르킨다.
+        }
+
+        test4();
+
+        const btn4 = document.getElementById('btn-4');
+        btn4.onclick = function(){
+            console.log(this);  // this는 이벤트가 발생한 요소 자신을 가르킨다.
+        }
+    </script>
+
+    <button onclick="test5(this)">클릭</button>
+    <script>
+        function test5(_btn){
+           if(_btn.style.background !== 'red'){
+                _btn.style.background = 'red';
+           } else {
+                _btn.style.backgroundColor = 'white';
+           }
+        }
+    </script>
+
+    <hr><br>
+
+    <h2>함수의 리턴</h2>
+    <h3>일반적인 값 리턴</h3>
+
+    <button onclick="test6()">실행</button>
+    <div id="area5" class="area"></div>
+    <script>
+        function run(){
+            const value = Math.random() *100 +1;
+            return value;
+        }
+
+        function test6(){
+            document.getElementById('area5').innerHTML += ('랜덤값 : ' + run() + '<br>');
+        }  
+    </script>
+
+    <h3>함수 리턴</h3>
+    이름 : <input type="text" id="user-name">
+    <button onclick="test7()()">실행</button>  <!-- test7()의 리턴값이 함수이므로 한번더 ()로 실행 -->
+    <script>
+        function test7(){
+            const inputE1 = document.getElementById('user-name');
+
+            return function(){
+                alert(inputE1.value);
+            }
+        }
+    </script>
+</body>
+</html>

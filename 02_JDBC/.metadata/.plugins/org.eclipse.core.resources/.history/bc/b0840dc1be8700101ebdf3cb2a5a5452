@@ -1,0 +1,254 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.*;
+import java.util.Scanner;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+import com.jdbc.lifegame.controller.LifeCharacterController;
+
+public class ShoppingMenu {
+    private LifeCharacter life;
+    private Scanner sc;
+    private LifeCharacterController lcc;
+    
+    public ShoppingMenu(LifeCharacter life, Scanner sc) {
+        this.life = life;
+        this.sc = sc;
+        this.lcc = new LifeCharacterController();
+    }
+    
+    public void showMenu() {
+        while(true) {
+            String menuName = "쇼핑";
+            menuHeader(menuName, life);
+            
+            System.out.println("=== 🧠 지능 향상 아이템");
+            System.out.println("1. 📚 책 구매 - 가격: " + formatMoney(50) + ", 효과: 지능 +1");
+            System.out.println("2. 💻 컴퓨터 구매 - 가격: " + formatMoney(500) + ", 효과: 지능 +5");
+            System.out.println("3. 📱 최신 스마트폰 - 가격: " + formatMoney(200) + ", 효과: 지능 +2");
+            
+            System.out.println();
+            System.out.println("=== 💪 체력 회복 아이템");
+            System.out.println("4. 🍎 건강식품 - 가격: " + formatMoney(30) + ", 효과: 체력 +2");
+            System.out.println("5. 💊 영양제 - 가격: " + formatMoney(100) + ", 효과: 체력 +5");
+            System.out.println("6. 🏥 종합건강검진 - 가격: " + formatMoney(300) + ", 효과: 체력 +10");
+            
+            System.out.println();
+            System.out.println("=== 🍀 운 향상 아이템");
+            System.out.println("7. 🧿 행운의 부적 - 가격: " + formatMoney(80) + ", 효과: 운 +2");
+            System.out.println("8. 💎 행운석 - 가격: " + formatMoney(250) + ", 효과: 운 +5");
+            
+            System.out.println();
+            System.out.println("=== 🎁 특별 아이템");
+            System.out.println("9. ⚡ 에너지 드링크 - 가격: " + formatMoney(20) + ", 효과: 체력 +1, 지능 +1");
+            System.out.println("10. 🎯 자기계발서 세트 - 가격: " + formatMoney(150) + ", 효과: 지능 +3, 운 +1");
+            System.out.println("11. 🏃‍♂️ 운동용품 세트 - 가격: " + formatMoney(120) + ", 효과: 체력 +3, 운 +1");
+            
+            System.out.println();
+            System.out.println("0. ← 돌아가기");
+            line();
+            System.out.print("메뉴 선택: ");
+            
+            int sel = sc.nextInt();
+            sc.nextLine();
+            System.out.println("\n");
+            
+            switch(sel) {
+                case 1: buyItem("책", 50, 1, 0, 0); break;
+                case 2: buyItem("컴퓨터", 500, 5, 0, 0); break;
+                case 3: buyItem("최신 스마트폰", 200, 2, 0, 0); break;
+                case 4: buyItem("건강식품", 30, 0, 2, 0); break;
+                case 5: buyItem("영양제", 100, 0, 5, 0); break;
+                case 6: buyItem("종합건강검진", 300, 0, 10, 0); break;
+                case 7: buyItem("행운의 부적", 80, 0, 0, 2); break;
+                case 8: buyItem("행운석", 250, 0, 0, 5); break;
+                case 9: buyItem("에너지 드링크", 20, 1, 1, 0); break;
+                case 10: buyItem("자기계발서 세트", 150, 3, 0, 1); break;
+                case 11: buyItem("운동용품 세트", 120, 0, 3, 1); break;
+                case 0: return;
+                default: System.out.println("잘못된 입력입니다.");
+            }
+            
+            if(sel != 0) {
+                System.out.println("Enter 키를 눌러 계속하세요...");
+                sc.nextLine();
+            }
+        }
+    }
+    
+    private void buyItem(String itemName, int price, int intBonus, int stamBonus, int luckBonus) {
+        System.out.println("\n=== " + itemName + " 구매 ===");
+        System.out.println("가격: " + formatMoney(price));
+        System.out.println("현재 자금: " + formatMoney(life.getMoney()));
+        
+        // 효과 표시
+        StringBuilder effects = new StringBuilder("효과: ");
+        boolean hasEffect = false;
+        
+        if(intBonus > 0) {
+            effects.append("지능 +").append(intBonus);
+            hasEffect = true;
+        }
+        if(stamBonus > 0) {
+            if(hasEffect) effects.append(", ");
+            effects.append("체력 +").append(stamBonus);
+            hasEffect = true;
+        }
+        if(luckBonus > 0) {
+            if(hasEffect) effects.append(", ");
+            effects.append("운 +").append(luckBonus);
+        }
+        
+        System.out.println(effects.toString());
+        
+        // 자금 확인
+        if(life.getMoney() < price) {
+            System.out.printf("자금이 부족합니다. (필요: %s, 보유: %s)\n", 
+                            formatMoney(price), formatMoney(life.getMoney()));
+            return;
+        }
+        
+        // 능력치 변화 전 값 저장
+        int prevInt = life.getIntelligence();
+        int prevStam = life.getStamina();
+        int prevLuck = life.getLuck();
+        
+        // 구매 실행
+        life.setMoney(life.getMoney() - price);
+        life.setIntelligence(life.getIntelligence() + intBonus);
+        life.setStamina(life.getStamina() + stamBonus);
+        life.setLuck(life.getLuck() + luckBonus);
+        
+        // 데이터베이스 업데이트 (쇼핑 전용)
+        lcc.updateShopping(life);
+        
+        // 구매 완료 메시지
+        line();
+        System.out.println("🎉 " + itemName + "을(를) 성공적으로 구매했습니다!");
+        System.out.println("지출: " + formatMoney(price));
+        
+        // 능력치 변화 표시
+        if(intBonus > 0) {
+            System.out.println("지능: " + prevInt + " → " + life.getIntelligence() + " (+" + intBonus + ")");
+        }
+        if(stamBonus > 0) {
+            System.out.println("체력: " + prevStam + " → " + life.getStamina() + " (+" + stamBonus + ")");
+        }
+        if(luckBonus > 0) {
+            System.out.println("운: " + prevLuck + " → " + life.getLuck() + " (+" + luckBonus + ")");
+        }
+        
+        System.out.println("남은 자금: " + formatMoney(life.getMoney()));
+        line();
+        
+        // 구매 완료 후 잠깐 딜레이
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void buyLotto(String itemName, int price) {
+        System.out.println("\n=== 🎰 로또 구매 ===");
+        System.out.println("가격: " + formatMoney(price));
+        System.out.println("현재 자금: " + formatMoney(life.getMoney()));
+        System.out.println("💡 당첨 확률은 운 능력치에 비례합니다!");
+        System.out.println("현재 운 능력치: " + life.getLuck());
+        
+        // 자금 확인
+        if(life.getMoney() < price) {
+            System.out.printf("자금이 부족합니다. (필요: %s, 보유: %s)\n", 
+                            formatMoney(price), formatMoney(life.getMoney()));
+            return;
+        }
+        
+        // 구매 확인
+        System.out.print("로또를 구매하시겠습니까? (y/n): ");
+        String confirm = sc.nextLine().trim().toLowerCase();
+        
+        if(!confirm.equals("y") && !confirm.equals("yes")) {
+            System.out.println("구매를 취소했습니다.");
+            return;
+        }
+        
+        // 로또 구매
+        life.setMoney(life.getMoney() - price);
+        
+        System.out.println("\n🎲 추첨 중입니다...");
+        
+        // 추첨 연출
+        try {
+            for(int i = 0; i < 3; i++) {
+                Thread.sleep(500);
+                System.out.print(".");
+            }
+            Thread.sleep(500);
+            System.out.println("\n");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // 당첨 확률 계산 (운 능력치 기반)
+        // 기본 확률 5% + (운 능력치 × 0.5%)
+        double winChance = 0.05 + (life.getLuck() * 0.005);
+        double randomValue = Math.random();
+        
+        if(randomValue < winChance) {
+            // 당첨! 상금 계산
+            int[] prizes = {5000, 10000, 25000, 50000, 100000}; // 5천만원 ~ 10억원
+            double[] prizeChances = {0.6, 0.25, 0.1, 0.04, 0.01}; // 확률 분배
+            
+            int wonPrize = selectPrize(prizes, prizeChances);
+            life.setMoney(life.getMoney() + wonPrize);
+            
+            line();
+            System.out.println("🎉🎉🎉 축하합니다! 당첨되었습니다! 🎉🎉🎉");
+            System.out.println("💰 당첨금: " + formatMoney(wonPrize));
+            System.out.println("💸 순이익: " + formatMoney(wonPrize - price));
+            System.out.println("💵 현재 자금: " + formatMoney(life.getMoney()));
+            line();
+            
+            // 당첨 시 운 능력치 소폭 증가 (행운이 행운을 부른다!)
+            if(Math.random() < 0.3) { // 30% 확률
+                life.setLuck(life.getLuck() + 1);
+                System.out.println("🍀 행운이 행운을 불렀습니다! 운 +1");
+            }
+            
+        } else {
+            // 꽝
+            System.out.println("💔 아쉽게도 꽝입니다...");
+            System.out.println("💸 손실: " + formatMoney(price));
+            System.out.println("💵 현재 자금: " + formatMoney(life.getMoney()));
+            
+            // 꽝일 때도 아주 낮은 확률로 운 증가 (경험치 개념)
+            if(Math.random() < 0.05) { // 5% 확률
+                life.setLuck(life.getLuck() + 1);
+                System.out.println("🍀 비록 꽝이지만 경험이 쌓였습니다! 운 +1");
+            }
+        }
+        
+        // 데이터베이스 업데이트
+        lcc.updateRealEstate(life);
+        
+        // 딜레이
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // 상금 선택 메서드
+    private int selectPrize(int[] prizes, double[] chances) {
+        double random = Math.random();
+        double cumulative = 0.0;
+        
+        for(int i = 0; i < prizes.length; i++) {
+            cumulative += chances[i];
+            if(random <= cumulative) {
+                return prizes[i];
+            }
+        }
+        return prizes[0]; // 기본값
+    }
+}

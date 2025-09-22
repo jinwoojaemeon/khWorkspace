@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="signUpUser">
+	INSERT INTO USER_TABLE 
+	VALUES(?, ?)
+</entry>
+<entry key="loginUser">
+	SELECT * 
+	FROM USER_TABLE 
+	WHERE USER_ID=? AND USER_PW=?
+</entry>
+<entry key ="createNewCharacter">
+	INSERT INTO LIFE_CHARACTER (CHARACTER_ID, CHARACTER_NAME, USER_ID)
+	VALUES (CHARACTER_SEQ.NEXTVAL, ?, ?)
+</entry>
+<entry key="updateCharacter">
+    UPDATE LIFE_CHARACTER 
+    	SET AGE = ?, 
+        MONEY = ?, 
+        INTELLIGENCE = ?, 
+        STAMINA = ?, 
+        LUCK = ?,
+        PART_TIME_EXP = ?,
+        EMPLOYEE_EXP = ?,
+        EXECUTIVE_EXP = ?,
+        ENTREPRENEUR_EXP = ?,
+        LABORER_EXP = ?,
+        SUPERVISOR_EXP = ?,
+        TRAINER_EXP = ?,
+        ATHLETE_EXP = ?,
+        STOCK_COUNT = ?,
+        HAS_APARTMENT = ?,
+        HAS_BUILDING = ?,
+        HAS_HOTEL = ?
+    WHERE USER_ID = ? AND CHARACTER_ID = ?
+</entry>
+
+
+<!-- 모든 주식 목록 조회 -->
+<entry key="getAllStocks">
+    SELECT STOCK_ID, STOCK_NAME 
+    FROM STOCK_LIST
+    ORDER BY STOCK_ID
+</entry>
+
+<!-- 특정 주식 가격 조회 -->
+<entry key="getStockPrice">
+    SELECT PRICE 
+    FROM CHARACTER_STOCK 
+    WHERE CHARACTER_ID = ? AND STOCK_ID = ?
+</entry>
+
+<!-- 주식 가격 업데이트 -->
+<entry key="updateStockPrice">
+    UPDATE CHARACTER_STOCK 
+    SET PRICE = ? 
+    WHERE CHARACTER_ID = ? AND STOCK_ID = ?
+</entry>
+
+<!-- 주식 구매 (보유 수량 증가) -->
+<entry key="buyStock">
+    UPDATE CHARACTER_STOCK 
+    SET STOCK_CNT = STOCK_CNT + ? 
+    WHERE CHARACTER_ID = ? AND STOCK_ID = ?
+</entry>
+
+<!-- 주식 판매 (보유 수량 감소) -->
+<entry key="sellStock">
+    UPDATE CHARACTER_STOCK 
+    SET STOCK_CNT = STOCK_CNT - ? 
+    WHERE CHARACTER_ID = ? AND STOCK_ID = ?
+</entry>
+
+<!-- 캐릭터 주식 초기화 -->
+<entry key="initializeCharacterStocks">
+    INSERT INTO CHARACTER_STOCK (CHARACTER_ID, STOCK_ID, STOCK_CNT, PRICE)
+    VALUES (?, ?, 0, ?)
+</entry>
+
+<!-- 총 주식 가치 계산 -->
+<entry key="getTotalStockValue"><![CDATA[
+    SELECT NVL(SUM(STOCK_CNT * PRICE), 0) AS TOTAL_VALUE
+    FROM CHARACTER_STOCK
+    WHERE CHARACTER_ID = ?
+]]></entry>
+
+<!-- 캐릭터별 주식 보유 현황 조회 -->
+<entry key="getCharacterStocks"><![CDATA[
+    SELECT cs.STOCK_ID, sl.STOCK_NAME, cs.STOCK_CNT, cs.PRICE
+    FROM CHARACTER_STOCK cs
+    JOIN STOCK_LIST sl ON cs.STOCK_ID = sl.STOCK_ID
+    WHERE cs.CHARACTER_ID = ?
+    ORDER BY cs.STOCK_ID
+]]></entry>
+
+<!-- 기존 updateStockTrade는 사용하지 않음 - 다중 주식에서는 개별 거래 -->
+<!-- updateStockTrade 쿼리 제거 또는 주석 처리 -->
+
+<entry key="updateRealEstate">
+    UPDATE LIFE_CHARACTER 
+    SET MONEY = ?,
+        HAS_APARTMENT = ?,
+        HAS_BUILDING = ?,
+        HAS_HOTEL = ?
+    WHERE USER_ID = ? AND CHARACTER_NAME = ?
+</entry>
+
+<entry key="selectLifeCharacterByCharNo">
+    SELECT CHARACTER_ID, CHARACTER_NAME, USER_ID,
+           AGE, MONEY, INTELLIGENCE, STAMINA, LUCK,
+           PART_TIME_EXP, EMPLOYEE_EXP, EXECUTIVE_EXP, ENTREPRENEUR_EXP,
+           LABORER_EXP, SUPERVISOR_EXP, TRAINER_EXP, ATHLETE_EXP,
+           STOCK_COUNT, HAS_APARTMENT, HAS_BUILDING, HAS_HOTEL
+    FROM LIFE_CHARACTER
+    WHERE CHARACTER_ID = ?
+</entry>
+<entry key="updateShopping">
+    UPDATE LIFE_CHARACTER 
+    SET MONEY = ?,
+        INTELLIGENCE = ?, 
+        STAMINA = ?, 
+        LUCK = ?
+    WHERE USER_ID = ? AND CHARACTER_NAME = ?
+</entry>
+<entry key="showRank"><![CDATA[
+    SELECT lc.USER_ID, 
+           lc.CHARACTER_NAME, 
+           lc.MONEY,
+           NVL(cs.STOCK_VALUE, 0) AS STOCK_VALUE,
+           (lc.MONEY + NVL(cs.STOCK_VALUE, 0)) AS TOTAL_ASSET
+    FROM LIFE_CHARACTER lc
+    LEFT JOIN (
+        SELECT CHARACTER_ID, 
+               SUM(STOCK_CNT * PRICE) AS STOCK_VALUE
+        FROM CHARACTER_STOCK
+        GROUP BY CHARACTER_ID
+    ) cs ON lc.CHARACTER_ID = cs.CHARACTER_ID
+    ORDER BY TOTAL_ASSET DESC
+]]></entry>
+
+<entry key="showAchievedList">
+	SELECT al.ACHIEVEMENT_ID, al.ACHIEVEMENT_TITLE, al.ACHIEVEMENT_DESCRIBE, ua.IS_ACHIEVE
+	FROM ACHIEVEMENT_LIST al
+	JOIN USER_ACHIEVEMENT ua ON al.ACHIEVEMENT_ID = ua.ACHIEVEMENT_ID 
+	WHERE ua.USER_ID = ?
+	ORDER BY al.ACHIEVEMENT_ID
+</entry>
+<entry key="initUserAchievements">
+    INSERT INTO USER_ACHIEVEMENT (ACHIEVEMENT_ID, USER_ID, IS_ACHIEVE)
+    SELECT ACHIEVEMENT_ID, ?, 0 FROM ACHIEVEMENT_LIST
+</entry>
+<entry key="updateAchievement">
+    UPDATE USER_ACHIEVEMENT 
+    SET IS_ACHIEVE = 1 
+    WHERE USER_ID = ? AND ACHIEVEMENT_ID = ?
+</entry>
+<entry key="isAlreadyAchieved">
+    SELECT IS_ACHIEVE 
+    FROM ACHIEVEMENT_LIST al
+	JOIN USER_ACHIEVEMENT ua ON al.ACHIEVEMENT_ID = ua.ACHIEVEMENT_ID 
+    WHERE ua.USER_ID = ? AND al.ACHIEVEMENT_ID = ?
+</entry>
+</properties>

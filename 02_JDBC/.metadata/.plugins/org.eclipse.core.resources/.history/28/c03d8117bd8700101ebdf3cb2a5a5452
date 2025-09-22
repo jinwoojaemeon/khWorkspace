@@ -1,0 +1,44 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.*;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+
+public class GameEndHandler {
+    
+    public static boolean handleGameEnd(LifeCharacter life, String endReason, Scanner sc) {
+    	try {
+				TimeUnit.MILLISECONDS.sleep(500);
+				line();
+		        System.out.println("🎮 " + endReason + " 🎮");
+		        line();
+		        TimeUnit.MILLISECONDS.sleep(500);
+		        System.out.println("📊 최종 결과");
+		        System.out.println(basicStat(life));
+		        System.out.println();
+		        TimeUnit.MILLISECONDS.sleep(500);
+		        System.out.println("💪 최종 능력치");
+		        System.out.println(abilityStat(life));
+		        System.out.println();
+		        TimeUnit.MILLISECONDS.sleep(500);
+		        System.out.println("👔 전체 경력 정보");
+		        System.out.println(fullExperienceStat(life));
+		        System.out.println();
+		        TimeUnit.MILLISECONDS.sleep(500);
+		        System.out.println("💰 투자 현황");
+		        System.out.println(investmentStat(life));
+		        line();
+		        TimeUnit.MILLISECONDS.sleep(500);
+		        System.out.println("🏆 최종 자산: " + formatMoney(life.getMoney()));
+		        line();
+		        TimeUnit.MILLISECONDS.sleep(500);
+		        System.out.println("게임이 종료되었습니다. Enter 키를 눌러 메인 메뉴로 돌아가세요...");
+		        sc.nextLine();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return true;
+    }
+}

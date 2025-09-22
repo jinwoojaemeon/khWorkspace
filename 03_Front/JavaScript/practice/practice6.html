@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제 2</title>
+    <style>
+        .flex-row-center {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .gap24{
+            gap: 24px;
+        }
+
+        .search-container {
+            background: lightgray;
+            padding: 12px;
+            display: none;
+        }
+        
+        .radio-container {
+            border: 1px solid black;
+            padding: 15px;
+            width: 400px;
+            text-align: center;
+        }
+        
+        .search-field {
+            margin-top: 10px;
+        }
+    
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <h1>Practice 6</h1>
+    
+    <fieldset class="radio-container gap24">
+        <legend>검색할 항목을 선택하세요.</legend>
+        <div class="flex-row-center">
+        <label><input type="radio" name="search" value="title"> 제목</label>
+        <label><input type="radio" name="search" value="date"> 날짜</label>
+        <label><input type="radio" name="search" value="author"> 작성자</label>
+    </div>
+        
+    </fieldset>
+    
+    <div class="search-container" id="search-container">
+        <div id="title-search" class="search-field">
+            <label>검색할 제목을 입력하세요.</label> <br>
+            <input type="text" id="title-input" placeholder="제목을 입력하세요">
+            <input type="submit" value="검색" onclick="return false">
+        </div>
+        
+        <div id="date-search" class="search-field">
+            <label>검색할 날짜를 선택하세요.</label> <br>
+            <input type="date" id="date-from"> - <input type="date" id="date-to">
+            <input type="submit" value="검색" onclick="return false">
+        </div>
+        
+        <div id="author-search" class="search-field">
+            <label>검색할 작성자 아이디를 입력하세요.</label> <br>
+            <input type="text" id="author-input" placeholder="작성자 아이디">
+            <input type="submit" value="검색" onclick="return false">
+        </div>
+    </div>
+
+    <script>
+        $(function() {
+            let lastChecked = null;
+            
+            $('input[name="search"]').click(function() {
+                // 이전에 체크된 것과 같은 버튼을 다시 클릭한 경우
+                if (lastChecked === this) {
+                    $(this).prop('checked', false);
+                    lastChecked = null;
+                    $('#search-container').hide();
+                } else {
+                    // 다른 버튼을 클릭한 경우
+                    lastChecked = this;
+                    const selectedValue = $(this).val();
+                    $('#search-container').show();
+                    $('.search-field').hide();
+                    
+                    switch(selectedValue) {
+                        case 'title':
+                            $('#title-search').show();
+                            break;
+                        case 'date':
+                            $('#date-search').show();
+                            break;
+                        case 'author':
+                            $('#author-search').show();
+                            break;
+                    }
+                }
+            });
+        });
+        /*
+         function showSearchArea(containerID){
+            const containerList = document.querySelectorAll('.container');
+            for(let i=0; i<containerList.length; i++){
+                containerList[i].classList.remove('block');
+            }
+            const container = document.getElementById(containerID);
+            container.classList.add('block');
+        }
+        */
+    </script>
+</body>
+</html>

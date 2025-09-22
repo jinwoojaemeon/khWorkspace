@@ -1,0 +1,127 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.*;
+import java.util.Scanner;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+import com.jdbc.lifegame.controller.LifeCharacterController;
+
+public class SelfDevelopMenu {
+    private LifeCharacter life;
+    private Scanner sc;
+    private LifeCharacterController lcc;
+    
+    public SelfDevelopMenu(LifeCharacter life, Scanner sc) {
+        this.life = life;
+        this.sc = sc;
+        this.lcc = new LifeCharacterController();
+    }
+    
+    public void showMenu() {
+        while(true) {
+            String menuName = "자기개발";
+            menuHeader(menuName, life);
+            line();
+            
+            // 1. 독서실 공부
+            System.out.println("1. 독서실 공부 - 지출: 300만원, 효과: 지능 +1, 체력 -1");
+            
+            // 2. 학원 다니기
+            System.out.println("2. 학원 다니기 - 지출: 2,100만원, 효과: 지능 +11, 체력 -5");
+            
+            // 3. 헬스 다니기
+            System.out.println("3. 헬스 다니기 - 지출: 300만원, 효과: 지능 -1, 체력 +2");
+            
+            // 4. PT 받기
+            System.out.println("4. PT 받기 - 지출: 3,200만원, 효과: 지능 -1, 체력 +22");
+            
+            // 5. 동전 줍기
+            System.out.println("5. 동전 줍기 - 수입: 1만원, 효과: 지능 -1, 체력 -2, 운 +1");
+            
+            System.out.println();
+            System.out.println("0. ← 돌아가기");
+            line();
+            System.out.print("메뉴 선택: ");
+            
+            int sel = sc.nextInt();
+            sc.nextLine();
+            
+            switch(sel) {
+                case 1: executeSelfDevelop("독서실 공부", -300, 1, -1, 0); break;
+                case 2: executeSelfDevelop("학원 다니기", -2100, 11, -5, 0); break;
+                case 3: executeSelfDevelop("헬스 다니기", -300, -1, 2, 0); break;
+                case 4: executeSelfDevelop("PT 받기", -3200, -1, 22, 0); break;
+                case 5: executeSelfDevelop("동전 줍기", 1, -1, -2, 1); break;
+                case 0: return;
+                default: System.out.println("잘못된 입력입니다.");
+            }
+        }
+    }
+    
+    // 자기개발 실행 메서드
+    private void executeSelfDevelop(String actionName, int moneyChange, int intChange, int stamChange, int luckChange) {
+        // 돈이 부족한지 체크 (지출인 경우)
+        if (moneyChange < 0 && life.getMoney() < Math.abs(moneyChange)) {
+            System.out.println("자금이 부족합니다. (필요: " + Math.abs(moneyChange) + "만원, 보유: " + life.getMoney() + "만원)");
+            System.out.println("Enter 키를 눌러 계속하세요...");
+            sc.nextLine();
+            return;
+        }
+        
+        // 나이 증가
+        life.setAge(life.getAge() + 1);
+        
+        // 능력치 변경 적용
+        life.setMoney(life.getMoney() + moneyChange);
+        life.setIntelligence(Math.max(0, life.getIntelligence() + intChange));
+        life.setStamina(Math.max(0, life.getStamina() + stamChange));
+        life.setLuck(Math.max(0, life.getLuck() + luckChange));
+        
+        
+        // 100세 체크
+        if (life.getAge() >= 100) {
+            System.out.println("100세가 되어 게임이 종료됩니다.");
+            System.out.println("최종 자산: " + life.getMoney() + "만원");
+            System.exit(0);
+        }
+        
+        // 데이터베이스에 저장
+        lcc.executeWork(life);
+        
+        // 결과 출력
+        
+        // 체력 0 체크 (사망)
+        if (life.getStamina() <= 0) {
+            line();
+            System.out.println("체력이 0이 되어 사망했습니다!");
+            System.out.println("게임 오버");
+            System.out.println("최종 나이: " + life.getAge() + "세");
+            System.out.println("최종 자산: " + life.getMoney() + "만원");
+            // 게임 결과 화면으로 이동
+        }
+        
+        line();
+        System.out.println(actionName + "을(를) 실행했습니다!");
+        if (moneyChange > 0) {
+            System.out.println("수입: +" + moneyChange + "만원");
+        } else {
+            System.out.println("지출: " + Math.abs(moneyChange) + "만원");
+        }
+        System.out.println("나이: " + (life.getAge() - 1) + "세 → " + life.getAge() + "세");
+        
+        // 능력치 변화 표시
+        if (intChange != 0) {
+            System.out.println("지능: " + (intChange > 0 ? "+" : "") + intChange + " (현재: " + life.getIntelligence() + ")");
+        }
+        if (stamChange != 0) {
+            System.out.println("체력: " + (stamChange > 0 ? "+" : "") + stamChange + " (현재: " + life.getStamina() + ")");
+        }
+        if (luckChange != 0) {
+            System.out.println("운: " + (luckChange > 0 ? "+" : "") + luckChange + " (현재: " + life.getLuck() + ")");
+        }
+        
+        System.out.println("현재 자산: " + life.getMoney() + "만원");
+        line();
+        System.out.println("Enter 키를 눌러 계속하세요...");
+        sc.nextLine();
+    }
+}

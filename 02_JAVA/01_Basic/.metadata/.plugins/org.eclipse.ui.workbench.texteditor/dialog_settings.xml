@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="java.lang.Class">
+		<item key="selection" value="System.out.print(&quot;구매하고자 하는 과일(사과(2000), 바나나(2000), 딸기(5000)) 입력 : &quot;);"/>
+		<list key="findhistory">
+			<item value="System.out.print(&quot;구매하고자 하는 과일(사과(2000), 바나나(2000), 딸기(5000)) 입력 : &quot;);"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value=""/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+</section>

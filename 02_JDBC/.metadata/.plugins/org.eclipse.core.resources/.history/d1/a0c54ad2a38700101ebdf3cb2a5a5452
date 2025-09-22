@@ -1,0 +1,131 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.formatMoney;
+import static com.jdbc.lifegame.common.UiTemplate.line;
+import static com.jdbc.lifegame.common.UiTemplate.menuHeader;
+
+import java.util.Scanner;
+
+import com.jdbc.lifegame.controller.StockController;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+
+public class InvestMenu{
+    private LifeCharacter life;
+    private Scanner sc;
+    private StockController stc = new StockController();
+
+    public InvestMenu(LifeCharacter life, Scanner sc) {
+        super();
+        this.life = life;
+        this.sc = sc;
+    }
+
+    // 투자 메인 메뉴
+    public void showMenu() {
+        while(true) {
+            String menuName = "투자";
+            menuHeader(menuName, life);
+
+            System.out.println("1. 주식");
+            System.out.printf("        현재 가격: %s\n", formatMoney(stc.getCurrentStockPrice(life.getcharacterId())));
+            System.out.println("        변동 -10% ~ +11%");
+            line();
+            System.out.println("=== 부동산 투자");
+            System.out.println("2. 아파트 구매");
+            System.out.println("        구매가: " + formatMoney(5000));
+            System.out.println("        연수익: " + formatMoney(300));
+            System.out.println("3. 빌딩 구매");
+            System.out.println("        구매가: " + formatMoney(30000));
+            System.out.println("        연수익: " + formatMoney(2000));
+            System.out.println("4. 호텔 구매");
+            System.out.println("        구매가: " + formatMoney(100000));
+            System.out.println("        연수익: " + formatMoney(5000));
+            System.out.println("0. ← 돌아가기");
+            line();
+            System.out.print("메뉴 입력: ");
+            
+            int sel = sc.nextInt();
+            sc.nextLine();
+            
+            switch(sel) {
+                case 1: 
+                    new StockMenu(sc, stc, life).showMenu();
+                    break;
+                case 2: 
+                    buyRealEstate("아파트", 5000, 300);
+                    break;
+                case 3: 
+                    buyRealEstate("빌딩", 30000, 2000);
+                    break;
+                case 4: 
+                    buyRealEstate("호텔", 100000, 5000);
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("잘못된 입력입니다.");
+            }
+            
+            // 주식 메뉴가 아닌 경우만 대기
+            if(sel != 1 && sel != 0) {
+                System.out.println("Enter 키를 눌러 계속하세요...");
+                sc.nextLine();
+            }
+        }
+    }
+    
+    private void buyRealEstate(String type, int price, int yearlyIncome) {
+        System.out.printf("\n=== %s 구매 ===\n", type);
+        System.out.printf("구매가: %s\n", formatMoney(price));
+        System.out.printf("연간 수익: %s\n", formatMoney(yearlyIncome));
+        System.out.printf("현재 자금: %s\n", formatMoney(life.getMoney()));
+        
+        // 이미 보유 중인지 확인
+        boolean alreadyOwned = false;
+        switch(type) {
+            case "아파트":
+                alreadyOwned = life.isHasApartment();
+                break;
+            case "빌딩":
+                alreadyOwned = life.isHasBuilding();
+                break;
+            case "호텔":
+                alreadyOwned = life.isHasHotel();
+                break;
+        }
+        
+        if(alreadyOwned) {
+            System.out.printf("이미 %s를 보유하고 있습니다.\n", type);
+            return;
+        }
+        
+        if(life.getMoney() < price) {
+            System.out.printf("자금이 부족합니다. (필요: %s, 보유: %s)\n", 
+                            formatMoney(price), formatMoney(life.getMoney()));
+            return;
+        }
+        
+        
+        if(confirm.equals("y") || confirm.equals("yes")) {
+            life.setMoney(life.getMoney() - price);
+            
+            switch(type) {
+                case "아파트":
+                    life.setHasApartment(true);
+                    break;
+                case "빌딩":
+                    life.setHasBuilding(true);
+                    break;
+                case "호텔":
+                    life.setHasHotel(true);
+                    break;
+            }
+            
+            // TODO: 데이터베이스 업데이트 (부동산 정보 저장 로직 필요)
+            System.out.printf("%s를 성공적으로 구매했습니다!\n", type);
+            System.out.printf("남은 자금: %s\n", formatMoney(life.getMoney()));
+        } else {
+            System.out.println("구매를 취소했습니다.");
+        }
+    }
+}

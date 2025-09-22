@@ -1,0 +1,295 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.*;
+import java.util.Scanner;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+import com.jdbc.lifegame.controller.LifeCharacterController;
+
+public class WorkMenu {
+    private LifeCharacter life;
+    private Scanner sc;
+    private LifeCharacterController lcc;
+    
+    public WorkMenu(LifeCharacter life, Scanner sc) {
+        this.life = life;
+        this.sc = sc;
+        this.lcc = new LifeCharacterController();
+    }
+    
+    public boolean showMenu() {  // 반환 타입을 boolean으로 변경
+        while(true) {
+            String menuName = "일하기";
+            menuHeader(menuName, life);
+            System.out.println(experienceStat(life));
+            line();
+            
+            // 1. 아르바이트
+            int partTimeIncome = 1000 + (life.getPartTimeExp() * 50);
+            System.out.println("1. 아르바이트 - 수입: " + formatMoney(partTimeIncome) + ", 조건: 없음 (체력 -1)");
+            
+            // 2. 노가다
+            int laborIncome = 6000 + (life.getLaborerExp() * 50);
+            boolean canLabor = life.getStamina() >= 5;
+            System.out.println("2. 노가다 - 수입: " + formatMoney(laborIncome) + ", 조건: 체력 5+ (체력 -3)" + (canLabor ? "" : " ❌"));
+            
+            System.out.println();
+            System.out.println("==== 출근하기");
+            
+            // 3. 회사원
+            int employeeIncome = 3000 + (life.getEmployeeExp() * 100);
+            boolean canEmployee = life.getIntelligence() >= 10 && life.getStamina() >= 5;
+            System.out.println("3. 회사원 - 수입: " + formatMoney(employeeIncome) + ", 조건: 지능 10+, 체력 5+ (체력 -2) " + (canEmployee ? "" : " ❌"));
+            
+            // 4. 회사 임원
+            int executiveIncome = 6000 + (life.getExecutiveExp() * 250);
+            boolean canExecutive = (life.getEmployeeExp() >= 30 && life.getIntelligence() >= 50) || 
+                                  (life.getEmployeeExp() >= 10 && life.getIntelligence() >= 150);
+            System.out.println("4. 회사 임원 - 수입: " + formatMoney(executiveIncome) + ", 조건: 회사원 경력 30+, 지능 50+ (체력 -2)" + (canExecutive ? "" : " ❌"));
+            
+            // 5. 창업자
+            int entrepreneurIncome = 20000 + (life.getEntrepreneurExp() * 500);
+            boolean canEntrepreneur = (life.getEmployeeExp() >= 55 && life.getIntelligence() >= 100);
+            System.out.println("5. 창업자 - 수입: " + formatMoney(entrepreneurIncome) + ", 조건: 회사원 경력 55+, 지능 100+" + (canEntrepreneur ? "" : " ❌"));
+            
+            // 6. 현장 책임자
+            int supervisorIncome = 9000 + (life.getSupervisorExp() * 70);
+            boolean canSupervisor = life.getStamina() >= 60 && life.getLaborerExp() >= 20;
+            System.out.println("6. 현장 책임자 - 수입: " + formatMoney(supervisorIncome) + ", 조건: 체력 60+, 노가다 경력 20+" + (canSupervisor ? "" : " ❌"));
+            
+            // 7. 트레이너
+            int trainerIncome = 2500 + (life.getTrainerExp() * 70);
+            boolean canTrainer = life.getStamina() >= 30 && life.getIntelligence() >= 10;
+            System.out.println("7. 트레이너 - 수입: " + formatMoney(trainerIncome) + ", 조건: 체력 30+, 지능 10+" + (canTrainer ? "" : " ❌"));
+            
+            System.out.println();
+            System.out.println("==== 특수");
+            
+            // 8. 운동선수
+            int athleteBaseIncome = 5000 + (life.getAthleteExp() * 500);
+            boolean canAthlete = life.getStamina() >= 60 && life.getIntelligence() >= 20;
+            System.out.println("8. 운동선수 - 수입: " + formatMoney(athleteBaseIncome) + "(변동), 조건: 체력 60+, 지능 20+" + (canAthlete ? "" : " ❌"));
+            
+            System.out.println();
+            System.out.println("0. ← 돌아가기");
+            line();
+            System.out.print("메뉴 선택: ");
+            
+            int sel = sc.nextInt();
+            sc.nextLine();
+            System.out.println("\n");
+            
+            switch(sel) {
+                case 1: return executeWork("아르바이트", partTimeIncome, true);
+                case 2: return executeWork("노가다", laborIncome, canLabor);
+                case 3: return executeWork("회사원", employeeIncome, canEmployee);
+                case 4: return executeWork("회사 임원", executiveIncome, canExecutive);
+                case 5: return executeWork("창업자", entrepreneurIncome, canEntrepreneur);
+                case 6: return executeWork("현장 책임자", supervisorIncome, canSupervisor);
+                case 7: return executeWork("트레이너", trainerIncome, canTrainer);
+                case 8: return executeWork("운동선수", athleteBaseIncome, canAthlete);
+                case 0: return false; // 게임 종료 아님
+                default: System.out.println("잘못된 입력입니다.");
+            }
+        }
+    }
+
+    private boolean executeWork(String jobName, int jobIncome, boolean canWork) {
+        if (!canWork) {
+            System.out.println("조건을 충족하지 않아 선택할 수 없는 직업입니다.");
+            System.out.println("Enter 키를 눌러 계속하세요...");
+            sc.nextLine();
+            return false; // 게임 종료 아님
+        }
+        
+        int realEstateIncome = calculateRealEstateIncome();
+        
+        // 운동선수인 경우 특별 로직 적용
+        int finalJobIncome = jobIncome;
+        if (jobName.equals("운동선수")) {
+            finalJobIncome = calculateAthleteIncome(jobIncome);
+        }
+        
+        int totalIncome = finalJobIncome + realEstateIncome;
+        
+        life.setAge(life.getAge() + 1);
+        life.setMoney(life.getMoney() + totalIncome);
+        updateJobExperience(jobName);
+        lcc.execute(life);
+        
+        // 체력 0 체크 (사망)
+        if (life.getStamina() <= 0) {
+            return GameEndHandler.handleGameEnd(life, "체력이 0이 되어 사망했습니다! 게임 오버", sc);
+        }
+        
+        // 결과 출력
+        line();
+        System.out.println(jobName + "으로 1년간 근무했습니다!");
+        System.out.println("근로소득: " + formatMoney(finalJobIncome));
+        if (realEstateIncome > 0) {
+            System.out.println("투자 수익금: " + formatMoney(realEstateIncome));
+        }
+        System.out.println("총 수입: " + formatMoney(totalIncome));
+        System.out.println("나이: " + (life.getAge() - 1) + "세 → " + life.getAge() + "세");
+        System.out.println("현재 자산: " + formatMoney(life.getMoney()));
+        line();
+        
+        // 100세 체크
+        if (life.getAge() >= 100) {
+            return GameEndHandler.handleGameEnd(life, "100세가 되어 인생을 완주했습니다! 축하합니다!", sc);
+        }
+        
+        System.out.println("Enter 키를 눌러 계속하세요...");
+        sc.nextLine();
+        return false; // 게임 종료 아님
+    }
+    
+    // 부동산 수익 계산
+    private int calculateRealEstateIncome() {
+        int income = 0;
+        if (life.isHasApartment()) {
+            income += 300; 
+        }
+        if (life.isHasBuilding()) {
+            income += 2000; 
+        }
+        if (life.isHasHotel()) {
+            income += 5000; 
+        }
+        return income;
+    }
+
+    private void updateJobExperience(String jobName) {
+        switch(jobName) {
+            case "아르바이트":
+                life.setPartTimeExp(life.getPartTimeExp() + 1);
+                // 아르바이트도 체력 1 감소
+                life.setStamina(Math.max(0, life.getStamina() - 1));
+                System.out.println("아르바이트로 인해 체력이 1 감소했습니다. (현재 체력: " + life.getStamina() + ")");
+                break;
+            case "노가다":
+                life.setLaborerExp(life.getLaborerExp() + 1);
+                // 기본적으로 체력 3 감소
+                life.setStamina(Math.max(0, life.getStamina() - 3));
+                System.out.println("힘든 일로 체력이 3 감소했습니다. (현재 체력: " + life.getStamina() + ")");
+                
+                // 40% 확률로 부상 (추가 체력 9 감소)
+                if (Math.random() < 0.4) {
+                    life.setStamina(Math.max(0, life.getStamina() - 9));
+                    System.out.println("❗ 작업 중 부상을 당해 체력이 추가로 9 감소했습니다! (현재 체력: " + life.getStamina() + ")");
+                }
+                break;
+            case "회사원":
+                life.setEmployeeExp(life.getEmployeeExp() + 1);
+                life.setStamina(Math.max(0, life.getStamina() - 2));
+                System.out.println("업무 스트레스로 체력이 2 감소했습니다. (현재 체력: " + life.getStamina() + ")");
+                break;
+            case "회사 임원":
+                life.setExecutiveExp(life.getExecutiveExp() + 1);
+                if (life.getExecutiveExp() == 1) {
+                    int bonus = (int)(life.getEmployeeExp() * 0.4);
+                    life.setExecutiveExp(life.getExecutiveExp() + bonus);
+                    System.out.println("회사원 경력을 바탕으로 임원 경력 " + bonus + "년이 추가되었습니다.");
+                }
+                life.setStamina(Math.max(0, life.getStamina() - 2));
+                System.out.println("업무 스트레스로 체력이 2 감소했습니다. (현재 체력: " + life.getStamina() + ")");
+                break;
+            case "창업자":
+                life.setEntrepreneurExp(life.getEntrepreneurExp() + 1);
+                // 8% 확률로 회사 부도 (전재산 몰수)
+                if (Math.random() < 0.08) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("💥 회사가 부도났습니다!");
+                    System.out.println("빚을 갚기 위해 모든 자산을 잃었습니다...");
+                    System.out.println("잃은 자산:");
+                    System.out.println("  💰 현금: " + formatMoney(life.getMoney()));
+                    if (life.isHasApartment()) System.out.println("  🏠 아파트");
+                    if (life.isHasBuilding()) System.out.println("  🏢 빌딩");
+                    if (life.isHasHotel()) System.out.println("  🏨 호텔");
+                    if (life.getStockCount() > 0) System.out.println("  📈 주식 " + life.getStockCount() + "주");
+                    
+                    // 전재산 몰수
+                    life.setMoney(0);
+                    life.setHasApartment(false);
+                    life.setHasBuilding(false);
+                    life.setHasHotel(false);
+                    life.setStockCount(0);
+                }
+                life.setStamina(Math.max(0, life.getStamina() - 2));
+                System.out.println("업무 스트레스로 체력이 2 감소했습니다. (현재 체력: " + life.getStamina() + ")");
+                break;
+                
+            case "현장 책임자":
+                life.setSupervisorExp(life.getSupervisorExp() + 1);
+                if (life.getSupervisorExp() == 1) {
+                    int bonus = (int)(life.getLaborerExp() * 0.1);
+                    life.setSupervisorExp(life.getSupervisorExp() + bonus);
+                    System.out.println("노가다 경력을 바탕으로 책임자 경력 " + bonus + "년이 추가되었습니다.");
+                }
+                
+                // 12% 확률로 부실공사 발각 (전재산 몰수)
+                if (Math.random() < 0.12) {
+                    System.out.println("🚨 부실공사가 발각되었습니다!");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("손해배상과 벌금으로 모든 자산을 잃었습니다...");
+                    System.out.println("잃은 자산:");
+                    System.out.println("  💰 현금: " + formatMoney(life.getMoney()));
+                    if (life.isHasApartment()) System.out.println("  🏠 아파트");
+                    if (life.isHasBuilding()) System.out.println("  🏢 빌딩");
+                    if (life.isHasHotel()) System.out.println("  🏨 호텔");
+                    if (life.getStockCount() > 0) System.out.println("  📈 주식 " + life.getStockCount() + "주");
+                    
+                    // 전재산 몰수
+                    life.setMoney(0);
+                    life.setHasApartment(false);
+                    life.setHasBuilding(false);
+                    life.setHasHotel(false);
+                    life.setStockCount(0);
+                }
+                life.setStamina(Math.max(0, life.getStamina() - 2));
+                System.out.println("업무 강도에 지쳐 체력이 2 감소했습니다. (현재 체력: " + life.getStamina() + ")");
+                break;
+            case "트레이너":
+                life.setTrainerExp(life.getTrainerExp() + 1);
+                if (life.getTrainerExp() % 5 == 0) {
+                    life.setStamina(Math.max(0, life.getStamina() - 1));
+                    System.out.println("지속적인 활동으로 체력이 1 감소했습니다. (현재 체력: " + life.getStamina() + ")");
+                }
+                break;
+            case "운동선수":
+                life.setAthleteExp(life.getAthleteExp() + 1);
+                // 7% 확률로 부상 (체력 50 감소)
+                if (Math.random() < 0.07) {
+                    life.setStamina(Math.max(0, life.getStamina() - 50));
+                    System.out.println("🚑 심각한 부상을 당했습니다! 체력 -50 (현재 체력: " + life.getStamina() + ")");
+                }
+                break;
+        }
+    }
+    
+    private int calculateAthleteIncome(int baseIncome) {
+        int finalIncome = baseIncome;
+        
+        // 10% + (운동선수 경력 × 1%) 확률로 인기선수가 되어 급여 상승
+        double starChance = 0.10 + (life.getAthleteExp() * 0.01);
+        if (Math.random() < starChance) {
+            finalIncome += 30000;
+            System.out.println("⭐ 인기 스타 선수가 되었습니다! 광고 수익 +" + formatMoney(30000));
+        }
+        
+        // 5% 확률로 사고 (급여가 3000만원으로 고정)
+        if (Math.random() < 0.05) {
+            finalIncome = 3000; 
+            System.out.println("💥 스캔들/사고로 인해 계약이 파기되었습니다! 최소연봉만 지급: " + formatMoney(3000));
+        }
+        
+        return finalIncome;
+    }
+}

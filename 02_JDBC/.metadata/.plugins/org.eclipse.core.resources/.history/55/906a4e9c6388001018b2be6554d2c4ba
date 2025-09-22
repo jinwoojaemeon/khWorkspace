@@ -1,0 +1,6 @@
+package com.jdbc.lifegame.model.vo;
+
+public class UserAchievenet {
+	private int achievement;
+	private String userId;
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제 1</title>
+    <style>
+        div{
+            margin-top: 10px;
+            border: 1px solid black;
+            min-height: 150px;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" id="buy-info-form">
+        <fieldset>
+        <legend>구매 정보</legend>
+        <ul>
+            <li>구매자 : <input type="text" data-info="구매자명" placeholder="구매자의 이름을 입력하세요"></li>
+            <li>상품명 : <input type="text" data-info="상품명" placeholder="구매 상품 명을 입력하세요"></li>
+            <li>가격 : <input type="text" data-info="가격" placeholder="구매 가격을 입력하세요"></li>
+            <li>구매 수량 : <input type="number" min="10" max="100" step="10" placeholder="최소 10개" data-info="구매수량" onchange="checkQuantity()"></li>
+            <li>납품 등급 : <input type="range" min="1" max="9" step="2" value="1" data-info="납품등급"></li>
+            <li>기타사항 : <textarea name="other_notes" data-info="기타사항" rows="4" cols="50"></textarea></li>
+        </ul>  
+    </fieldset>
+    </form>
+    <br>
+    <button type="button" onclick="displayPurchaseInfo()">입력 값 출력하기</button> <br>
+    <div id="output"></div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous">
+    </script>
+    <script>
+        function checkQuantity() {
+            let value = Number($('#quantity').val());
+            if (value < 10) {
+                $('#quantity').val(10);
+            } else if (value > 100) {
+                $('#quantity').val(100);
+            } else if (value % 10 !== 0) {
+                $('#quantity').val(Math.round(value / 10) * 10);
+            }
+        }
+
+        function displayPurchaseInfo() {
+            /*
+            const buyer = $('#buyer').val();
+            const productName = $('#product-name').val();
+            const price = $('#price').val();
+            const quantity = $('#quantity').val();
+            const deliveryGrade = $('#delivery-grade').val();
+            const notes = $('#notes').val();
+            */
+            /*
+              Element.children : 특정 요소 내부에 있는 요소(element) 목록을 배열로 반환
+              Element.childNodes : 특정 요소 내부에 있는 모든 자식노드(태그, 텍스트, 주석, 공백, 개행... 전부 포함)를 배열로 반환
+            */
+            const buyInfoliArr = document.querySelectorAll('#buy-info-form li');
+            const output = document.querySelector('#output');
+            /*outputDiv.innerHTML = '';  // 기존 내용 지우기
+            outputDiv.innerHTML += '구매자 명 : ' + buyer + '<br>';
+            outputDiv.innerHTML += '상품 명 : ' + productName + '<br>';
+            outputDiv.innerHTML += '가격 : ' + price + '원<br>';
+            outputDiv.innerHTML += '구매 수량 : ' + quantity + '개<br>';
+            outputDiv.innerHTML += '납품 등급 : ' + deliveryGrade + '등급<br>';
+            outputDiv.innerHTML += '기타사항 : ' + notes;*/
+            let str = '';
+            for(let i=0; i<buyInfoliArr.length; i++) {
+                const info = buyInfoliArr[i].children[0].dataset.info + ' : ' + buyInfoliArr[i].children[0].value;
+                str += (info + "<br>") 
+                
+            }
+            output.innerHTML = str;
+        }
+    </script>
+</body>
+</html>

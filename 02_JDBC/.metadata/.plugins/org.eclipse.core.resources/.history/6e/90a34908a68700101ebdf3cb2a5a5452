@@ -1,0 +1,162 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.formatMoney;
+import static com.jdbc.lifegame.common.UiTemplate.line;
+import static com.jdbc.lifegame.common.UiTemplate.menuHeader;
+
+import java.util.Scanner;
+
+import com.jdbc.lifegame.controller.LifeCharacterController;
+import com.jdbc.lifegame.controller.StockController;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+
+public class InvestMenu{
+    private LifeCharacter life;
+    private Scanner sc;
+    private StockController stc = new StockController();
+    private LifeCharacterController lcc = new LifeCharacterController();
+
+    public InvestMenu(LifeCharacter life, Scanner sc) {
+        super();
+        this.life = life;
+        this.sc = sc;
+    }
+
+    // 투자 메인 메뉴
+    public void showMenu() {
+        while(true) {
+            String menuName = "투자";
+            menuHeader(menuName, life);
+
+            System.out.println("1. 주식");
+            System.out.printf("        현재 가격: %s\n", formatMoney(stc.getCurrentStockPrice(life.getcharacterId())));
+            System.out.println("        변동 -10% ~ +11%");
+            line();
+            System.out.println("=== 부동산 투자");
+            System.out.println("2. 아파트 구매");
+            System.out.println("        구매가: " + formatMoney(5000));
+            System.out.println("        연수익: " + formatMoney(300));
+            System.out.println("3. 빌딩 구매");
+            System.out.println("        구매가: " + formatMoney(30000));
+            System.out.println("        연수익: " + formatMoney(2000));
+            System.out.println("4. 호텔 구매");
+            System.out.println("        구매가: " + formatMoney(100000));
+            System.out.println("        연수익: " + formatMoney(5000));
+            System.out.println("0. ← 돌아가기");
+            line();
+            System.out.print("메뉴 입력: ");
+            
+            int sel = sc.nextInt();
+            sc.nextLine();
+            
+            switch(sel) {
+                case 1: 
+                    new StockMenu(sc, stc, life).showMenu();
+                    break;
+                case 2: 
+                    buyApartment();
+                    break;
+                case 3: 
+                    buyBuilding();
+                    break;
+                case 4: 
+                    buyHotel();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("잘못된 입력입니다.");
+            }
+            
+            // 주식 메뉴가 아닌 경우만 대기
+            if(sel != 1 && sel != 0) {
+                System.out.println("Enter 키를 눌러 계속하세요...");
+                sc.nextLine();
+            }
+        }
+    }
+    
+    // 아파트 구매 - 확인 절차 없음
+    private void buyApartment() {
+        System.out.println("\n=== 아파트 구매 ===");
+        System.out.println("구매가: " + formatMoney(5000));
+        System.out.println("연간 수익: " + formatMoney(300));
+        System.out.println("현재 자금: " + formatMoney(life.getMoney()));
+        
+        if(life.isHasApartment()) {
+            System.out.println("이미 아파트를 보유하고 있습니다.");
+            return;
+        }
+        
+        if(life.getMoney() < 5000) {
+            System.out.printf("자금이 부족합니다. (필요: %s, 보유: %s)\n", 
+                            formatMoney(5000), formatMoney(life.getMoney()));
+            return;
+        }
+        
+        life.setMoney(life.getMoney() - 5000);
+        life.setHasApartment(true);
+        
+        // 데이터베이스에 저장
+        lcc.execute(life);
+        
+        System.out.println("아파트를 성공적으로 구매했습니다!");
+        System.out.println("남은 자금: " + formatMoney(life.getMoney()));
+    }
+    
+    // 빌딩 구매 - 확인 절차 없음
+    private void buyBuilding() {
+        System.out.println("\n=== 빌딩 구매 ===");
+        System.out.println("구매가: " + formatMoney(30000));
+        System.out.println("연간 수익: " + formatMoney(2000));
+        System.out.println("현재 자금: " + formatMoney(life.getMoney()));
+        
+        if(life.isHasBuilding()) {
+            System.out.println("이미 빌딩을 보유하고 있습니다.");
+            return;
+        }
+        
+        if(life.getMoney() < 30000) {
+            System.out.printf("자금이 부족합니다. (필요: %s, 보유: %s)\n", 
+                            formatMoney(30000), formatMoney(life.getMoney()));
+            return;
+        }
+        
+        life.setMoney(life.getMoney() - 30000);
+        life.setHasBuilding(true);
+        
+        // 데이터베이스에 저장
+        lcc.execute(life);
+        
+        System.out.println("빌딩을 성공적으로 구매했습니다!");
+        System.out.println("남은 자금: " + formatMoney(life.getMoney()));
+    }
+    
+    // 호텔 구매 - 확인 절차 없음
+    private void buyHotel() {
+        System.out.println("\n=== 호텔 구매 ===");
+        System.out.println("구매가: " + formatMoney(100000));
+        System.out.println("연간 수익: " + formatMoney(5000));
+        System.out.println("현재 자금: " + formatMoney(life.getMoney()));
+        
+        if(life.isHasHotel()) {
+            System.out.println("이미 호텔을 보유하고 있습니다.");
+            return;
+        }
+        
+        if(life.getMoney() < 100000) {
+            System.out.printf("자금이 부족합니다. (필요: %s, 보유: %s)\n", 
+                            formatMoney(100000), formatMoney(life.getMoney()));
+            return;
+        }
+        
+        life.setMoney(life.getMoney() - 100000);
+        life.setHasHotel(true);
+        
+        // 데이터베이스에 저장
+        lcc.execute(life);
+        
+        System.out.println("호텔을 성공적으로 구매했습니다!");
+        System.out.println("남은 자금: " + formatMoney(life.getMoney()));
+    }
+}

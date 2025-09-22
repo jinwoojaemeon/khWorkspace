@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            background-color: black;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
+    crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <h3>문제1. 색상 선택 후 변경 버튼을 클릭하면 색상이 변경되도록 만들어라</h3>
+    <div id="div1"></div>
+    <input type="color" id="color">
+    <button onclick="changeColor()" class="changeBtn">변경</button>
+    
+    <!--<script>  // 어떤 이벤트가 발생했을 때 어떤 동작을 하고 싶은가?
+        function changeColor(){
+            const colorBox = document.getElementById('div1');
+            const inputColor = document.querySelector('input[type="color"]');
+            colorBox.style.background = inputColor.value;
+        }
+    </script>-->
+    <script>
+        // $('.changeBtn').click(function(){
+        //     let color = $('#color').val();
+        //     $('#div1').css("background-color", color);
+        // })
+        function changeColor(){
+            $("#div1").css("background", $("#color").val());
+        }
+
+    </script>
+
+    <h3>문제2. 버튼에 따른 크기조절이 가능하게 만들어 보세요. </h3>
+    <div id="div2"></div>
+    <input type="button" value="50" onclick="changeSize(50,50)" class="sizeBtn">
+    <input type="button" value="100" onclick="changeSize(100,100)" class="sizeBtn">
+    <input type="button" value="200" onclick="changeSize(200,200)" class="sizeBtn">
+    <!--<script>
+    function changeSize(width, height){
+        const box = document.querySelector('#div2');
+        box.style.width = width + 'px';
+        box.style.height = height + 'px';
+    }   
+    </script>-->
+    <script>
+        function changeSize(width, height){
+            $("#div2").css({
+                "width" : width + "px",
+                "height" : height + "px"
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.Objects"/>
+    <fullyQualifiedTypeName name="com.sun.java_cup.internal.runtime.Scanner"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="com.sun.tools.sjavac.server.SysInfo"/>
+    <fullyQualifiedTypeName name="java.sql.Date"/>
+    <fullyQualifiedTypeName name="sun.jvm.hotspot.gc.parallel.PSYoungGen"/>
+    <fullyQualifiedTypeName name="com.kh.jdbc.model.dao.MemberDao"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="com.kh.jdbc.view.MemberMenu"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="com.kh.jdbc.common.JDBCTemplate"/>
+    <fullyQualifiedTypeName name="com.kh.jdbc.model.vo.Member"/>
+    <fullyQualifiedTypeName name="sun.jvm.hotspot.oops.java_lang_Class"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.common.LifegameTemplate"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.view.LobbyMenu"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.view.DisplayMsg"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.common.UiTemplate"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.view.MainMenu"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.view.LifegameMenu"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.service.StockService"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.view.StockMenu"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="com.jdbc.lifegame.view.GameEndHandler"/>
+    <fullyQualifiedTypeName name="com.project.lifegame.common.LifegameTemplate"/>
+    <fullyQualifiedTypeName name="com.project.lifegame.controller.LifeCharacterController"/>
+</qualifiedTypeNameHistroy>

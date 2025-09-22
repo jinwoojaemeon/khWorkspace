@@ -1,0 +1,7 @@
+package com.jdbc.lifegame.common;
+
+public class UiTemplate {
+	public static void line() {
+		System.out.println("**********************************************************************");
+	}
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        input{
+            width: 100px;
+            height: 30px;
+        }
+        select, button{
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Practice2</h1>
+    <div class="container">
+        <input type="number">
+        <select name="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input type="number">
+        <button id="equals" onclick="operatorResult()">=</button>
+        <input type="text" id="result">
+    </div>
+    
+
+    <script>
+        function operatorResult(){
+            const numberList = document.querySelectorAll('input[type=number]');
+            const oper = document.querySelector('select[name="operator"]').value;
+            const res = document.querySelector('#result');
+            let result = 0;
+            switch(oper){
+                case '+':
+                    result = Number(numberList[0].value) + Number(numberList[1].value);
+                    res.value = result;
+                    break;
+                case '-':
+                    result = Number(numberList[0].value) - Number(numberList[1].value);
+                    res.value = result;
+                    break;
+                case '*':
+                    result = Number(numberList[0].value) * Number(numberList[1].value);
+                    res.value = result;
+                    break;
+                case '/':
+                    if(Number(numberList[1].value) === 0){
+                        impossible();
+                        break;
+                    }
+                    result = Number(numberList[0].value) / Number(numberList[1].value);
+                    res.value = result;
+                    break;
+                case '%':
+                    if(Number(numberList[1].value) === 0){
+                        impossible();
+                        break;
+                    }
+                    result = Number(numberList[0].value) % Number(numberList[1].value);
+                    res.value = result;
+                    break;
+            }
+            
+            
+        }
+
+        function impossible(){
+            // result의 배경색을 빨간색으로, 연산 불가 텍스트 출력 (하얀색 텍스트)
+            const res = document.querySelector('#result');
+            res.style.backgroundColor = 'red';
+            res.style.color = 'white';
+            res.value = '연산 불가';
+        }
+    </script>
+</body>
+</html>

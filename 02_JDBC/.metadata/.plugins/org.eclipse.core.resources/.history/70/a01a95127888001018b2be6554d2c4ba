@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="signUpUser">
+	INSERT INTO USER_TABLE 
+	VALUES(?, ?, DEFAULT)
+</entry>
+<entry key="loginUser">
+	SELECT * 
+	FROM USER_TABLE 
+	WHERE USER_ID=? AND USER_PW=?
+</entry>
+<entry key ="createNewCharacter">
+	INSERT INTO LIFE_CHARACTER (CHARACTER_ID, CHARACTER_NAME, USER_ID)
+	VALUES (CHARACTER_SEQ.NEXTVAL, ?, ?)
+</entry>
+<entry key="updateCharacter">
+    UPDATE LIFE_CHARACTER 
+    	SET AGE = ?, 
+        MONEY = ?, 
+        INTELLIGENCE = ?, 
+        STAMINA = ?, 
+        LUCK = ?,
+        PART_TIME_EXP = ?,
+        EMPLOYEE_EXP = ?,
+        EXECUTIVE_EXP = ?,
+        ENTREPRENEUR_EXP = ?,
+        LABORER_EXP = ?,
+        SUPERVISOR_EXP = ?,
+        TRAINER_EXP = ?,
+        ATHLETE_EXP = ?,
+        STOCK_COUNT = ?,
+        HAS_APARTMENT = ?,
+        HAS_BUILDING = ?,
+        HAS_HOTEL = ?
+    WHERE USER_ID = ? AND CHARACTER_NAME = ?
+</entry>
+
+<entry key="updateStockTrade">
+    UPDATE LIFE_CHARACTER 
+    	SET MONEY = ?, 
+        STOCK_COUNT = ?
+    WHERE USER_ID = ? AND CHARACTER_NAME = ?
+</entry>
+
+<entry key="getStockPrice">
+    SELECT PRICE 
+    FROM STOCK 
+    WHERE CHARACTER_ID = ?
+</entry>
+
+<entry key="updateStockPrice">
+    UPDATE STOCK 
+    SET PRICE = ? 
+    WHERE CHARACTER_ID = ?
+</entry>
+
+<entry key="initializeStock">
+    INSERT INTO STOCK(CHARACTER_ID, PRICE) 
+    VALUES(?, DEFAULT)
+</entry>
+<entry key="selectstock">
+    SELECT * FROM STOCK
+    WHERE CHARACTER_ID=?
+</entry>
+
+<entry key="updateRealEstate">
+    UPDATE LIFE_CHARACTER 
+    SET MONEY = ?,
+        HAS_APARTMENT = ?,
+        HAS_BUILDING = ?,
+        HAS_HOTEL = ?
+    WHERE USER_ID = ? AND CHARACTER_NAME = ?
+</entry>
+
+<entry key="selectLifeCharacterByCharNo">
+    SELECT CHARACTER_ID, CHARACTER_NAME, USER_ID,
+           AGE, MONEY, INTELLIGENCE, STAMINA, LUCK,
+           PART_TIME_EXP, EMPLOYEE_EXP, EXECUTIVE_EXP, ENTREPRENEUR_EXP,
+           LABORER_EXP, SUPERVISOR_EXP, TRAINER_EXP, ATHLETE_EXP,
+           STOCK_COUNT, HAS_APARTMENT, HAS_BUILDING, HAS_HOTEL
+    FROM LIFE_CHARACTER
+    WHERE CHARACTER_ID = ?
+</entry>
+<entry key="updateShopping">
+    UPDATE LIFE_CHARACTER 
+    SET MONEY = ?,
+        INTELLIGENCE = ?, 
+        STAMINA = ?, 
+        LUCK = ?
+    WHERE USER_ID = ? AND CHARACTER_NAME = ?
+</entry>
+<entry key="showRank"><![CDATA[
+  SELECT USER_ID, CHARACTER_NAME, MONEY
+  FROM LIFE_CHARACTER
+  WHERE ROWNUM <= 5
+  ORDER BY MONEY DESC
+]]></entry>
+<entry key="showAchievedList">
+    SELECT al.ACHIEVEMENT_ID, al.TITLE, al.DESCRIPTION, 
+       CASE WHEN ua.IS_ACHIEVED = 1 THEN '✅ 달성' ELSE '❌ 미달성' END AS STATUS,
+       ua.ACHIEVED_DATE
+	FROM ACHIEVEMENT_LIST al
+	LEFT JOIN USER_ACHIEVEMENT ua ON al.ACHIEVEMENT_ID = ua.ACHIEVEMENT_ID AND ua.USER_ID = ?
+	ORDER BY al.ACHIEVEMENT_ID;
+</entry>
+
+
+
+</properties>

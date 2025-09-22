@@ -1,0 +1,54 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.menuHeader;
+
+import java.util.Scanner;
+
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+
+public class StockMenu {
+	 // 주식 메뉴
+	private Scanner sc;
+	private LifeCharacter life;
+	private StockController stc;
+    public StockMenu(Scanner sc, StockController stc, LifeCharacter life) {
+		super();
+		this.sc = sc;
+		this.life = life;
+	}
+
+
+	public void showMenu() {
+    	String menuName = "주식";
+		menuHeader(menuName, life);
+
+        System.out.printf("현재 주식 가격: %,d만원\n", stc.getCurrentStockPrice(life.getCharNo()));
+        System.out.printf("내가 가진 주식 수 : %d\n", myStockCount);
+        System.out.println("1. 주식 구매 ");
+        System.out.println("2. 주식 판매 ");
+        System.out.println("0. ← 돌아가기");
+        System.out.print("메뉴 입력: ");
+        int sel = sc.nextInt();
+        switch(sel) {
+        case 1: 
+        	System.out.println("구매 할 주식 수 : ");
+        	int buyStockCnt = sc.nextInt();
+        	if(life.getMoney() < buyStockCnt * stc.getCurrentStockPrice(life.getCharNo())) {
+        		System.out.println("보유 금액이 부족합니다.");
+        	}
+        	break;
+        case 2: 
+        	System.out.println("구매 할 주식 수 : ");
+        	int sellStockCnt = sc.nextInt();
+        	if(life.getStockCount() < sellStockCnt) {
+        		System.out.println("보유 수량보다 더 많은 수량을 판매할 수 없습니다.");
+        	}
+        	break;
+
+        case 0:
+        	return;
+        default:
+        	System.out.println("잘못된 입력입니다.");
+        }
+    }
+}

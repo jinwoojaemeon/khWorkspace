@@ -1,0 +1,17 @@
+package com.jdbc.lifegame.view;
+
+import java.util.Scanner;
+
+import com.jdbc.lifegame.controller.LifeCharacterController;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+
+public class SelfDevelopMenu {
+	private LifeCharacter life;
+    private Scanner sc;
+    private LifeCharacterController lcc;
+    public SelfDevelopMenu(LifeCharacter life, Scanner sc) {
+        this.life = life;
+        this.sc = sc;
+        this.lcc = new LifeCharacterController();;
+    }
+}

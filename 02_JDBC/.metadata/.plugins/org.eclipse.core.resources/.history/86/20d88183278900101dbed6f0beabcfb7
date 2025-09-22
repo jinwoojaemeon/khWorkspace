@@ -1,0 +1,266 @@
+package com.jdbc.lifegame.model.vo;
+import static com.jdbc.lifegame.common.UiTemplate.formatMoney;
+
+
+public class LifeCharacter {
+		private int characterId;
+	    private String characterName;  // 캐릭터 이름
+	    private String userId;         // 소유자 ID
+	    private int age;              // 나이 (20세 시작, 100세 종료)
+	    private int money;            // 자금 (만원 단위, 초기값 100)
+	    private int intelligence;     // 지능 (초기값 5)
+	    private int stamina;         // 체력 (초기값 3) 
+	    private int luck;            // 운 (초기값 5)
+	    
+	    // 각 직업별 경력 (분리 관리)
+	    private int partTimeExp;      // 아르바이트 경력
+	    private int employeeExp;      // 회사원 경력
+	    private int executiveExp;     // 회사 임원 경력
+	    private int entrepreneurExp;  // 창업자 경력
+	    private int laborerExp;      // 노가다 경력
+	    private int supervisorExp;   // 현장 책임자 경력
+	    private int trainerExp;      // 트레이너 경력
+	    private int athleteExp;      // 운동선수 경력
+	    
+	    // 투자 관련 
+	    private int stockCount;    // 보유 주식 수
+	    private int stockValue;       // 주식 총 가치 (만원)
+	    private boolean hasApartment; 
+	    private boolean hasBuilding;
+	    private boolean hasHotel;
+	    
+		public LifeCharacter(int characterId) {
+			super();
+			this.characterId = characterId;
+		}
+
+		public LifeCharacter(int charNo, String characterName, String userId, int age, int money, int intelligence,
+				int stamina, int luck, int partTimeExp, int employeeExp, int executiveExp, int entrepreneurExp,
+				int laborerExp, int supervisorExp, int trainerExp, int athleteExp, int stockCount, int stockValue,
+				boolean hasApartment, boolean hasBuilding, boolean hasHotel) {
+			super();
+			this.characterId = charNo;
+			this.characterName = characterName;
+			this.userId = userId;
+			this.age = age;
+			this.money = money;
+			this.intelligence = intelligence;
+			this.stamina = stamina;
+			this.luck = luck;
+			this.partTimeExp = partTimeExp;
+			this.employeeExp = employeeExp;
+			this.executiveExp = executiveExp;
+			this.entrepreneurExp = entrepreneurExp;
+			this.laborerExp = laborerExp;
+			this.supervisorExp = supervisorExp;
+			this.trainerExp = trainerExp;
+			this.athleteExp = athleteExp;
+			this.stockCount = stockCount;
+			this.stockValue = stockValue;
+			this.hasApartment = hasApartment;
+			this.hasBuilding = hasBuilding;
+			this.hasHotel = hasHotel;
+		}
+
+		public LifeCharacter(String characterName, String userId) {
+			super();
+			this.characterName = characterName;
+			this.userId = userId;
+			this.age = 20;
+			this.money = 100;
+			this.intelligence = 5;
+			this.stamina = 3;
+			this.luck = 5;
+			this.partTimeExp = 0;
+			this.employeeExp = 0;
+			this.executiveExp = 0;
+			this.entrepreneurExp = 0;
+			this.laborerExp = 0;
+			this.supervisorExp = 0;
+			this.trainerExp = 0;
+			this.athleteExp = 0;
+			this.stockCount = 0;
+			this.stockValue = 0;
+			this.hasApartment = false;
+			this.hasBuilding = false;
+			this.hasHotel = false;
+		}
+
+		public int getcharacterId() {
+			return characterId;
+		}
+
+		public void setcharacterId(int characterId) {
+			this.characterId = characterId;
+		}
+
+		public String getCharacterName() {
+			return characterName;
+		}
+
+		public void setCharacterName(String characterName) {
+			this.characterName = characterName;
+		}
+
+		public String getUserId() {
+			return userId;
+		}
+
+		public void setUserId(String userId) {
+			this.userId = userId;
+		}
+
+		public int getAge() {
+			return age;
+		}
+
+		public void setAge(int age) {
+			this.age = age;
+		}
+
+		public int getMoney() {
+			return money;
+		}
+
+		public void setMoney(int money) {
+			this.money = money;
+		}
+
+		public int getIntelligence() {
+			return intelligence;
+		}
+
+		public void setIntelligence(int intelligence) {
+			this.intelligence = intelligence;
+		}
+
+		public int getStamina() {
+			return stamina;
+		}
+
+		public void setStamina(int stamina) {
+			this.stamina = stamina;
+		}
+
+		public int getLuck() {
+			return luck;
+		}
+
+		public void setLuck(int luck) {
+			this.luck = luck;
+		}
+
+		public int getPartTimeExp() {
+			return partTimeExp;
+		}
+
+		public void setPartTimeExp(int partTimeExp) {
+			this.partTimeExp = partTimeExp;
+		}
+
+		public int getEmployeeExp() {
+			return employeeExp;
+		}
+
+		public void setEmployeeExp(int employeeExp) {
+			this.employeeExp = employeeExp;
+		}
+
+		public int getExecutiveExp() {
+			return executiveExp;
+		}
+
+		public void setExecutiveExp(int executiveExp) {
+			this.executiveExp = executiveExp;
+		}
+
+		public int getEntrepreneurExp() {
+			return entrepreneurExp;
+		}
+
+		public void setEntrepreneurExp(int entrepreneurExp) {
+			this.entrepreneurExp = entrepreneurExp;
+		}
+
+		public int getLaborerExp() {
+			return laborerExp;
+		}
+
+		public void setLaborerExp(int laborerExp) {
+			this.laborerExp = laborerExp;
+		}
+
+		public int getSupervisorExp() {
+			return supervisorExp;
+		}
+
+		public void setSupervisorExp(int supervisorExp) {
+			this.supervisorExp = supervisorExp;
+		}
+
+		public int getTrainerExp() {
+			return trainerExp;
+		}
+
+		public void setTrainerExp(int trainerExp) {
+			this.trainerExp = trainerExp;
+		}
+
+		public int getAthleteExp() {
+			return athleteExp;
+		}
+
+		public void setAthleteExp(int athleteExp) {
+			this.athleteExp = athleteExp;
+		}
+
+		public int getStockCount() {
+			return stockCount;
+		}
+
+		public void setStockCount(int stockCount) {
+			this.stockCount = stockCount;
+		}
+
+		public int getStockValue() {
+			return stockValue;
+		}
+
+		public void setStockValue(int stockValue) {
+			this.stockValue = stockValue;
+		}
+
+		public boolean isHasApartment() {
+			return hasApartment;
+		}
+
+		public void setHasApartment(boolean hasApartment) {
+			this.hasApartment = hasApartment;
+		}
+
+		public boolean isHasBuilding() {
+			return hasBuilding;
+		}
+
+		public void setHasBuilding(boolean hasBuilding) {
+			this.hasBuilding = hasBuilding;
+		}
+
+		public boolean isHasHotel() {
+			return hasHotel;
+		}
+
+		public void setHasHotel(boolean hasHotel) {
+			this.hasHotel = hasHotel;
+		}
+	    
+		@Override
+		public String toString() {
+		    return String.format("%-15s %-15s %15s", 
+		        this.userId, 
+		        this.characterName, 
+		        formatMoney(this.money)
+		    );
+		}
+	    
+}

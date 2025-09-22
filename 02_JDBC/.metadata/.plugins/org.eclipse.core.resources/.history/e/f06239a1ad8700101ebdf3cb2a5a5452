@@ -1,0 +1,139 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.*;
+import java.util.Scanner;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+import com.jdbc.lifegame.controller.LifeCharacterController;
+
+public class SelfDevelopMenu {
+    private LifeCharacter life;
+    private Scanner sc;
+    private LifeCharacterController lcc;
+    
+    public SelfDevelopMenu(LifeCharacter life, Scanner sc) {
+        this.life = life;
+        this.sc = sc;
+        this.lcc = new LifeCharacterController();
+    }
+    
+    public void showMenu() {
+        while(true) {
+            String menuName = "자기개발";
+            menuHeader(menuName, life);
+            System.out.println("1. 독서실 공부 - 지출: 300만원, 효과: 지능 +1, 체력 -1");
+            System.out.println("2. 학원 다니기 - 지출: 2,100만원, 효과: 지능 +11, 체력 -5");
+            System.out.println("3. 헬스 다니기 - 지출: 300만원, 효과: 지능 -1, 체력 +2");
+            System.out.println("4. PT 받기 - 지출: 3,200만원, 효과: 지능 -1, 체력 +22");
+            System.out.println("5. 동전 줍기 - 수입: 1만원, 효과: 지능 -1, 체력 -2, 운 +1");
+            
+            System.out.println();
+            System.out.println("0. ← 돌아가기");
+            line();
+            System.out.print("메뉴 선택: ");
+            
+            int sel = sc.nextInt();
+            sc.nextLine();
+            System.out.println("\n");
+            
+            switch(sel) {
+                case 1: executeSelfDevelop("독서실 공부", -300, 1, -1, 0); return;
+                case 2: executeSelfDevelop("학원 다니기", -2100, 11, -5, 0); return;
+                case 3: executeSelfDevelop("헬스 다니기", -300, -1, 2, 0); return;
+                case 4: executeSelfDevelop("PT 받기", -3200, -1, 22, 0); return;
+                case 5: executeSelfDevelop("동전 줍기", 1, -1, -2, 1); return;
+                case 0: return;
+                default: System.out.println("잘못된 입력입니다.");
+            }
+        }
+    }
+    
+    private void executeSelfDevelop(String actionName, int moneyChange, int intChange, int stamChange, int luckChange) {
+        if (moneyChange < 0 && life.getMoney() < Math.abs(moneyChange)) {
+            System.out.println("자금이 부족합니다. (필요: " + formatMoney(Math.abs(moneyChange)) + ", 보유: " + formatMoney(life.getMoney()) + ")");
+            System.out.println("Enter 키를 눌러 계속하세요...");
+            sc.nextLine();
+            return;
+        }
+        
+        int previousAge = life.getAge();
+        int previousIntelligence = life.getIntelligence();
+        int previousStamina = life.getStamina();
+        int previousLuck = life.getLuck();
+        
+        // 부동산 투자 수익금 계산
+        int realEstateIncome = calculateRealEstateIncome();
+        int totalMoneyChange = moneyChange + realEstateIncome;
+        
+        life.setAge(life.getAge() + 1);
+        life.setMoney(life.getMoney() + totalMoneyChange);
+        life.setIntelligence(Math.max(0, life.getIntelligence() + intChange));
+        life.setStamina(Math.max(0, life.getStamina() + stamChange));
+        life.setLuck(Math.max(0, life.getLuck() + luckChange));
+        
+        lcc.execute(life);
+        
+        // 체력 0 체크 (사망)
+        if (life.getStamina() <= 0) {
+            GameEndHandler.handleGameEnd(life, "체력이 0이 되어 사망했습니다! 게임 오버", sc);
+            return;
+        }
+        
+        // 결과 출력
+        line();
+        System.out.println(actionName + "을(를) 실행하여 1년이 지났습니다!");
+        
+        if (moneyChange > 0) {
+            System.out.println("수입: +" + moneyChange + "만원");
+        } else if (moneyChange < 0) {
+            System.out.println("지출: " + Math.abs(moneyChange) + "만원");
+        }
+        
+        if (realEstateIncome > 0) {
+            System.out.println("투자 수익금: +" + realEstateIncome + "만원");
+            System.out.println("총 수입: +" + totalMoneyChange + "만원");
+        }
+        
+        System.out.println("나이: " + previousAge + "세 → " + life.getAge() + "세");
+        
+        // 능력치 변화 표시
+        if (intChange != 0) {
+            System.out.println("지능: " + previousIntelligence + " → " + life.getIntelligence() + 
+                             " (" + (intChange > 0 ? "+" : "") + intChange + ")");
+        }
+        if (stamChange != 0) {
+            System.out.println("체력: " + previousStamina + " → " + life.getStamina() + 
+                             " (" + (stamChange > 0 ? "+" : "") + stamChange + ")");
+        }
+        if (luckChange != 0) {
+            System.out.println("운: " + previousLuck + " → " + life.getLuck() + 
+                             " (" + (luckChange > 0 ? "+" : "") + luckChange + ")");
+        }
+        
+        System.out.println("현재 자산: " + formatMoney(life.getMoney()));
+        line();
+        
+        // 100세 체크
+        if (life.getAge() >= 100) {
+            GameEndHandler.handleGameEnd(life, "100세가 되어 인생을 완주했습니다! 축하합니다!", sc);
+            return;
+        }
+        
+        System.out.println("Enter 키를 눌러 계속하세요...");
+        sc.nextLine();
+    }
+    
+    // 부동산 투자 수익금 계산
+    private int calculateRealEstateIncome() {
+        int income = 0;
+        if (life.isHasApartment()) {
+            income += 300; 
+        }
+        if (life.isHasBuilding()) {
+            income += 2000; 
+        }
+        if (life.isHasHotel()) {
+            income += 5000; 
+        }
+        return income;
+    }
+}

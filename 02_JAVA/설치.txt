@@ -1,0 +1,10 @@
+open jdk 17 다운로드 
+
+https://jdk.java.net/archive/ 들어가서 17.0.2 jdk  zip파일 다운 
+
+환경변수 - 시스템변수 
+JAVA_HOME - jdk-17.0.2 경로 
+path -> %JAVA_HOME%\bin\ 추가
+CLASSPATH -> %JAVA_HOME%\lib 
+
+WORKSPACE - 02_JAVA _ 새 텍스트 문서 

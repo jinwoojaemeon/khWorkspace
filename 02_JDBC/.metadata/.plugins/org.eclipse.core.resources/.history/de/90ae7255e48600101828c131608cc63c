@@ -1,0 +1,29 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.experienceStat;
+import static com.jdbc.lifegame.common.UiTemplate.line;
+import static com.jdbc.lifegame.common.UiTemplate.menuHeader;
+
+import java.util.Scanner;
+
+import com.jdbc.lifegame.controller.LifeCharacterController;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+
+public class SelfDevelopMenu {
+	private LifeCharacter life;
+    private Scanner sc;
+    private LifeCharacterController lcc;
+    public SelfDevelopMenu(LifeCharacter life, Scanner sc) {
+        this.life = life;
+        this.sc = sc;
+        this.lcc = new LifeCharacterController();;
+    }
+    
+    public void showMenu() {
+    	 String menuName = "일하기";
+         menuHeader(menuName, life);
+         System.out.println(experienceStat(life));
+         line();
+    }
+    
+}

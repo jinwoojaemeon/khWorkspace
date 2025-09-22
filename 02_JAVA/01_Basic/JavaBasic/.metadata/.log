@@ -1,0 +1,1282 @@
+!SESSION 2025-08-06 09:52:21.880 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 09:52:23.646
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 09:52:36.170
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-06 09:52:39.405
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2025-08-06 09:54:07.205 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 09:54:08.466
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 09:54:11.178
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-06 09:54:14.232
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-06 10:00:11.258
+!MESSAGE ex-0000000027 Cookie rejected [_cfuvid="JbKO8e5NQXpe8KK3PhqxYRbHA4aLjjbduZemxdnoWQg-1754442009973-0.0.1.1-604800000", domain:cdn.webflow.com, path:/, expiry:null] Illegal 'domain' attribute "cdn.webflow.com". Domain of origin: "www.codetogether.com"
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2025-08-06 10:00:47.037
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2025-08-06 10:00:47.037
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.037
+!MESSAGE Software being installed: DevStyle with CodeTogether Bundle 2025.1.0.202505261652 (com.genuitec.eclipse.theming.feature.feature.group 2025.1.0.202505261652)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.037
+!MESSAGE Missing requirement: CodeTogether Core 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.core 2025.1.0.202501171533) requires 'java.package; javax.websocket 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.037
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.037
+!MESSAGE From: CodeTogether Common API 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.api 2025.1.0.202501171533)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.037
+!MESSAGE To: osgi.bundle; com.genuitec.eclipse.codetogether.core 0.0.0
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.037
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.037
+!MESSAGE From: CodeTogether Cloud 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.feature.feature.group 2025.1.0.202501171533)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.037
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.codetogether.api [2025.1.0.202501171533,2025.1.0.202501171533]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.037
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.037
+!MESSAGE From: DevStyle with CodeTogether Bundle 2025.1.0.202505261652 (com.genuitec.eclipse.theming.feature.feature.group 2025.1.0.202505261652)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.037
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.codetogether.feature.feature.group 1.0.0
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2025-08-06 10:00:47.043
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2025-08-06 10:00:47.043
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.043
+!MESSAGE Software being installed: DevStyle with CodeTogether Bundle 2025.1.0.202505261652 (com.genuitec.eclipse.theming.feature.feature.group 2025.1.0.202505261652)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.043
+!MESSAGE Missing requirement: CodeTogether Core 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.core 2025.1.0.202501171533) requires 'java.package; javax.websocket 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.043
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.043
+!MESSAGE From: CodeTogether Common API 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.api 2025.1.0.202501171533)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.043
+!MESSAGE To: osgi.bundle; com.genuitec.eclipse.codetogether.core 0.0.0
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.043
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.043
+!MESSAGE From: CodeTogether Cloud 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.feature.feature.group 2025.1.0.202501171533)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.043
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.codetogether.api [2025.1.0.202501171533,2025.1.0.202501171533]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.043
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.043
+!MESSAGE From: DevStyle with CodeTogether Bundle 2025.1.0.202505261652 (com.genuitec.eclipse.theming.feature.feature.group 2025.1.0.202505261652)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.043
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.codetogether.feature.feature.group 1.0.0
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2025-08-06 10:00:47.049
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2025-08-06 10:00:47.049
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.049
+!MESSAGE Software being installed: DevStyle with CodeTogether Bundle 2025.1.0.202505261652 (com.genuitec.eclipse.theming.feature.feature.group 2025.1.0.202505261652)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.049
+!MESSAGE Missing requirement: CodeTogether Core 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.core 2025.1.0.202501171533) requires 'java.package; javax.websocket 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.049
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.049
+!MESSAGE From: CodeTogether Common API 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.api 2025.1.0.202501171533)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.049
+!MESSAGE To: osgi.bundle; com.genuitec.eclipse.codetogether.core 0.0.0
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.049
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.049
+!MESSAGE From: CodeTogether Cloud 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.feature.feature.group 2025.1.0.202501171533)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.049
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.codetogether.api [2025.1.0.202501171533,2025.1.0.202501171533]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.049
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.049
+!MESSAGE From: DevStyle with CodeTogether Bundle 2025.1.0.202505261652 (com.genuitec.eclipse.theming.feature.feature.group 2025.1.0.202505261652)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.049
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.codetogether.feature.feature.group 1.0.0
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2025-08-06 10:00:47.050
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2025-08-06 10:00:47.050
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.050
+!MESSAGE Software being installed: DevStyle with CodeTogether Bundle 2025.1.0.202505261652 (com.genuitec.eclipse.theming.feature.feature.group 2025.1.0.202505261652)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.050
+!MESSAGE Missing requirement: CodeTogether Core 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.core 2025.1.0.202501171533) requires 'java.package; javax.websocket 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.050
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.050
+!MESSAGE From: CodeTogether Common API 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.api 2025.1.0.202501171533)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.050
+!MESSAGE To: osgi.bundle; com.genuitec.eclipse.codetogether.core 0.0.0
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.050
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.050
+!MESSAGE From: CodeTogether Cloud 2025.1.0.202501171533 (com.genuitec.eclipse.codetogether.feature.feature.group 2025.1.0.202501171533)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.050
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.codetogether.api [2025.1.0.202501171533,2025.1.0.202501171533]
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:00:47.050
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.050
+!MESSAGE From: DevStyle with CodeTogether Bundle 2025.1.0.202505261652 (com.genuitec.eclipse.theming.feature.feature.group 2025.1.0.202505261652)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:00:47.050
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.codetogether.feature.feature.group 1.0.0
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-06 10:01:04.427
+!MESSAGE ex-0000000068 Cookie rejected [_cfuvid="FpaQzCbGrxX9gCTiRFCi.j.Dkakd.CFbcK81BPIB5sE-1754442063144-0.0.1.1-604800000", domain:cdn.webflow.com, path:/, expiry:null] Illegal 'domain' attribute "cdn.webflow.com". Domain of origin: "www.codetogether.com"
+
+!ENTRY org.eclipse.equinox.p2.engine 4 4 2025-08-06 10:01:37.324
+!MESSAGE An error occurred while collecting items to be installed
+!SUBENTRY 1 org.eclipse.equinox.p2.engine 4 0 2025-08-06 10:01:37.324
+!MESSAGE session context was:(profile=C__Users_user1_eclipse_jee-2025-06_eclipse, phase=org.eclipse.equinox.internal.p2.engine.phases.Collect, operand=, action=).
+!SUBENTRY 1 org.eclipse.equinox.p2.engine 4 0 2025-08-06 10:01:37.324
+!MESSAGE Cannot invoke "org.eclipse.osgi.signedcontent.SignedContentFactory.getSignedContent(java.io.File)" because "verifierFactory" is null
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.osgi.signedcontent.SignedContentFactory.getSignedContent(java.io.File)" because "verifierFactory" is null
+	at org.eclipse.equinox.internal.p2.artifact.repository.SignatureVerifier.verifyContent(SignatureVerifier.java:88)
+	at org.eclipse.equinox.internal.p2.artifact.repository.SignatureVerifier.verify(SignatureVerifier.java:68)
+	at org.eclipse.equinox.internal.p2.artifact.repository.SignatureVerifier.close(SignatureVerifier.java:120)
+	at org.eclipse.equinox.internal.provisional.p2.artifact.repository.processing.ProcessingStep.close(ProcessingStep.java:98)
+	at org.eclipse.equinox.internal.p2.artifact.processors.checksum.MessageDigestProcessingStep.close(MessageDigestProcessingStep.java:58)
+	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.reportStatus(SimpleArtifactRepository.java:1432)
+	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.downloadArtifact(SimpleArtifactRepository.java:677)
+	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.getArtifact(SimpleArtifactRepository.java:890)
+	at org.eclipse.equinox.internal.p2.artifact.repository.MirrorRequest.getArtifact(MirrorRequest.java:366)
+	at org.eclipse.equinox.internal.p2.artifact.repository.MirrorRequest.transferSingle(MirrorRequest.java:335)
+	at org.eclipse.equinox.internal.p2.artifact.repository.MirrorRequest.transfer(MirrorRequest.java:253)
+	at org.eclipse.equinox.internal.p2.artifact.repository.MirrorRequest.perform(MirrorRequest.java:166)
+	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.getArtifact(SimpleArtifactRepository.java:870)
+	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepository.getArtifacts(SimpleArtifactRepository.java:959)
+	at org.eclipse.equinox.internal.p2.engine.DownloadManager.fetch(DownloadManager.java:143)
+	at org.eclipse.equinox.internal.p2.engine.DownloadManager.start(DownloadManager.java:117)
+	at org.eclipse.equinox.internal.p2.engine.phases.Collect.completePhase(Collect.java:130)
+	at org.eclipse.equinox.internal.p2.engine.Phase.postPerform(Phase.java:272)
+	at org.eclipse.equinox.internal.p2.engine.Phase.perform(Phase.java:109)
+	at org.eclipse.equinox.internal.p2.engine.PhaseSet.perform(PhaseSet.java:65)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:102)
+	at org.eclipse.equinox.internal.p2.engine.Engine.perform(Engine.java:52)
+	at org.eclipse.equinox.p2.operations.ProvisioningSession.performProvisioningPlan(ProvisioningSession.java:175)
+	at org.eclipse.equinox.p2.operations.ProfileModificationJob.runModal(ProfileModificationJob.java:78)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:190)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+!SESSION 2025-08-06 10:01:38.168 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 10:01:39.854
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 10:01:43.304
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-06 10:01:46.387
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-06 10:02:42.317
+!MESSAGE ex-0000000035 Cookie rejected [_cfuvid="wkv55JSVbDmBpW2BPJDcdrcseD9Ds5XmtykDEB8QSf8-1754442161031-0.0.1.1-604800000", domain:cdn.webflow.com, path:/, expiry:null] Illegal 'domain' attribute "cdn.webflow.com". Domain of origin: "www.codetogether.com"
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2025-08-06 10:03:12.765
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2025-08-06 10:03:12.765
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.765
+!MESSAGE Software being installed: DevStyle (includes Darkest Dark Theme) 1.11.0.202206131352 (com.genuitec.eclipse.theming.core.feature.feature.group 1.11.0.202206131352)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.765
+!MESSAGE Missing requirement: Genuitec Enhanced Theme 1.11.0.202206131352 (com.genuitec.eclipse.theming.core 1.11.0.202206131352) requires 'java.package; org.apache.commons.lang3 [3.1.0,3.2.0)' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:03:12.765
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.765
+!MESSAGE From: DevStyle (includes Darkest Dark Theme) 1.11.0.202206131352 (com.genuitec.eclipse.theming.core.feature.feature.group 1.11.0.202206131352)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.765
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.theming.core [1.11.0.202206131352,1.11.0.202206131352]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2025-08-06 10:03:12.771
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2025-08-06 10:03:12.771
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.771
+!MESSAGE Software being installed: DevStyle (includes Darkest Dark Theme) 1.11.0.202206131352 (com.genuitec.eclipse.theming.core.feature.feature.group 1.11.0.202206131352)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.771
+!MESSAGE Missing requirement: Genuitec Enhanced Theme 1.11.0.202206131352 (com.genuitec.eclipse.theming.core 1.11.0.202206131352) requires 'java.package; org.apache.commons.lang3 [3.1.0,3.2.0)' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:03:12.771
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.771
+!MESSAGE From: DevStyle (includes Darkest Dark Theme) 1.11.0.202206131352 (com.genuitec.eclipse.theming.core.feature.feature.group 1.11.0.202206131352)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.771
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.theming.core [1.11.0.202206131352,1.11.0.202206131352]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2025-08-06 10:03:12.777
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2025-08-06 10:03:12.777
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.778
+!MESSAGE Software being installed: DevStyle (includes Darkest Dark Theme) 1.11.0.202206131352 (com.genuitec.eclipse.theming.core.feature.feature.group 1.11.0.202206131352)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.778
+!MESSAGE Missing requirement: Genuitec Enhanced Theme 1.11.0.202206131352 (com.genuitec.eclipse.theming.core 1.11.0.202206131352) requires 'java.package; org.apache.commons.lang3 [3.1.0,3.2.0)' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:03:12.778
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.778
+!MESSAGE From: DevStyle (includes Darkest Dark Theme) 1.11.0.202206131352 (com.genuitec.eclipse.theming.core.feature.feature.group 1.11.0.202206131352)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.778
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.theming.core [1.11.0.202206131352,1.11.0.202206131352]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 10053 2025-08-06 10:03:12.778
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 10053 2025-08-06 10:03:12.778
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.778
+!MESSAGE Software being installed: DevStyle (includes Darkest Dark Theme) 1.11.0.202206131352 (com.genuitec.eclipse.theming.core.feature.feature.group 1.11.0.202206131352)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.778
+!MESSAGE Missing requirement: Genuitec Enhanced Theme 1.11.0.202206131352 (com.genuitec.eclipse.theming.core 1.11.0.202206131352) requires 'java.package; org.apache.commons.lang3 [3.1.0,3.2.0)' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2025-08-06 10:03:12.778
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.778
+!MESSAGE From: DevStyle (includes Darkest Dark Theme) 1.11.0.202206131352 (com.genuitec.eclipse.theming.core.feature.feature.group 1.11.0.202206131352)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2025-08-06 10:03:12.778
+!MESSAGE To: org.eclipse.equinox.p2.iu; com.genuitec.eclipse.theming.core [1.11.0.202206131352,1.11.0.202206131352]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-06 10:03:45.261
+!MESSAGE ex-0000000065 Cookie rejected [_cfuvid="oTGBXy2FO_BeCVDwHzMkHEe_z8G7S.xFf2RAnZ4p2cw-1754442223980-0.0.1.1-604800000", domain:cdn.webflow.com, path:/, expiry:null] Illegal 'domain' attribute "cdn.webflow.com". Domain of origin: "www.codetogether.com"
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-06 10:03:45.776
+!MESSAGE ex-0000000066 Cookie rejected [_cfuvid="MheKtGxMxARvoml8jC76AFMssn2BTDL5nBu.Z1AXhgE-1754442224492-0.0.1.1-604800000", domain:cdn.webflow.com, path:/, expiry:null] Illegal 'domain' attribute "cdn.webflow.com". Domain of origin: "www.codetogether.com"
+!SESSION 2025-08-06 10:04:20.480 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product -data file:/C:/workspace/02_JAVA/01_Basic/JavaBasic/
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 10:04:23.759
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 10:04:48.907
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-08-06 10:04:49.369
+!MESSAGE Warnings while parsing the images from the 'org.eclipse.ui.commandImages' extension point.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-08-06 10:04:49.369
+!MESSAGE Cannot bind to an undefined command: plug-in='com.genuitec.eclipse.theming.ui', id='com.genuitec.myeclipse.help.darktheme.commandid'
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2025-08-06 10:04:49.708
+!MESSAGE A DevStyle Theme is being activated on this workspace; preparing colors and configuration
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2025-08-06 10:04:49.718
+!MESSAGE DevStyle has archived current color configurations to alternate preferences - will be restored when switching out of the DevStyle Theme
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-06 10:04:52.589
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-06 10:04:53.214
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-06 10:10:11.346 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 10:10:12.823
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-06 10:10:25.991
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-06 10:10:29.705
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-06 10:10:30.148
+!MESSAGE Authorization Server started successfuly
+
+!ENTRY org.eclipse.jdt.launching 4 120 2025-08-06 10:24:54.998
+!MESSAGE Cannot connect to VM
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endAccept(NioSocketImpl.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.accept(NioSocketImpl.java:755)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:698)
+	at java.base/java.net.ServerSocket.platformImplAccept(ServerSocket.java:663)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:639)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:585)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:543)
+	at org.eclipse.jdi.internal.connect.SocketTransportService.accept(SocketTransportService.java:91)
+	at org.eclipse.jdi.internal.connect.SocketTransportImpl.accept(SocketTransportImpl.java:63)
+	at org.eclipse.jdi.internal.connect.SocketListeningConnectorImpl.accept(SocketListeningConnectorImpl.java:167)
+	at org.eclipse.jdt.internal.launching.StandardVMDebugger$ConnectRunnable.run(StandardVMDebugger.java:113)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+!ENTRY org.eclipse.jdt.launching 4 120 2025-08-06 10:25:02.059
+!MESSAGE Cannot connect to VM
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endAccept(NioSocketImpl.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.accept(NioSocketImpl.java:755)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:698)
+	at java.base/java.net.ServerSocket.platformImplAccept(ServerSocket.java:663)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:639)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:585)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:543)
+	at org.eclipse.jdi.internal.connect.SocketTransportService.accept(SocketTransportService.java:91)
+	at org.eclipse.jdi.internal.connect.SocketTransportImpl.accept(SocketTransportImpl.java:63)
+	at org.eclipse.jdi.internal.connect.SocketListeningConnectorImpl.accept(SocketListeningConnectorImpl.java:167)
+	at org.eclipse.jdt.internal.launching.StandardVMDebugger$ConnectRunnable.run(StandardVMDebugger.java:113)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+!ENTRY org.eclipse.jdt.launching 4 120 2025-08-06 10:25:15.372
+!MESSAGE Cannot connect to VM
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endAccept(NioSocketImpl.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.accept(NioSocketImpl.java:755)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:698)
+	at java.base/java.net.ServerSocket.platformImplAccept(ServerSocket.java:663)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:639)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:585)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:543)
+	at org.eclipse.jdi.internal.connect.SocketTransportService.accept(SocketTransportService.java:91)
+	at org.eclipse.jdi.internal.connect.SocketTransportImpl.accept(SocketTransportImpl.java:63)
+	at org.eclipse.jdi.internal.connect.SocketListeningConnectorImpl.accept(SocketListeningConnectorImpl.java:167)
+	at org.eclipse.jdt.internal.launching.StandardVMDebugger$ConnectRunnable.run(StandardVMDebugger.java:113)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+!ENTRY org.eclipse.jdt.launching 4 120 2025-08-06 10:26:06.409
+!MESSAGE Cannot connect to VM
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endAccept(NioSocketImpl.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.accept(NioSocketImpl.java:755)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:698)
+	at java.base/java.net.ServerSocket.platformImplAccept(ServerSocket.java:663)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:639)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:585)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:543)
+	at org.eclipse.jdi.internal.connect.SocketTransportService.accept(SocketTransportService.java:91)
+	at org.eclipse.jdi.internal.connect.SocketTransportImpl.accept(SocketTransportImpl.java:63)
+	at org.eclipse.jdi.internal.connect.SocketListeningConnectorImpl.accept(SocketListeningConnectorImpl.java:167)
+	at org.eclipse.jdt.internal.launching.StandardVMDebugger$ConnectRunnable.run(StandardVMDebugger.java:113)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+!SESSION 2025-08-18 17:16:38.048 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-18 17:16:40.516
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-18 17:17:06.617
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-18 17:17:11.829
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-18 17:17:13.212
+!MESSAGE Authorization Server started successfuly
+
+!ENTRY org.eclipse.jdt.launching 4 120 2025-08-18 17:27:16.642
+!MESSAGE Cannot connect to VM
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.base/sun.nio.ch.NioSocketImpl.endAccept(NioSocketImpl.java:682)
+	at java.base/sun.nio.ch.NioSocketImpl.accept(NioSocketImpl.java:755)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:698)
+	at java.base/java.net.ServerSocket.platformImplAccept(ServerSocket.java:663)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:639)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:585)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:543)
+	at org.eclipse.jdi.internal.connect.SocketTransportService.accept(SocketTransportService.java:91)
+	at org.eclipse.jdi.internal.connect.SocketTransportImpl.accept(SocketTransportImpl.java:63)
+	at org.eclipse.jdi.internal.connect.SocketListeningConnectorImpl.accept(SocketListeningConnectorImpl.java:167)
+	at org.eclipse.jdt.internal.launching.StandardVMDebugger$ConnectRunnable.run(StandardVMDebugger.java:113)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+!SESSION 2025-08-19 08:14:31.867 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-19 08:14:34.095
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-19 08:15:21.705
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-19 08:15:26.906
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-19 08:15:27.696
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-19 17:02:42.562 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-19 17:02:44.502
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-19 17:02:53.528
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-19 17:02:58.090
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-19 17:02:59.246
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-20 08:18:11.161 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-20 08:18:13.774
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-20 08:18:21.811
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-20 08:18:26.861
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-20 08:18:27.908
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-20 08:18:31.587 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-20 08:18:32.933
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-20 08:18:39.972
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-20 08:18:44.454
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-20 08:18:45.485
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-20 08:20:48.316 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-20 08:20:50.092
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-20 08:20:57.623
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-20 08:21:02.156
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-20 08:21:03.193
+!MESSAGE Authorization Server started successfuly
+
+!ENTRY org.eclipse.ui.ide 4 4 2025-08-20 17:25:24.070
+!MESSAGE Not properly disposed SWT resource
+!STACK 0
+java.lang.Error: SWT Resource was not properly disposed
+	at org.eclipse.swt.graphics.Resource.initNonDisposeTracking(Resource.java:191)
+	at org.eclipse.swt.graphics.Resource.<init>(Resource.java:124)
+	at org.eclipse.swt.graphics.Image.<init>(Image.java:567)
+	at org.eclipse.jface.resource.URLImageDescriptor.createImage(URLImageDescriptor.java:299)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:331)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:309)
+	at com.genuitec.eclipse.startup.dialogs.tabs.RecentTabFactory.createTabArea(RecentTabFactory.java:92)
+	at com.genuitec.eclipse.startup.dialogs.tabs.CodeFullyTabFactory.createContents(CodeFullyTabFactory.java:139)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabContent(SideTabFolder.java:455)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.doCreateTabs(SideTabFolder.java:224)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabs(SideTabFolder.java:155)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createTabs(AbstactSideTabDialog.java:142)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:464)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:460)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createContents(AbstactSideTabDialog.java:122)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.window.Window.open(Window.java:788)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.open(AbstactSideTabDialog.java:61)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.prompt(CustomStartupDialog.java:335)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.showCustomDialog(IDEApplication.java:627)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.promptForWorkspace(IDEApplication.java:383)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.checkInstanceLocation(IDEApplication.java:328)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:175)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.ui.ide 4 4 2025-08-20 17:25:24.071
+!MESSAGE Not properly disposed SWT resource
+!STACK 0
+java.lang.Error: SWT Resource was not properly disposed
+	at org.eclipse.swt.graphics.Resource.initNonDisposeTracking(Resource.java:191)
+	at org.eclipse.swt.graphics.Resource.<init>(Resource.java:124)
+	at org.eclipse.swt.graphics.Image.<init>(Image.java:607)
+	at com.genuitec.eclipse.webicons.IconImageDescriptor.createImage(IconImageDescriptor.java:46)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:331)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:309)
+	at com.genuitec.eclipse.startup.dialogs.custom.UIHelper.createIcon(UIHelper.java:342)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.createBrowseOnHover(WorkspaceNameControl.java:279)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameLink.createNameLabel(WorkspaceNameLink.java:104)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.<init>(WorkspaceNameControl.java:183)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameLink.<init>(WorkspaceNameLink.java:79)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceControl.createWorkspaceNameControl(WorkspaceControl.java:117)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceControl.createControl(WorkspaceControl.java:43)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspacesTabFactory.createTabArea(WorkspacesTabFactory.java:85)
+	at com.genuitec.eclipse.startup.dialogs.tabs.CodeFullyTabFactory.createContents(CodeFullyTabFactory.java:139)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabContent(SideTabFolder.java:455)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.doCreateTabs(SideTabFolder.java:224)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabs(SideTabFolder.java:155)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createTabs(AbstactSideTabDialog.java:142)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:464)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:460)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createContents(AbstactSideTabDialog.java:122)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.window.Window.open(Window.java:788)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.open(AbstactSideTabDialog.java:61)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.prompt(CustomStartupDialog.java:335)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.showCustomDialog(IDEApplication.java:627)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.promptForWorkspace(IDEApplication.java:383)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.checkInstanceLocation(IDEApplication.java:328)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:175)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.ui.ide 4 4 2025-08-20 17:25:24.072
+!MESSAGE Not properly disposed SWT resource
+!STACK 0
+java.lang.Error: SWT Resource was not properly disposed
+	at org.eclipse.swt.graphics.Resource.initNonDisposeTracking(Resource.java:191)
+	at org.eclipse.swt.graphics.Resource.<init>(Resource.java:124)
+	at org.eclipse.swt.graphics.Image.<init>(Image.java:607)
+	at com.genuitec.eclipse.webicons.IconImageDescriptor.createImage(IconImageDescriptor.java:46)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:331)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:309)
+	at com.genuitec.eclipse.startup.dialogs.custom.UIHelper.createIcon(UIHelper.java:342)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.createBrowseOnHover(WorkspaceNameControl.java:279)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameLink.createNameLabel(WorkspaceNameLink.java:104)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.<init>(WorkspaceNameControl.java:183)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameLink.<init>(WorkspaceNameLink.java:79)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceControl.createWorkspaceNameControl(WorkspaceControl.java:117)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceControl.createControl(WorkspaceControl.java:43)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspacesTabFactory.createTabArea(WorkspacesTabFactory.java:85)
+	at com.genuitec.eclipse.startup.dialogs.tabs.CodeFullyTabFactory.createContents(CodeFullyTabFactory.java:139)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabContent(SideTabFolder.java:455)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.doCreateTabs(SideTabFolder.java:224)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabs(SideTabFolder.java:155)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createTabs(AbstactSideTabDialog.java:142)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:464)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:460)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createContents(AbstactSideTabDialog.java:122)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.window.Window.open(Window.java:788)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.open(AbstactSideTabDialog.java:61)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.prompt(CustomStartupDialog.java:335)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.showCustomDialog(IDEApplication.java:627)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.promptForWorkspace(IDEApplication.java:383)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.checkInstanceLocation(IDEApplication.java:328)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:175)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.ui.ide 4 4 2025-08-20 17:25:24.073
+!MESSAGE Not properly disposed SWT resource
+!STACK 0
+java.lang.Error: SWT Resource was not properly disposed
+	at org.eclipse.swt.graphics.Resource.initNonDisposeTracking(Resource.java:191)
+	at org.eclipse.swt.graphics.Resource.<init>(Resource.java:124)
+	at org.eclipse.swt.graphics.Image.<init>(Image.java:607)
+	at com.genuitec.eclipse.webicons.IconImageDescriptor.createImage(IconImageDescriptor.java:46)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:331)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:309)
+	at com.genuitec.eclipse.startup.dialogs.custom.UIHelper.createIcon(UIHelper.java:342)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.createBrowseOnHover(WorkspaceNameControl.java:279)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.createNameLabel(WorkspaceNameControl.java:233)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.<init>(WorkspaceNameControl.java:183)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceControl.createWorkspaceNameControl(WorkspaceControl.java:115)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceControl.createControl(WorkspaceControl.java:43)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspacesTabFactory.createTabArea(WorkspacesTabFactory.java:85)
+	at com.genuitec.eclipse.startup.dialogs.tabs.CodeFullyTabFactory.createContents(CodeFullyTabFactory.java:139)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabContent(SideTabFolder.java:455)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.doCreateTabs(SideTabFolder.java:224)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabs(SideTabFolder.java:155)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createTabs(AbstactSideTabDialog.java:142)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:464)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:460)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createContents(AbstactSideTabDialog.java:122)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.window.Window.open(Window.java:788)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.open(AbstactSideTabDialog.java:61)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.prompt(CustomStartupDialog.java:335)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.showCustomDialog(IDEApplication.java:627)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.promptForWorkspace(IDEApplication.java:383)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.checkInstanceLocation(IDEApplication.java:328)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:175)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.ui.ide 4 4 2025-08-20 17:25:24.074
+!MESSAGE Not properly disposed SWT resource
+!STACK 0
+java.lang.Error: SWT Resource was not properly disposed
+	at org.eclipse.swt.graphics.Resource.initNonDisposeTracking(Resource.java:191)
+	at org.eclipse.swt.graphics.Resource.<init>(Resource.java:124)
+	at org.eclipse.swt.graphics.Image.<init>(Image.java:607)
+	at com.genuitec.eclipse.webicons.IconImageDescriptor.createImage(IconImageDescriptor.java:46)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:331)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:309)
+	at com.genuitec.eclipse.startup.dialogs.custom.UIHelper.createIcon(UIHelper.java:342)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.createBrowseOnHover(WorkspaceNameControl.java:279)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameLink.createNameLabel(WorkspaceNameLink.java:104)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.<init>(WorkspaceNameControl.java:183)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameLink.<init>(WorkspaceNameLink.java:79)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabMainPage.createRecentWorkspacesComposite(LaunchTabMainPage.java:92)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabMainPage.createContents(LaunchTabMainPage.java:55)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabFactory.createPages(LaunchTabFactory.java:40)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabFactory.createTabArea(LaunchTabFactory.java:34)
+	at com.genuitec.eclipse.startup.dialogs.tabs.CodeFullyTabFactory.createContents(CodeFullyTabFactory.java:139)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabContent(SideTabFolder.java:455)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.doCreateTabs(SideTabFolder.java:224)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabs(SideTabFolder.java:155)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createTabs(AbstactSideTabDialog.java:142)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:464)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:460)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createContents(AbstactSideTabDialog.java:122)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.window.Window.open(Window.java:788)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.open(AbstactSideTabDialog.java:61)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.prompt(CustomStartupDialog.java:335)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.showCustomDialog(IDEApplication.java:627)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.promptForWorkspace(IDEApplication.java:383)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.checkInstanceLocation(IDEApplication.java:328)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:175)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.ui.ide 4 4 2025-08-20 17:25:24.074
+!MESSAGE Not properly disposed SWT resource
+!STACK 0
+java.lang.Error: SWT Resource was not properly disposed
+	at org.eclipse.swt.graphics.Resource.initNonDisposeTracking(Resource.java:191)
+	at org.eclipse.swt.graphics.Resource.<init>(Resource.java:124)
+	at org.eclipse.swt.graphics.Image.<init>(Image.java:607)
+	at com.genuitec.eclipse.webicons.IconImageDescriptor.createImage(IconImageDescriptor.java:46)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:331)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:309)
+	at com.genuitec.eclipse.startup.dialogs.custom.UIHelper.createIcon(UIHelper.java:342)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.createBrowseOnHover(WorkspaceNameControl.java:279)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameLink.createNameLabel(WorkspaceNameLink.java:104)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.<init>(WorkspaceNameControl.java:183)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameLink.<init>(WorkspaceNameLink.java:79)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabMainPage.createRecentWorkspacesComposite(LaunchTabMainPage.java:92)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabMainPage.createContents(LaunchTabMainPage.java:55)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabFactory.createPages(LaunchTabFactory.java:40)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabFactory.createTabArea(LaunchTabFactory.java:34)
+	at com.genuitec.eclipse.startup.dialogs.tabs.CodeFullyTabFactory.createContents(CodeFullyTabFactory.java:139)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabContent(SideTabFolder.java:455)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.doCreateTabs(SideTabFolder.java:224)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabs(SideTabFolder.java:155)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createTabs(AbstactSideTabDialog.java:142)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:464)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:460)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createContents(AbstactSideTabDialog.java:122)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.window.Window.open(Window.java:788)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.open(AbstactSideTabDialog.java:61)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.prompt(CustomStartupDialog.java:335)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.showCustomDialog(IDEApplication.java:627)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.promptForWorkspace(IDEApplication.java:383)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.checkInstanceLocation(IDEApplication.java:328)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:175)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.ui.ide 4 4 2025-08-20 17:25:24.075
+!MESSAGE Not properly disposed SWT resource
+!STACK 0
+java.lang.Error: SWT Resource was not properly disposed
+	at org.eclipse.swt.graphics.Resource.initNonDisposeTracking(Resource.java:191)
+	at org.eclipse.swt.graphics.Resource.<init>(Resource.java:124)
+	at org.eclipse.swt.graphics.Image.<init>(Image.java:607)
+	at com.genuitec.eclipse.webicons.IconImageDescriptor.createImage(IconImageDescriptor.java:46)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:331)
+	at org.eclipse.jface.resource.ImageDescriptor.createImage(ImageDescriptor.java:309)
+	at com.genuitec.eclipse.startup.dialogs.custom.UIHelper.createIcon(UIHelper.java:342)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.createBrowseOnHover(WorkspaceNameControl.java:279)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.createNameLabel(WorkspaceNameControl.java:233)
+	at com.genuitec.eclipse.startup.dialogs.tabs.WorkspaceNameControl.<init>(WorkspaceNameControl.java:183)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabMainPage.createRecentWorkspacesComposite(LaunchTabMainPage.java:90)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabMainPage.createContents(LaunchTabMainPage.java:55)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabFactory.createPages(LaunchTabFactory.java:40)
+	at com.genuitec.eclipse.startup.dialogs.tabs.LaunchTabFactory.createTabArea(LaunchTabFactory.java:34)
+	at com.genuitec.eclipse.startup.dialogs.tabs.CodeFullyTabFactory.createContents(CodeFullyTabFactory.java:139)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabContent(SideTabFolder.java:455)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.doCreateTabs(SideTabFolder.java:224)
+	at com.genuitec.eclipse.startup.dialogs.custom.SideTabFolder.createTabs(SideTabFolder.java:155)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createTabs(AbstactSideTabDialog.java:142)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:464)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.createTabs(CustomStartupDialog.java:460)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.createContents(AbstactSideTabDialog.java:122)
+	at org.eclipse.jface.window.Window.create(Window.java:431)
+	at org.eclipse.jface.window.Window.open(Window.java:788)
+	at com.genuitec.eclipse.startup.dialogs.custom.AbstactSideTabDialog.open(AbstactSideTabDialog.java:61)
+	at com.genuitec.eclipse.startup.dialogs.custom.CustomStartupDialog.prompt(CustomStartupDialog.java:335)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.showCustomDialog(IDEApplication.java:627)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.promptForWorkspace(IDEApplication.java:383)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.checkInstanceLocation(IDEApplication.java:328)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:175)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+!SESSION 2025-08-20 17:26:38.347 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-20 17:26:41.418
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-20 17:26:47.614
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-20 17:26:53.771
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-20 17:26:54.802
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-21 08:23:03.776 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-21 08:23:05.774
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-21 08:26:42.543
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-21 08:26:48.478
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-21 08:26:49.723
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-22 17:31:47.208 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-22 17:31:48.646
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-22 17:31:52.175
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-22 17:31:56.761
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-22 17:31:57.297
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-22 17:32:15.944 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-22 17:32:17.879
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-22 17:32:59.705
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-22 17:33:04.633
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-22 17:33:05.247
+!MESSAGE Authorization Server started successfuly
+
+!ENTRY org.eclipse.ui 4 0 2025-08-22 17:33:40.552
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.IllegalArgumentException: Argument not valid
+	at org.eclipse.swt.SWT.error(SWT.java:4926)
+	at org.eclipse.swt.SWT.error(SWT.java:4860)
+	at org.eclipse.swt.SWT.error(SWT.java:4831)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:507)
+	at org.eclipse.swt.widgets.Label.setImage(Label.java:351)
+	at org.eclipse.swt.widgets.Label.handleDPIChange(Label.java:630)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Control.handleMonitorSpecificDpiChange(Control.java:4956)
+	at org.eclipse.swt.widgets.Control.WM_DPICHANGED(Control.java:4968)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4874)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(Native Method)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:513)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4881)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(Native Method)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:513)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4881)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3722)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:678)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:583)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:185)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.ui 4 0 2025-08-22 17:36:28.081
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.IllegalArgumentException: Argument not valid
+	at org.eclipse.swt.SWT.error(SWT.java:4926)
+	at org.eclipse.swt.SWT.error(SWT.java:4860)
+	at org.eclipse.swt.SWT.error(SWT.java:4831)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:507)
+	at org.eclipse.swt.widgets.Label.setImage(Label.java:351)
+	at org.eclipse.swt.widgets.Label.handleDPIChange(Label.java:630)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Control.handleMonitorSpecificDpiChange(Control.java:4956)
+	at org.eclipse.swt.widgets.Control.WM_DPICHANGED(Control.java:4968)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4874)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(Native Method)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:513)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4881)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(Native Method)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:513)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4881)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3722)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:678)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:583)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:185)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.ui 4 0 2025-08-22 17:36:37.118
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.IllegalArgumentException: Argument not valid
+	at org.eclipse.swt.SWT.error(SWT.java:4926)
+	at org.eclipse.swt.SWT.error(SWT.java:4860)
+	at org.eclipse.swt.SWT.error(SWT.java:4831)
+	at org.eclipse.swt.widgets.Widget.error(Widget.java:507)
+	at org.eclipse.swt.widgets.Label.setImage(Label.java:351)
+	at org.eclipse.swt.widgets.Label.handleDPIChange(Label.java:630)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Composite.handleDPIChange(Composite.java:1985)
+	at org.eclipse.swt.internal.DPIZoomChangeRegistry.applyChange(DPIZoomChangeRegistry.java:56)
+	at org.eclipse.swt.widgets.Control.handleMonitorSpecificDpiChange(Control.java:4956)
+	at org.eclipse.swt.widgets.Control.WM_DPICHANGED(Control.java:4968)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4874)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(Native Method)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:513)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4881)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DefWindowProc(Native Method)
+	at org.eclipse.swt.widgets.Shell.callWindowProc(Shell.java:513)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4881)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:336)
+	at org.eclipse.swt.widgets.Decorations.windowProc(Decorations.java:1494)
+	at org.eclipse.swt.widgets.Shell.windowProc(Shell.java:2387)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5106)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3722)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:678)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:583)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:185)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+!SESSION 2025-08-22 17:37:29.604 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-22 17:37:32.650
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-22 17:37:38.177
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-22 17:37:45.906
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-22 17:37:47.381
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-08-25 08:19:25.772 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-25 08:19:27.634
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-25 08:19:35.795
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-25 08:19:41.291
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-08-25 08:19:42.379
+!MESSAGE Authorization Server started successfuly
+!SESSION 2025-09-03 16:28:18.345 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.8
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-09-03 16:28:19.915
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-09-03 16:28:24.854
+!MESSAGE Logback config file: C:\workspace\02_JAVA\01_Basic\JavaBasic\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-09-03 16:28:29.909
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user1'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.codetogether.hq.eclipse 1 0 2025-09-03 16:28:30.778
+!MESSAGE Authorization Server started successfuly

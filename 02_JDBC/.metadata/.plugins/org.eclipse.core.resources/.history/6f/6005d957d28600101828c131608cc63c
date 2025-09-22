@@ -1,0 +1,13 @@
+package com.jdbc.lifegame.common;
+
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+
+public class UiTemplate {
+	public static void line() {
+		System.out.println("=============================================");
+	}
+	
+	public static void basicStat(LifeCharacter life) {
+		System.out.println("이름 : " + life.getCharacterName() + "    나이 : " + life.getAge());
+	}
+}

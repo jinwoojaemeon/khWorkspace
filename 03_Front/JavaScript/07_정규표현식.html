@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .area{
+            border: 1px solid black;
+            background: beige;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <h1>정규표현식이란?</h1>
+    <p>
+        정규표현식(Regular Expression)
+        특정 문자열의 특정 패턴을 찾고, 검사하고, 치환하는 형식<br>
+        정규표현식을 사용하면 문자열에 대한 특정 패턴 조건을 쉽게 검사할 수 있다. <br>
+    </p>
+    <h3>정규표현식 객체 생성 및 관련된 메서드</h3>
+    <button onclick="test1()">실행</button>
+    <div id="area1" class="area"></div>
+    <script>
+        function test1(){
+            const area = document.getElementById('area1');
+
+            const str1 = "javascript jquery ajax";
+            const str2 = "java oracle html css";
+
+            //정규표현식 객체 생성 방법
+            // 방법1) 생성자를 통한 생성
+            const regExp1 = new RegExp("script"); 
+            // 방법2) 리터럴방식 생성
+            const regExp2 = /script/
+            /*
+            // RegExp 객체 관련 메서드
+                1) rexExp.test(문자열) : 문자열이 정규표현식 값(패턴)과 일치하면 true, 아니면 false
+                2) rexExp.exec(문자열) : 문자열이 정규표현식 값(패턴)과 일치하면 일치하는  
+                                            값 중 가장 첫번째 값 반환, 아니면 null
+            */
+            area.innerHTML += "regExp1.test(str1) : " + regExp1.test(str1) + "<br>";
+            area.innerHTML += "regExp2.test(str1) : " + regExp2.test(str1) + "<br>";
+            area.innerHTML += "regExp1.test(str2) : " + regExp1.test(str2) + "<br>";
+            area.innerHTML += "regExp2.test(str2) : " + regExp2.test(str2) + "<br><br>";
+
+            area.innerHTML += "regExp1.exec(str1) : " + regExp1.exec(str1) + "<br>";
+            area.innerHTML += "regExp2.exec(str1) : " + regExp2.exec(str1) + "<br>";
+            area.innerHTML += "regExp1.exec(str2) : " + regExp1.exec(str2) + "<br>";
+            area.innerHTML += "regExp2.exec(str2) : " + regExp2.exec(str2) + "<br>";
+        }
+    </script>
+    <h3>메타문자</h3>
+    <p>
+        메타문자를 이용해서 정규식의 검색조건으로 삼을 '특정패턴' 제시 가능
+        문자열이 해당 정규식으로 제시한 특정 패턴에 만족하는지 test()통해 검사할 수 있다.
+    
+        ^ : 문자열의 시작  ex: /^j/.test("java") -> true <br>
+        $ : 문자열의 끝  ex: /x$/.test("javascript") -> false <br>
+    </p>
+    <button onclick="test2()">실행</button>
+    <div id="area2" class="area"></div>
+
+    <script>
+        function test2(){
+            const area2 = document.getElementById('area2');
+
+            const str = "javascript jquery ajax";
+            
+            let regExp = /^j/; 
+            area2.innerHTML = "regExp.test(str) : " + regExp.test(str) + "<br>";
+
+            regExp = /x$/;
+            area2.innerHTML += "<br>regExp.test(str) : " + regExp.test(str) + "<br>";
+            
+            // [abc] -> a또는 b또는 c
+            // [^abc] -> a,b,c 제외
+            // [a-z] -> a부터 z까지
+            // [A-Z] -> A부터 Z까지
+            // [0-9] -> 0부터 9까지
+            // [가-힣] -> 가부터 힣까지
+            regExp = /[a-z]/
+            area2.innerHTML += "<br>regExp.test(str) : " + regExp.test(str) + "<br>";
+            area2.innerHTML += "regExp.exec(str) : " + str.replace(regExp, '*') + "<br>";
+
+            regExp = /^[a-zA-Z0-9]{5,12}$/; // 영문자 대소문자, 숫자 5~12자리
+        }
+    </script>
+</body>
+</html>

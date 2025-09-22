@@ -1,0 +1,64 @@
+package com.jdbc.lifegame.view;
+
+import static com.jdbc.lifegame.common.UiTemplate.abilityStat;
+import static com.jdbc.lifegame.common.UiTemplate.basicStat;
+import static com.jdbc.lifegame.common.UiTemplate.formatMoney;
+import static com.jdbc.lifegame.common.UiTemplate.fullExperienceStat;
+import static com.jdbc.lifegame.common.UiTemplate.investmentStat;
+import static com.jdbc.lifegame.common.UiTemplate.line;
+
+import java.util.Scanner;
+
+import com.jdbc.lifegame.controller.AchievementController;
+import com.jdbc.lifegame.model.vo.LifeCharacter;
+
+public class GameEndHandler {
+    public static boolean handleGameEnd(LifeCharacter life, String endReason, Scanner sc) {
+        try {
+            Thread.sleep(500);  
+            line();
+            System.out.println("🎮 " + endReason + " 🎮");
+            line();
+            Thread.sleep(500);
+            
+            
+            
+            System.out.println("📊 최종 기본 정보");
+            System.out.println(basicStat(life));
+            System.out.println();
+            Thread.sleep(500);
+            
+            System.out.println("💪 최종 능력치");
+            System.out.println(abilityStat(life));
+            System.out.println();
+            Thread.sleep(500);
+            
+            System.out.println("👔 전체 경력 정보");
+            System.out.println(fullExperienceStat(life));
+            System.out.println();
+            Thread.sleep(500);
+            
+            System.out.println("💰 투자 현황");
+            System.out.println(investmentStat(life));
+            Thread.sleep(500);
+            line();
+            
+            System.out.println("🏆 최종 자산: " + formatMoney(life.getMoney()));
+            line();
+            Thread.sleep(500);
+            // 업적 체크 및 새로 달성한 업적 표시
+            new AchievementController().checkAchievements(life, endReason);
+            
+            System.out.println("게임이 종료되었습니다. Enter 키를 눌러 메인 메뉴로 돌아가세요...");
+            sc.nextLine();
+            
+            
+           
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        // 게임 종료 플래그 반환
+        return true;
+    }
+}

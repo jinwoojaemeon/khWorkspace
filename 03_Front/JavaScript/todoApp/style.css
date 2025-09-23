@@ -1,231 +1,240 @@
+/* ========== 전체 초기화 ========== */
+/* 모든 HTML 요소의 기본 여백과 패딩을 0으로 초기화 */
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;     /* 모든 요소의 바깥 여백 제거 */
+    padding: 0;    /* 모든 요소의 안쪽 여백 제거 */
+    box-sizing: border-box;  /* 요소의 크기를 테두리까지 포함하여 계산 */
 }
 
+/* ========== 페이지 전체 배경 및 기본 설정 ========== */
 body{
-    min-height: 100vh; /* 화면 사이를 가득차게 */
-    font-family: "Nanum Brush Script", cursive;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-weight: 400;
-    background:linear-gradient(135deg, #44444E, #D3DAD9);
-
+    min-height: 100vh; /* 최소 높이를 화면 전체 높이(100vh)로 설정 */
+    font-family: "Nanum Brush Script", cursive;  /* 구글 웹폰트: 나눔손글씨 적용 */
+    font-optical-sizing: auto;  /* 폰트 크기에 따른 자동 최적화 */
+    font-style: normal;         /* 기본 폰트 스타일 (기울임 없음) */
+    font-weight: 400;           /* 폰트 굵기: 보통 */
+    background:linear-gradient(135deg, #44444E, #D3DAD9);  /* 대각선 그라데이션 배경 (어두운 회색 → 밝은 회색) */
 }
 
+/* ========== 모든 버튼의 기본 스타일 ========== */
 button{
-    border: none;
-    background: #44444E;
+    border: none;              /* 버튼의 기본 테두리 제거 */
+    background: #44444E;       /* 버튼 배경색: 어두운 회색 */
 }
 
+/* ========== 메인 컨테이너 (Todo 앱 전체 영역) ========== */
 .container{
-    max-width: 600px;
-    margin : 0 auto;
-    background: rgb(227, 234, 234);
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(2, 3, 1, 0.879);
+    max-width: 600px;          /* 최대 너비: 600px (반응형 디자인) */
+    margin : 0 auto;           /* 좌우 여백을 자동으로 설정하여 가운데 정렬 */
+    background: rgb(227, 234, 234);  /* 배경색: 연한 회색 */
+    border-radius: 15px;       /* 모서리를 15px만큼 둥글게 */
+    box-shadow: 0 20px 40px rgba(2, 3, 1, 0.879);  /* 그림자 효과 (x:0, y:20px, 흐림:40px, 투명도:87.9%) */
 }
 
+/* ========== 헤더 영역 (제목 부분) ========== */
 header{
-    background:linear-gradient(135deg, #44444E, #D3DAD9);
-    text-align: center;
-    color: #d9d9d9;
-    padding: 30px 0;
+    background:linear-gradient(135deg, #44444E, #D3DAD9);  /* body와 동일한 그라데이션 배경 */
+    text-align: center;        /* 텍스트 가운데 정렬 */
+    color: #d9d9d9;           /* 텍스트 색상: 밝은 회색 */
+    padding: 30px 0;          /* 위아래 여백: 30px, 좌우 여백: 0 */
 }
 
 header h1{
-    font-size: 40px;
-    font-weight: 300;
-    letter-spacing: 2px; /*글자 간격*/
-
+    font-size: 40px;          /* 제목 크기: 40px */
+    font-weight: 300;         /* 폰트 굵기: 가늘게 */
+    letter-spacing: 2px;      /* 글자 간격: 2px (글자 사이를 벌려줌) */
 }
 
+/* ========== 할일 입력 영역 ========== */
 .todo-input{
-    display: flex; /*가로 정렬*/
-    padding: 20px;
-    border-bottom: 1px solid #696968;
-    border-radius: 15px;
-    
+    display: flex;            /* 가로 방향으로 요소들을 나란히 배치 (입력창 + 버튼) */
+    padding: 20px;            /* 안쪽 여백: 20px */
+    border-bottom: 1px solid #696968;  /* 아래쪽에만 1px 실선 테두리 */
+    border-radius: 15px;      /* 모서리 둥글게 */
 }
 
 .todo-input input{
-    flex: 1;
-    padding: 15px;
-    border: 2px solid #696968;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 1s ease;
+    flex: 1;                  /* 남은 공간을 모두 차지 (버튼 제외한 나머지 공간) */
+    padding: 15px;            /* 안쪽 여백: 15px */
+    border: 2px solid #696968;  /* 2px 실선 테두리 */
+    border-radius: 8px;       /* 모서리 8px만큼 둥글게 */
+    font-size: 16px;          /* 입력 텍스트 크기: 16px */
+    outline: none;            /* 포커스 시 기본 외곽선 제거 */
+    transition: border-color 1s ease;  /* 테두리 색상 변화를 1초에 걸쳐 부드럽게 */
 }
 
-.todo-input input:focus{
-    border-color: rgb(142, 194, 237);
+.todo-input input:focus{     /* 입력창에 포커스(클릭)했을 때의 스타일 */
+    border-color: rgb(142, 194, 237);  /* 테두리 색상을 파란색으로 변경 */
 }
 
-.todo-input button{
-    margin-left: 7px;
-    padding: 15px 25px;
-    
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    transition: transform 0.3s ease;
+.todo-input button{          /* 할일 추가 버튼 스타일 */
+    margin-left: 7px;         /* 입력창과의 좌측 간격: 7px */
+    padding: 15px 25px;       /* 안쪽 여백: 위아래 15px, 좌우 25px */
+    color: white;             /* 텍스트 색상: 흰색 */
+    border: none;             /* 테두리 없음 */
+    border-radius: 8px;       /* 모서리 8px만큼 둥글게 */
+    cursor: pointer;          /* 마우스 올렸을 때 손가락 모양 커서 */
+    font-size: 16px;          /* 버튼 텍스트 크기: 16px */
+    font-weight: 600;         /* 폰트 굵기: 굵게 */
+    transition: transform 0.3s ease;  /* 변형 효과를 0.3초에 걸쳐 부드럽게 */
 }
 
-.todo-input button:hover{
-    opacity: 0.8;
-    scale: 0.98;
-    /*transform: translateY(-2px);*/
+.todo-input button:hover{    /* 버튼에 마우스를 올렸을 때의 효과 */
+    opacity: 0.8;             /* 투명도 80% (약간 흐려짐) */
+    scale: 0.98;              /* 크기를 98%로 축소 (살짝 눌린 효과) */
+    /*transform: translateY(-2px);*/  /* 주석: 위로 2px 이동하는 대체 효과 */
 }
 
+/* ========== 삭제 버튼 공통 스타일 ========== */
 .delete-btn{
-    margin-left: 7px;
-    padding: 8px 12px;
-    
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 300;
-    transition: transform 0.3s ease;
+    margin-left: 7px;         /* 좌측 여백: 7px */
+    padding: 8px 12px;        /* 안쪽 여백: 위아래 8px, 좌우 12px */
+    color: white;             /* 텍스트 색상: 흰색 */
+    border: none;             /* 테두리 없음 */
+    border-radius: 8px;       /* 모서리 둥글게 */
+    cursor: pointer;          /* 클릭 가능한 커서 */
+    font-size: 12px;          /* 텍스트 크기: 12px (작게) */
+    font-weight: 300;         /* 폰트 굵기: 가늘게 */
+    transition: transform 0.3s ease;  /* 변형 효과 애니메이션 */
 }
 
-.delete-btn:hover{
-    opacity: 0.8;
-    scale: 0.98;
-    /*transform: translateY(-2px);*/
+.delete-btn:hover{           /* 삭제 버튼 호버 효과 */
+    opacity: 0.8;             /* 투명도 80% */
+    scale: 0.98;              /* 크기 98%로 축소 */
+    /*transform: translateY(-2px);*/  /* 주석: 위로 이동 효과 */
 }
 
+/* ========== 할일 목록 영역 ========== */
 .todo-list{
-    list-style: none;
-    max-height: 400px;
-    overflow-y: auto; /*auto=scroll?*/
+    list-style: none;         /* 기본 리스트 점(•) 제거 */
+    max-height: 400px;        /* 최대 높이: 400px */
+    overflow-y: auto;         /* 내용이 넘치면 세로 스크롤바 표시 (auto=필요시에만 스크롤) */
 }
 
+/* ========== 개별 할일 항목 ========== */
 .todo-item{
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid #696968;
-    transition: background 0.2s ease;
+    display: flex;            /* 가로 방향으로 요소 배치 (체크박스 + 텍스트 + 삭제버튼) */
+    align-items: center;      /* 세로 중앙 정렬 */
+    padding: 15px 20px;       /* 안쪽 여백: 위아래 15px, 좌우 20px */
+    border-bottom: 1px solid #696968;  /* 아래쪽 구분선 */
+    transition: background 0.2s ease;  /* 배경색 변화 애니메이션 0.2초 */
 }
 
-.todo-item:hover{
-    background: #f2f2e3;
+.todo-item:hover{            /* 할일 항목에 마우스 올렸을 때 */
+    background: #f2f2e3;      /* 배경색을 연한 베이지색으로 변경 */
 }
 
-.todo-item > span{
-    flex: 1;
-    font-size: 16px;
-    line-height: 24px;
+.todo-item > span{           /* 할일 텍스트 영역 */
+    flex: 1;                  /* 남은 공간 모두 차지 (체크박스와 버튼 제외) */
+    font-size: 16px;          /* 텍스트 크기: 16px */
+    line-height: 24px;        /* 줄 높이: 24px (텍스트 상하 여백) */
 }
 
-.todo-item > button{
-    color: white;
-    border-radius: 6px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 12px;
+.todo-item > button{         /* 할일 항목 내 버튼 스타일 */
+    color: white;             /* 텍스트 색상: 흰색 */
+    border-radius: 6px;       /* 모서리 6px만큼 둥글게 */
+    padding: 8px 12px;        /* 안쪽 여백 */
+    cursor: pointer;          /* 클릭 가능한 커서 */
+    font-size: 12px;          /* 텍스트 크기: 12px */
 }
 
-.todo-item > button:hover{
-    background: #696968;
+.todo-item > button:hover{   /* 할일 항목 버튼 호버 효과 */
+    background: #696968;      /* 배경색을 회색으로 변경 */
 }
 
-.todo-item.completed{
-    opacity: 0.6;
+/* ========== 완료된 할일 스타일 ========== */
+.todo-item.completed{        /* 완료 상태인 할일 항목 */
+    opacity: 0.6;             /* 투명도 60% (흐려 보이게) */
 }
 
-.todo-item.completed > span{
-    text-decoration: line-through;
-    color: #44444E;
+.todo-item.completed > span{ /* 완료된 할일의 텍스트 */
+    text-decoration: line-through;  /* 취소선 효과 */
+    color: #44444E;           /* 텍스트 색상을 어두운 회색으로 */
 }
 
+/* ========== 체크박스 스타일 ========== */
 .todo-checkbox{
-    width: 20px;
-    height: 20px;
-    border: 2px solid #696968;
-    border-radius: 8px;
-    margin-right: 15px;
-    cursor: pointer;
+    width: 20px;              /* 너비: 20px */
+    height: 20px;             /* 높이: 20px (정사각형) */
+    border: 2px solid #696968;  /* 2px 실선 테두리 */
+    border-radius: 8px;       /* 모서리 둥글게 */
+    margin-right: 15px;       /* 우측 여백: 15px (텍스트와의 간격) */
+    cursor: pointer;          /* 클릭 가능한 커서 */
 
-    /*중앙 정렬을 위한 3신기*/
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* 중앙 정렬을 위한 Flexbox 3신기 */
+    display: flex;            /* Flexbox 레이아웃 사용 */
+    align-items: center;      /* 세로 중앙 정렬 */
+    justify-content: center;  /* 가로 중앙 정렬 */
 
-    background: #ffffff;
-    padding-bottom: 4px;
-    transition: all 0.3s ease;
+    background: #ffffff;      /* 배경색: 흰색 */
+    padding-bottom: 4px;      /* 아래쪽 여백: 4px (체크 마크 위치 조정용) */
+    transition: all 0.3s ease;  /* 모든 속성 변화를 0.3초에 걸쳐 부드럽게 */
 }
 
-.todo-checkbox.checked{
-    background: #7b7b79;
-    border-color: #696968;
+.todo-checkbox.checked{      /* 체크된 상태의 체크박스 */
+    background: #7b7b79;      /* 배경색: 어두운 회색 */
+    border-color: #696968;    /* 테두리 색상: 회색 */
 }
 
-
-/* .todo-checkbox.checked::after  
-.todo-checkbox.checked 요소에 가상의 요소를 넣겠다*/
+/* ========== 체크 마크 (가상 요소) ========== */
+/* .todo-checkbox.checked::after는 
+   .todo-checkbox.checked 요소에 가상의 요소를 추가하겠다는 의미 */
 .todo-checkbox.checked::after {
-    content: '✔';
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
+    content: '✔';             /* 체크 마크(✔) 문자 삽입 */
+    color: white;             /* 체크 마크 색상: 흰색 */
+    font-size: 12px;          /* 체크 마크 크기: 12px */
+    font-weight: bold;        /* 체크 마크 굵기: 굵게 */
 }
 
+/* ========== 하단 정보 영역 (개수 표시 + 완료 항목 삭제 버튼) ========== */
 .todo-footer{
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background: white;
-    color: #44444E;
-    font-size: 14px;
-    font-weight: 600;
+    display: flex;            /* 가로 방향으로 요소 배치 */
+    justify-content: space-between;  /* 양 끝으로 요소들을 분리 배치 */
+    padding: 20px;            /* 안쪽 여백: 20px */
+    background: white;        /* 배경색: 흰색 */
+    color: #44444E;           /* 텍스트 색상: 어두운 회색 */
+    font-size: 14px;          /* 기본 텍스트 크기: 14px */
+    font-weight: 600;         /* 폰트 굵기: 굵게 */
 }
 
-.todo-footer > span{
-    line-height: 33px;
-    font-size: 25px;
-    font-weight: 600;
+.todo-footer > span{         /* 할일 개수 표시 텍스트 */
+    line-height: 33px;        /* 줄 높이: 33px (버튼과 높이 맞춤) */
+    font-size: 25px;          /* 텍스트 크기: 25px (큰 글씨) */
+    font-weight: 600;         /* 폰트 굵기: 굵게 */
 }
 
-.empty-state{
-    text-align: center;
-    padding: 40px 20px;
-    color: #44444E;
-    font-size: 16px;
-    font-weight: 600;
+/* ========== 빈 상태 메시지 ========== */
+.empty-state{                /* 할일이 없을 때 표시되는 메시지 */
+    text-align: center;       /* 텍스트 가운데 정렬 */
+    padding: 40px 20px;       /* 안쪽 여백: 위아래 40px, 좌우 20px */
+    color: #44444E;           /* 텍스트 색상: 어두운 회색 */
+    font-size: 16px;          /* 텍스트 크기: 16px */
+    font-weight: 600;         /* 폰트 굵기: 굵게 */
 }
 
-
+/* ========== 필터 버튼 영역 ========== */
 .filter-buttons{
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    border-bottom: 1px solid #696968;
-    gap: 10px;
+    display: flex;            /* 가로 방향으로 버튼들 배치 */
+    justify-content: center;  /* 가운데 정렬 */
+    padding: 20px;            /* 안쪽 여백: 20px */
+    border-bottom: 1px solid #696968;  /* 아래쪽 구분선 */
+    gap: 10px;                /* 버튼 간 간격: 10px */
 }
 
-.filter-buttons button{
-    padding: 8px 16px;
-    border: 2px solid rgb(224, 224, 224);
-    font-size: 14px;
-    background: white;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-.filter-buttons button:hover,
-.filter-buttons button.active{
-    background: #696968;
-    color: white;
-    border-color: #696968;
+.filter-buttons button{      /* 개별 필터 버튼 스타일 */
+    padding: 8px 16px;        /* 안쪽 여백: 위아래 8px, 좌우 16px */
+    border: 2px solid rgb(224, 224, 224);  /* 2px 연한 회색 테두리 */
+    font-size: 14px;          /* 텍스트 크기: 14px */
+    background: white;        /* 배경색: 흰색 */
+    border-radius: 20px;      /* 모서리를 많이 둥글게 (알약 모양) */
+    cursor: pointer;          /* 클릭 가능한 커서 */
+    transition: all 0.3s ease;  /* 모든 속성 변화를 0.3초에 걸쳐 부드럽게 */
 }
 
-
+/* ========== 필터 버튼 활성 상태 ========== */
+.filter-buttons button:hover,     /* 마우스를 올렸을 때 */
+.filter-buttons button.active{    /* 현재 선택된 필터 버튼 */
+    background: #696968;      /* 배경색: 어두운 회색 */
+    color: white;             /* 텍스트 색상: 흰색 */
+    border-color: #696968;    /* 테두리 색상: 어두운 회색 */
+}

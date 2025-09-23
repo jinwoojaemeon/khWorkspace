@@ -1,12 +1,28 @@
+/**
+ * localStorage 객체
+ * - 브라우저에 key-value 형태로 데이터를 저장할 수 있는 공간
+ * - 저장된 데이터는 브라우저를 껐다 켜도 유지가 되며, 도메인 별로 저장이 된다.
+ * - 최대 저장 용량은 5MB(브라우저별로 다를 수 있다.)
+ *  localStorage.setItem(key, value); - 데이터를 저장 
+    localStorage.getItem(key); - 데이터를 불러올 때
+    localStorage.removeItem(key) - 데이터를 삭제할 때
+    localStorage.clear() - 모든 데이터 삭제
+    * 문자열만 저장하고 가져올 수 있다.
+
+    JSON.stringify(js객체) -> JSON 문자열로 변환
+    JSON.parse(문자열) -> JS 객채로 복원
+ */
+
 // ============= 전역 변수 =============
 // 할 일 목록을 저장하는 배열 - 여러 함수에서 공유해야 하기 때문에 전역 선언
-let todos = [];
+let todos = JSON.parse(localStorage.getItem('todos'))||[];  // 로컬 저장소에서 불러오거나, 비어있다면 빈칸
+let filterState = 'all';
 
 // ============= DOM  요소 =============
 const todoList = document.getElementById('todo-list');   // 할일 목록 
 const todoInput = document.getElementById('todo-input');  // todo 입력창 
 const clearCompletedBtn = document.getElementById('clear-btn'); // 완료목록삭제버튼
-
+const filterBtns = document.querySelectorAll('.filter-buttons button');  // 필터 버튼 목록
 
 // ============ 초기화 함수 ============
 // 웹이 시작될 때 실행되는 기본함수
@@ -27,6 +43,14 @@ function bindEvents(){
     })
 
     clearCompletedBtn.addEventListener('click', clearCompletedTodos);
+
+    //필터 버튼들을 가져와서 이벤트를 등록 
+    
+    filterBtns.forEach(function(btn){
+        btn.addEventListener('click', function(ev){
+           setFilter(ev.target.dataset.filter);
+        });
+    })
 }
 
 // ========== 데이터 조작 함수 ==========
@@ -38,6 +62,7 @@ function clearCompletedTodos(){
         }
     }
     todos = newTodos;
+    saveTodos();
     render(); // 화면 업데이트
 }
 
@@ -57,6 +82,7 @@ function addTodo(){
     todoInput.value = "";
     //console.log(todos);
     // 할일 목록을 기준으로 UI에 적용
+    saveTodos();
     render();
 }
 
@@ -70,6 +96,7 @@ function deleteTodo(id){
     }
 
     todos = newTodo;
+    saveTodos();
     render();
 }
 
@@ -82,7 +109,35 @@ function toggleTodo(id){
         }
         
     }
+    saveTodos();
     render();
+}
+
+// 현재 필터에 따라서 할 일 목록을 필터링하여 보여주는 함수
+function getFilterTodos(){
+    let filteredTodos = [];
+    if(filterState === 'active'){
+        // 미완료 목록만 filteredTodos에 담기
+        for(let todo of todos){
+            if(!todo.completed){
+                filteredTodos.push(todo);
+            }
+        }
+    }else if(filterState === 'completed'){
+        // 완료 목록만 filteredTodos에 담기
+        for(let todo of todos){
+            if(todo.completed){
+                filteredTodos.push(todo);
+            }
+        }
+    }else{
+        return todos;
+    }
+    return filteredTodos;
+}
+
+function saveTodos(){
+     localStorage.setItem('todos', JSON.stringify(todos)); // todos를 key-value 형태로 만들어준다.
 }
 
 // =========== 화면 렌더링을 위한 함수 =============
@@ -90,10 +145,14 @@ function toggleTodo(id){
 function render(){
     todoList.innerHTML = ""; // 기존 UI 제거
 
-    if(todos.length === 0){ // 할 일 목록이 비어있다면 
+    // 현재 필터에 맞는 할일만 목록으로 가져오기
+    const filteredTodos = getFilterTodos();
+
+
+    if(filteredTodos.length === 0){ // 할 일 목록이 비어있다면 
         emptyStateRender();
     } else { // 할일 목록이 있는 경우 
-        todos.forEach(function(todo){
+        filteredTodos.forEach(function(todo){
             todoItemRender(todo);
         })
     }
@@ -130,7 +189,7 @@ function todoItemRender(todo){
     todoList.appendChild(todoItem);
 }
 
-// 남은 할 일의 개수를 구해서 화면에 업데이트
+// 남은 할 일의 개수를 구해서 화면을 업데이트
 function updateCount(){
     const todoCnt = document.getElementById('todo-count');
     let count = 0;
@@ -153,6 +212,19 @@ function updateClearButton(){
     // 완료된 목록이 있다면 버튼 표시, 없으면 숨김
     const clearCompletedBtn = document.getElementById('clear-btn');
     clearCompletedBtn.style.display = isView;   
+}
+
+// ========= 필터 관련 함수 ===========
+//필터를 설정하고 UI를 업데이트하는 함수
+function setFilter(filter){
+    filterState = filter; // 전역 상태에 필터 상태를 변경
+
+    // 모든 필터 버튼의 active클래스를 조회해서 수정
+    filterBtns.forEach(function(btn){
+        btn.className = (btn.dataset.filter === filter ? " active" : "");
+    })
+
+    render();
 }
 
 // ========= load 이벤트 함수 =========

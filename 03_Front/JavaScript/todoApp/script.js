@@ -107,7 +107,7 @@ function render(){
 function emptyStateRender(){
     const emptyE1 = document.createElement('div');
     emptyE1.className = 'empty-state';
-    emptyE1.innerHTML = '할 일이 없습니다.';
+    emptyE1.innerHTML = '등록된 할 일이 없습니다.';
     todoList.appendChild(emptyE1);
 }
 

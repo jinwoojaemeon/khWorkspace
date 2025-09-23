@@ -6,7 +6,7 @@
 
 body{
     min-height: 100vh; /* 화면 사이를 가득차게 */
-     font-family: "Nanum Brush Script", cursive;
+    font-family: "Nanum Brush Script", cursive;
     font-optical-sizing: auto;
     font-style: normal;
     font-weight: 400;

@@ -6,7 +6,7 @@
 
 body{
     min-height: 100vh; /* 화면 사이를 가득차게 */
-    font-family: "Noto Sans KR", sans-serif;
+     font-family: "Nanum Brush Script", cursive;
     font-optical-sizing: auto;
     font-style: normal;
     font-weight: 400;
@@ -222,8 +222,10 @@ header h1{
     transition: all 0.3s ease;
 }
 .filter-buttons button:hover,
-.filter-buttons button:active{
+.filter-buttons button.active{
     background: #696968;
     color: white;
     border-color: #696968;
 }
+
+

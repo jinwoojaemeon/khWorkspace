@@ -33,7 +33,7 @@ function init(){
 }
 
 function bindEvents(){
-    const addBtn = document.getElementById('add-todo-btn');
+    const addBtn = document.getElementById('todo-add-btn');
     addBtn.addEventListener('click', addTodo);
 
     todoInput.addEventListener('keydown', function(e){
@@ -113,9 +113,10 @@ function toggleTodo(id){
     render();
 }
 
+
 // 현재 필터에 따라서 할 일 목록을 필터링하여 보여주는 함수
-function getFilterTodos(){
-    let filteredTodos = [];
+function getFilteredTodos(){
+    const filteredTodos = [];
     if(filterState === 'active'){
         // 미완료 목록만 filteredTodos에 담기
         for(let todo of todos){
@@ -146,7 +147,7 @@ function render(){
     todoList.innerHTML = ""; // 기존 UI 제거
 
     // 현재 필터에 맞는 할일만 목록으로 가져오기
-    const filteredTodos = getFilterTodos();
+    const filteredTodos = getFilteredTodos();
 
 
     if(filteredTodos.length === 0){ // 할 일 목록이 비어있다면 
@@ -196,8 +197,12 @@ function updateCount(){
     for(let todo of todos){
         if(!todo.completed) count++;        
     }
-
-    todoCnt.innerHTML = `${count}개 남음`;
+    if(count===0){
+        todoCnt.innerHTML = `모든 할 일을 마쳤다.`;
+    }else{
+        todoCnt.innerHTML = `할 일이 ${count}개 남아있다.`;
+    }
+    
 }
 
 function updateClearButton(){
@@ -210,7 +215,6 @@ function updateClearButton(){
     }
 
     // 완료된 목록이 있다면 버튼 표시, 없으면 숨김
-    const clearCompletedBtn = document.getElementById('clear-btn');
     clearCompletedBtn.style.display = isView;   
 }
 
@@ -221,8 +225,8 @@ function setFilter(filter){
 
     // 모든 필터 버튼의 active클래스를 조회해서 수정
     filterBtns.forEach(function(btn){
-        btn.className = (btn.dataset.filter === filter ? " active" : "");
-    })
+        btn.className = (btn.dataset.filter === filter ? "active" : "");
+    });
 
     render();
 }

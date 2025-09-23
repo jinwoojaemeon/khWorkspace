@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="alert" class="alert-box">Alert 박스</div>
+    <button onclick="저거alert박스를보여주셈()">버튼</button>
+    <button onclick="저기alert박스를닫아주셈()">닫기</button>
+    <script>
+        function 저거alert박스를보여주셈(){
+            document.getElementById('alert').style.display = 'block';
+        }
+         function 저기alert박스를닫아주셈(){
+            document.getElementById('alert').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

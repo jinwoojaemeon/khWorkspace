@@ -29,8 +29,6 @@ function bindEvents(){
     clearCompletedBtn.addEventListener('click', clearCompletedTodos);
 }
 
-
-
 // ========== 데이터 조작 함수 ==========
 function clearCompletedTodos(){
     let newTodos = [];

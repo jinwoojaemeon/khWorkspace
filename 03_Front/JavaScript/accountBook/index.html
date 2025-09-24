@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가계부 APP</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Nanum+Brush+Script&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+     <div class="container">
+        <header class="header">
+            <h1>가계부</h1>
+            <p>현재 잔액</p>
+            <span id="current-cost">100,000원</span><br>
+            <button class="reset-account">reset</button>
+        </header>
+        <div class="account-input">
+            <input id="account-contents" type="text" placeholder="내용을 입력하세요. (예: 점심값, 월급).">
+            <input id="account-cost" type="text" placeholder="금액을 입력하세요.">
+         </div>
+         <div class="cost-type">
+            <button id="income-btn" class="active">수입</button>
+            <button id="expense-btn">지출</button>
+        </div>
+        <div class="add">
+            <button id="account-add-btn">추가하기</button>
+        </div>
+        
+       
+        <div class="history-board">
+            <div class="board-left">
+                <div class="all-income-board">수입</div>
+                <div class="all-income">1,000,000원</div>
+            </div>
+            <div class="board-center">
+                <div class="all-expense-board">지출</div>
+                <div class="all-expense">15,000원</div>
+            </div>
+            <div class="board-right">
+                <div class="all-account-board">잔액</div>
+                <div class="account">985,000원</div>
+            </div>
+        </div>
+         <div class="filter-buttons">
+            <button data-filter="all" class="active">전체</button>
+            <button data-filter="income">수입</button>
+            <button data-filter="expense">지출</button>
+        </div>
+        <div class="history-cost">
+            <ul id="history-list" class="history-list">
+                <div class="income-item">
+                    <div class="item-left">
+                        <div class="history-date">2025년 9월 22일</div>
+                        <div class="history-content">급여</div>
+                    </div>
+                    <div class="item-right">
+                        <span class="amount income-amount">+1,000,000원</span>
+                        <button class="delete-btn">삭제</button>
+                    </div>
+                </div>
+                <div class="expense-item">
+                    <div class="item-left">
+                        <div class="history-date">2025년 9월 22일</div>
+                        <div class="history-content">점심</div>
+                    </div>
+                    <div class="item-right">
+                        <span class="amount expense-amount">-15,000원</span>
+                        <button class="delete-btn">삭제</button>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <script src="./script.js"></script> 
+</body>
+</html>

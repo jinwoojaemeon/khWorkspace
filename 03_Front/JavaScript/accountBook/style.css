@@ -1,0 +1,310 @@
+*{
+    margin: 0;    
+    padding: 0;    
+    box-sizing: border-box;  
+}
+
+body{
+    min-height: 100vh;
+    font-family: "Noto Sans KR", sans-serif;  
+    font-optical-sizing: auto; 
+    font-style: normal;         
+    font-weight: 400;          
+    background:linear-gradient(135deg, #97FEED, #0B666A ); 
+}
+
+button{
+    border: 1px solid lightgray;       
+    border-radius: 12px;
+    background: white;    
+    padding: 5px 10px;
+    cursor: pointer;
+}
+button:hover{
+    background: #35A29F;
+    color: white;
+}
+.container{
+    max-width: 600px;
+    margin : 10px auto 0 auto; 
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(2, 3, 1, 0.879);
+}
+
+header{
+    background:linear-gradient(135deg, #97FEED, #0B666A ); /* body와 동일한 그라데이션 배경 */
+    text-align: center;        /* 텍스트 가운데 정렬 */
+    color: #d9d9d9;           /* 텍스트 색상: 밝은 회색 */
+    padding: 30px 0;          /* 위아래 여백: 30px, 좌우 여백: 0 */
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+header h1{
+    font-family: "Bagel Fat One", system-ui;
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+header span{
+    font-family: "Bagel Fat One", system-ui;
+    color: green;
+    font-size: 25px;
+}
+header button{
+    color: #d9d9d9; 
+    border: transparent;
+    background: transparent;
+    font-family: "Bagel Fat One", system-ui;
+    float: right;
+    margin-right: 20px;
+    transition: all 0.3s ease;
+}
+
+.account-input{
+    margin-left: 7px;         /* 입력창과의 좌측 간격: 7px */
+    display: flex;            /* 가로 방향으로 요소들을 나란히 배치 (입력창 + 버튼) */
+    padding: 15px;            /* 안쪽 여백: 20px */ 
+}
+.account-input input{
+    flex: 1;                  /* 남은 공간을 모두 차지 (버튼 제외한 나머지 공간) */
+    padding: 10px;            /* 안쪽 여백: 15px */
+    margin: 5px;
+    border: 2px solid #b0b0b0;  /* 2px 실선 테두리 */
+    border-radius: 8px;       /* 모서리 8px만큼 둥글게 */
+    font-size: 16px;          
+    outline: none;           
+    transition: border-color 1s ease;  
+}
+.account-input input:focus{     /* 입력창에 포커스(클릭)했을 때의 스타일 */
+    border-color: rgb(142, 194, 237); 
+}
+
+.cost-type{
+    display: flex;            /* Flexbox 레이아웃 사용 */
+    align-items: center;      /* 세로 중앙 정렬 */
+    justify-content: center;
+    gap: 10px;
+}
+
+#income-btn{
+    background: white;
+    color: green;
+    width: 50px;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 12px; 
+    transition: all 0.3s ease;
+}
+#income-btn:hover,
+#income-btn.active{
+    background: green;
+    color: white;    
+}
+
+
+#expense-btn{
+    background: white;
+    color: red;
+    width: 50px;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 12px; 
+    transition: all 0.3s ease;
+}
+
+#expense-btn:hover,
+#expense-btn.active{
+    background: red;
+    color: white;     
+}
+
+.add{
+    display: flex;
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 1px solid lightgray ;
+}
+
+#account-add-btn{
+    flex: 1;                 /* 부모 컨테이너의 전체 너비를 차지 */
+    padding: 7px 15px;           /* 상하좌우 균등한 패딩 */
+
+    border-radius: 7px;
+    background:linear-gradient(135deg, #97FEED, #0B666A );
+    color: white;  
+    border: none;
+    font-size: 16px;         /* 폰트 크기 */
+    font-weight: 500;        /* 폰트 굵기 */
+}
+
+#account-add-btn:hover{
+    opacity: 0.8;         
+    scale: 0.98;
+}
+
+
+/* 내역 */
+   .history-board{
+    display: flex;
+    background: #f8f9fa;
+    padding: 20px;
+    margin: 10px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.board-left, .board-center, .board-right{
+    flex: 1;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.board-center{
+    border-left: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+}
+
+.all-income-board, .all-expense-board, .all-account-board{
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.all-income-board::before{
+    font-size: 14px;
+}
+
+.all-expense-board::before{
+    font-size: 14px;
+}
+
+.all-account-board::before{
+    font-size: 14px;
+}
+
+.all-income, .all-expense, .account{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.all-income{
+    color: #4CAF50;
+}
+
+.all-expense{
+    color: #F44336;
+}
+
+.account{
+    color: #2196F3;
+}
+
+.filter-buttons{
+    display: flex;            /* 가로 방향으로 버튼들 배치 */
+    justify-content: center;  /* 가운데 정렬 */
+    padding: 20px;            /* 안쪽 여백: 20px */
+    border-bottom: 1px solid #696968;  /* 아래쪽 구분선 */
+    gap: 10px;                /* 버튼 간 간격: 10px */
+}
+
+.filter-buttons button{      /* 개별 필터 버튼 스타일 */
+    padding: 8px 16px;        /* 안쪽 여백: 위아래 8px, 좌우 16px */
+    border: 2px solid rgb(224, 224, 224);  /* 2px 연한 회색 테두리 */
+    font-size: 14px;          /* 텍스트 크기: 14px */
+    background: white;        /* 배경색: 흰색 */
+    border-radius: 20px;      /* 모서리를 많이 둥글게 (알약 모양) */
+    cursor: pointer;          /* 클릭 가능한 커서 */
+    transition: all 0.3s ease;  /* 모든 속성 변화를 0.3초에 걸쳐 부드럽게 */
+}
+
+/* ========== 필터 버튼 활성 상태 ========== */
+.filter-buttons button:hover,     /* 마우스를 올렸을 때 */
+.filter-buttons button.active{    /* 현재 선택된 필터 버튼 */
+    background:linear-gradient(135deg, #97FEED, #0B666A );      /* 배경색: 어두운 회색 */
+    color: white;             /* 텍스트 색상: 흰색 */
+    border-color: #97FEED;    /* 테두리 색상: 어두운 회색 */
+}
+
+.history-list{
+    border-bottom: lightgray;
+    border-radius: 12px;
+    max-height: 300px;        /* 최대 높이: 400px */
+    overflow-y: auto; 
+    margin-left: 20px;
+    width: 100%;
+}
+
+.income-item, .expense-item{
+    list-style: none;  
+    display: flex;
+    justify-content: space-between; /* 양끝 정렬 */
+    align-items: center;             /* 세로 중앙 정렬 */
+    padding: 15px 20px;              /* 상하 15px, 좌우 20px */
+    border-bottom: 1px solid lightgray;
+    border-radius: 12px;
+    margin-right: 20px;
+}
+
+.item-left{
+    display: flex;
+    flex-direction: column;
+}
+
+.item-right{
+    display: flex;
+    margin-right: 15px;
+    align-items: center;
+    gap: 10px;
+}
+
+.history-date{
+    color: gray;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.history-content{
+    font-size: 14px;
+}
+
+.amount{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.income-amount{
+    color: green;
+}
+
+.expense-amount{
+    color: red;
+}
+
+.delete-btn{
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.delete-btn:hover{
+    background: #ff3838;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    font-size: 40px;
+    font-family: "Nanum Brush Script", cursive;
+}

@@ -177,18 +177,6 @@ header button{
     gap: 5px;
 }
 
-.all-income-board::before{
-    font-size: 14px;
-}
-
-.all-expense-board::before{
-    font-size: 14px;
-}
-
-.all-account-board::before{
-    font-size: 14px;
-}
-
 .all-income, .all-expense, .account{
     font-size: 18px;
     font-weight: bold;

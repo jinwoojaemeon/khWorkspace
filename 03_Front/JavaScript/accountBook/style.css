@@ -131,13 +131,13 @@ header button{
 #account-add-btn{
     flex: 1;                 /* 부모 컨테이너의 전체 너비를 차지 */
     padding: 7px 15px;           /* 상하좌우 균등한 패딩 */
-
     border-radius: 7px;
     background:linear-gradient(135deg, #97FEED, #0B666A );
     color: white;  
     border: none;
     font-size: 16px;         /* 폰트 크기 */
     font-weight: 500;        /* 폰트 굵기 */
+    transition: all 0.3s ease;
 }
 
 #account-add-btn:hover{

@@ -78,6 +78,7 @@ function addAccount(){
     render();
 }
 
+//내역 삭제 함수
 function deleteAccount(id){
     let newAcc = [];
     for(let acc of accList){
@@ -91,6 +92,7 @@ function deleteAccount(id){
     render();
 }
 
+// 현재 타입버튼 업데이트 함수
 function selectTypeIncome(){
     currentType = 'income';
     updateActiveButton();
@@ -118,6 +120,7 @@ function updateActiveButton(){
     }
 }
 
+// 필터 버튼에 따른 필터링 함수
 function getFilteredAccount(){
     const filteredAcc = []; 
     if(filterState === 'income'){     
@@ -138,6 +141,7 @@ function getFilteredAccount(){
     return filteredAcc; 
 }
 
+// 가계부 초기화
 function resetAccount(){
     while (accList.length > 0) {
         accList.pop();
@@ -149,6 +153,7 @@ function resetAccount(){
 function saveAccount(){
      localStorage.setItem('accList', JSON.stringify(accList)); 
 }
+
 function render(){
     historyList.innerHTML ="";
     updateActiveButton();

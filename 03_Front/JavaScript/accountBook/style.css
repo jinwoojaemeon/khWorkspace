@@ -18,7 +18,7 @@ body{
     margin : 10px auto 0 auto; 
     background: white;
     border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(2, 3, 1, 0.879);
+    box-shadow: 0 20px 40px rgb(22, 97, 89)
 }
 
 header{
@@ -31,14 +31,13 @@ header{
 }
 
 header h1{
-    font-family: "Bagel Fat One", system-ui;
     font-size: 40px;
     font-weight: 300;
     letter-spacing: 2px;
 }
 header span{
-    font-family: "Bagel Fat One", system-ui;
     color: green;
+    font-weight: bold;
     font-size: 25px;
 }
 header button{
@@ -49,6 +48,11 @@ header button{
     float: right;
     margin-right: 20px;
     transition: all 0.3s ease;
+}
+
+header button:hover{
+    opacity: 0.8;         
+    scale: 0.98;
 }
 
 .account-input{
@@ -126,7 +130,6 @@ header button{
     border: none;
     font-size: 16px;         
     font-weight: 500;        
-    transition: all 0.3s ease;
 }
 
 #account-add-btn:hover{
@@ -276,6 +279,7 @@ header button{
 
 .delete-btn:hover{
     background: #ff3838;
+    transform: translateY(-2px);
 }
 
 .empty-state {

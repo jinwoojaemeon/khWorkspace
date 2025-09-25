@@ -1,16 +1,18 @@
 // 전역 변수
-let accList = JSON.parse(localStorage.getItem('accList'))||[];
+let accList = JSON.parse(localStorage.getItem('accList')) || [];
 let currentType = 'income';
 let filterState = 'all'; 
+
 // DOM 요소 
 const historyList = document.getElementById('history-list');
 const filterBtns = document.querySelectorAll('.filter-buttons button');
-const currentCost = document.getElementById('current-cost');
+
 const contents = document.getElementById('account-contents');
 const cost = document.getElementById('account-cost');
-const emptyE1 = document.createElement('div');
 
-// 초기화 함수 
+
+
+// ======================================= 초기화 함수 
 function init(){
     bindEvents();   
     render();
@@ -48,6 +50,7 @@ function bindEvents(){
     })
 }
 
+// ========================================== 데이터 조작
 function addAccount(){
     if(!contents.value.trim() || !cost.value.trim()) return;
  
@@ -91,16 +94,16 @@ function deleteAccount(id){
 // 현재 타입버튼 업데이트 함수
 function selectTypeIncome(){
     currentType = 'income';
-    updateActiveButton();
+    toggleCurrentType();
 }
 
 function selectTypeExpense(){
     currentType = 'expense';
-    updateActiveButton();
+    toggleCurrentType();
 }
 
 // 버튼 활성화 상태 업데이트
-function updateActiveButton(){
+function toggleCurrentType(){
     const incomeBtn = document.getElementById('income-btn');
     const expenseBtn = document.getElementById('expense-btn');
     
@@ -146,13 +149,26 @@ function resetAccount(){
     render();
 }
 
+function getEmptyText(){
+    if(filterState === 'all' || accList.length === 0){
+        return '가계부를 입력해보세요!';
+    }else if(filterState === 'income'){
+        return '수입 내역이 없습니다.';
+    }
+    else{
+        return '지출 내역이 없습니다.'
+    }
+}
+
 function saveAccount(){
      localStorage.setItem('accList', JSON.stringify(accList)); 
 }
 
+
+// ============================= 렌더링 영역  
 function render(){
     historyList.innerHTML ="";
-    updateActiveButton();
+    toggleCurrentType();
 
     const filteredAcc = getFilteredAccount();
 
@@ -166,9 +182,10 @@ function render(){
     updateBoard();
 }
 
-function emptyStateRender(){    // 내역이 비어있을 경우 화면 출력 관련 함수    
+function emptyStateRender(){    // 내역이 비어있을 경우 화면 출력 관련 함수
+    const emptyE1 = document.createElement('div');
     emptyE1.className = 'empty-state';      
-    emptyE1.innerHTML = '가계부를 입력해보세요!';  
+    emptyE1.innerHTML = getEmptyText();  
     historyList.appendChild(emptyE1);   
 }
 
@@ -222,6 +239,7 @@ function updateBoard(){
 }
 
 function setCurrentCost(extra){
+    const currentCost = document.getElementById('current-cost');
     currentCost.innerHTML = `${extra.toLocaleString()}원`;
 }
 

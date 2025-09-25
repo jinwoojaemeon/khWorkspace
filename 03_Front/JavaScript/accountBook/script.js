@@ -48,11 +48,9 @@ function bindEvents(){
     })
 }
 
-// 데이터 조작 함수 
 function addAccount(){
     if(!contents.value.trim() || !cost.value.trim()) return;
  
-    // 금액이 숫자인지 확인
     const costNumber = Number(cost.value);
     if(isNaN(costNumber)) {
         alert('금액은 숫자로 입력해주세요.');
@@ -68,12 +66,10 @@ function addAccount(){
     }
     
     accList.push(account);
-    
-    // 입력값 초기화
+
     contents.value = '';
     cost.value = '';
-    
-    // 화면 업데이트
+
     saveAccount();
     render();
 }
@@ -184,22 +180,22 @@ function accItemRender(account){
     // 타입클래스 결정
     const amountClass = account.accType === 'income' ? 'income-amount' : 'expense-amount';
     
-    accItem.innerHTML = `   <div class="item-left">
-                                <div class="history-date">${account.createdAt}</div>
-                                <div class="history-content">${account.accContent}</div>
-                            </div>
-                            <div class="item-right">
-                                <span class="amount ${amountClass}">${sign}${account.accCost.toLocaleString()}원</span>
-                                <button class="delete-btn">삭제</button>
-                            </div>`; 
+    accItem.innerHTML = `<div class="item-left">
+                            <div class="history-date">${account.createdAt}</div>
+                            <div class="history-content">${account.accContent}</div>
+                        </div>
+                        <div class="item-right">
+                            <span class="amount ${amountClass}">${sign}${account.accCost.toLocaleString()}원</span>
+                            <button class="delete-btn">삭제</button>
+                        </div>`; 
     
     // 새로 생성된 요소들 중에서 이벤트가 필요한 부분만 가져오기.
-    const deleteBtn = accItem.querySelector('.delete-btn'); // accItem 내부에 있는 deleteBtn요소
-    deleteBtn.addEventListener('click', function(){ // 삭제 버튼의 클릭 이벤트 추가
-        deleteAccount(account.id); // 눌러진 영역의 내역을 accList에서 삭제
+    const deleteBtn = accItem.querySelector('.delete-btn'); 
+    deleteBtn.addEventListener('click', function(){ 
+        deleteAccount(account.id);
     })
     
-    historyList.appendChild(accItem); // 추가되거나 삭제된 내역 목록을 최종적으로 DOM 트리에 업데이트
+    historyList.appendChild(accItem);
 }
 
 function updateBoard(){

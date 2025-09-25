@@ -13,17 +13,6 @@ body{
     background:linear-gradient(215deg, #97FEED, #0B666A ); 
 }
 
-button{
-    border: 1px solid lightgray;       
-    border-radius: 12px;
-    background: white;    
-    padding: 5px 10px;
-    cursor: pointer;
-}
-button:hover{
-    background: #35A29F;
-    color: white;
-}
 .container{
     max-width: 600px;
     margin : 10px auto 0 auto; 
@@ -78,7 +67,7 @@ header button{
     transition: border-color 1s ease;  
 }
 .account-input input:focus{     
-    border-color: rgb(142, 194, 237); 
+    border-color: #35A29F 
 }
 
 .cost-type{

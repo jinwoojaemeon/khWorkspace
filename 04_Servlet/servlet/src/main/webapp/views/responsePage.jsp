@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% 
+	<%  
 		String name = (String)request.getAttribute("name");
 		int age = (Integer)request.getAttribute("age");
 		String gender = (String)request.getAttribute("gender"); 

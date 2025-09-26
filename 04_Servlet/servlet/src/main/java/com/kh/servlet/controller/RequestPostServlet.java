@@ -42,7 +42,7 @@ public class RequestPostServlet extends HttpServlet {
 		// 응답 HTML을 생성하는 과정을 JSP 템플릿 엔진에 위임
 		// 단, 응답 화면에서 필요로 하는 데이터를 잘 담아서 전달해줘야한다.
 		// 데이터를 전달하기 위한 공간 -> request의 attribute영역
-		// request.setAttribute("키", "값");
+		// request.setAttribute("키", "값"); >> objects 객체로 어떤 변수형인지 관계없이 가져온다
 		
 		request.setAttribute("name", name);
 		request.setAttribute("gender", gender);

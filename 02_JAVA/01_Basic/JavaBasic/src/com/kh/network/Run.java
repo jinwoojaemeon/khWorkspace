@@ -38,7 +38,6 @@ public class Run {
 			System.out.println("구글 IP 주소 : "  + googleHost.getHostAddress());
 			
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

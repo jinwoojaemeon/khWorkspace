@@ -12,7 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class RequestPostServlet
  */
-@WebServlet("/posttest.do") 
+
+@WebServlet("/posttest.do")
 public class RequestPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -54,7 +55,7 @@ public class RequestPostServlet extends HttpServlet {
 		// 현재 요청을 responsePage.jsp로 전달 
 		// RequestDispatcher -> 서블릿에 다른 리소스(jsp, 또 다른 서블릿)로 요청을 전달(포워드)하거나
 		// 기존 응답에 내용을 추가할 수 있게 해주는 객체 
-		RequestDispatcher view = request.getRequestDispatcher("/views/responsePage.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/views/responsePage.jsp");  // responsePage.jsp에 응답을 위임 
 		view.forward(request, response);
 	}
 

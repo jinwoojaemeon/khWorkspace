@@ -27,7 +27,7 @@ public class RequestGetServlet extends HttpServlet {
 
     }
 
-	
+	// request: 헤더에 있는 정보 ?  response: 응답에 필요한 통로 ? 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Get 방식으로 요청 시 doGet 메서드를 실행하여 요청을 처리해 준다.(tomcat이 서블릿 객체를 생성해서 메서드 호출까지 해준다.)
 		System.out.println("서불릿 응답 완료");
@@ -37,7 +37,7 @@ public class RequestGetServlet extends HttpServlet {
 			HttpServletResponse : 요청을 처리 후 응답할 때 사용되는 객체(어떤 타입으로 응답할지, 어떤 값을 응답할지 등을 작성)
 			
 			요청 처리를 위해서 요청 시 전달된 값을 추출
-			request의 parameter영역 안에 전달된 값을 추출 
+			request의 parameter영역 안에 전달된 값을 추출  >> 읽기 전용
 			request.getParameter("KEY");
 			 
 		*/
@@ -87,11 +87,10 @@ public class RequestGetServlet extends HttpServlet {
 		 */
 		out.println("<html>");
 		out.println("<head>");
+		out.println("</head>");
 		out.println("<body>");
 		out.printf("<h2>개인정보 응답화면</h2>");
-		
 		out.println("</body>");
-		out.println("</head>");
 		out.println("</html>");
 		
 	}

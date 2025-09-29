@@ -8,6 +8,7 @@
 </head>
 <body>
 	<%  
+	// 스크립틀릿(scriptlet) -> html 문서 내에서 자바코드를 사용하고 싶을 때 쓸 수 있는 영역
 		String name = (String)request.getAttribute("name");
 		int age = (Integer)request.getAttribute("age");
 		String gender = (String)request.getAttribute("gender"); 

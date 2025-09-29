@@ -74,24 +74,25 @@ public class RequestGetServlet extends HttpServlet {
 		// 2) 응답받는 사용자와의 스트림을 연결
 		PrintWriter out = response.getWriter();
 		
-		/**
-		 * <html>
-		 *  <head>
-		 *  </head>
-		 *  <body>
-		 *  	<h2>개인정보 응답화면</h2>
-		 *  	<span>jaemeon은</span>
-		 *  	<span>나이가 ...이며...</span>
-		 *  </body>
-		 * </html>
-		 */
 		out.println("<html>");
 		out.println("<head>");
 		out.println("</head>");
+		
 		out.println("<body>");
-		out.printf("<h2>개인정보 응답화면</h2>");
+		out.println("<h2>개인정보 응답화면</h2>");
+		out.printf("<span>%s님은</span>", name);
+		out.printf("<span>%d살이며</span>", age);
+		out.printf("<span>%s에 살고 있습니다.</span>", address);
+		out.println("성별은 ");
+		if(gender == null) {
+			out.println("미입력 상태입니다.");
+		} else if(gender.equals("M")) {
+			out.println("남자입니다.");
+		} else {
+			out.println("여자입니다.");
+		}
 		out.println("</body>");
-		out.println("</html>");
+		out.println("</html>"); 
 		
 	}
 

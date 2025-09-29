@@ -24,14 +24,14 @@ public class RequestPostServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// POST 방식 같은 경우에도 동일하게 데이터를 이용하면 된다.
-		String name = request.getParameter("userName");    // 이름 | "" 
-		String gender = request.getParameter("gender");    //  M | F | NULL
-		int age = Integer.parseInt(request.getParameter("age"));  // "55" -> 55 | ""
-		String address = request.getParameter("address");  // "서울" | "대구" ...  | ""
-		double height = Double.parseDouble(request.getParameter("height"));  // 178.7  | ""
+		String name = request.getParameter("userName");    
+		String gender = request.getParameter("gender");   
+		int age = Integer.parseInt(request.getParameter("age"));  
+		String address = request.getParameter("address");  
+		double height = Double.parseDouble(request.getParameter("height"));  
 		
 		// checkbox와 같이 여러개의 값을 추출하고자할 때
-		String[] foods = request.getParameterValues("food");  // ["한식", "중식" ... ] || NULL
+		String[] foods = request.getParameterValues("food");
 		
 		System.out.println("name : " + name);
 		System.out.println("gender : " + gender);

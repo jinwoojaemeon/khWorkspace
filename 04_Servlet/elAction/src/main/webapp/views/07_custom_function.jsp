@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>JSTL Function</h1>
+    <p>
+    	EL 내에서 문자열, 배열, 컬렉션을 조작하는 함수 제공
+    </p>
+    
+    <c:set var="str" value="How are you?" />
+  	문자열 길이 : ${str.length()} 또는 ${fn:length(str)} <br>
+  	"are" 시작 인덱스 : ${fn:indexOf(str, "are")} <br>
+  	
+  	<!-- 더 많은 jstl function기능이 있지만 대부분 자바의 기본 메서드로 대체가 가능하므로 기본 메서드를 사용하는게 좋을 것 같다. -->
+</body>
+</html>

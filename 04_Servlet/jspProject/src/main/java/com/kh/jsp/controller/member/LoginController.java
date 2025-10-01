@@ -12,16 +12,16 @@ import com.kh.jsp.model.vo.Member;
 import com.kh.jsp.service.MemberService;
 
 /**
- * Servlet implementation class loginController
+ * Servlet implementation class LoginController
  */
 @WebServlet("/login.me")
-public class loginController extends HttpServlet {
+public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginController() {
+    public LoginController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +37,7 @@ public class loginController extends HttpServlet {
 		List<Member> loginMemberArr = new MemberService().loginMember(m);
         Member loginMember = loginMemberArr.get(0);
 		
-		if(loginMember.size() > 0) {
+		if(loginMember != null) {
 			request.getSession().setAttribute("loginMember", loginMember);
 			response.sendRedirect(request.getContextPath());
 		} else {

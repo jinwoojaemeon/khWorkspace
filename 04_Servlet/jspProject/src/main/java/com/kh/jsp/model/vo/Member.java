@@ -34,17 +34,17 @@ public class Member {
    private Date modifyDate;
    private String status; 
 
-   public static Member insertCreateMember(String userId, 
-                                            String userPwd, 
-                                            String userName,
+   public static Member insertCreateMember(String memberId, 
+                                            String memberPwd, 
+                                            String memberName,
                                             String phone, 
                                             String email, 
                                             String address, 
                                             String interest) {
         Member m = new Member();
-        m.setMemberId(userId);
-        m.setMemberPwd(userPwd);
-        m.setMemberName(userName);
+        m.setMemberId(memberId);
+        m.setMemberPwd(memberPwd);
+        m.setMemberName(memberName);
         m.setPhone(phone);
         m.setEmail(email);
         m.setAddress(address);

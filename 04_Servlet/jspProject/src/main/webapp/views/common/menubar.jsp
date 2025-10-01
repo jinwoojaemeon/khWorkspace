@@ -95,8 +95,8 @@
     <h1 align="center">Welcome KH World</h1>
     
     <div class="login-area">
-        <!-- 로그인 전 -->
-        <c:if test="${empty loginMember}">
+    <c:choose>
+    	<c:when test="${empty sessionScope.loginMember}">
             <form action="${pageContext.request.contextPath}/login.me" method="post">
                 <table>
                     <tr>
@@ -115,20 +115,20 @@
                     </tr>
                 </table>
             </form>
-        </c:if>
-
-        <!-- 로그인 후 -->
-        <c:if test="${not empty loginMember}">
-            <div class="logout-area">
-                <div>
-                    <b>${loginMember.memberName}님</b> 방문을 환영합니다.
+       </c:when>
+            
+            <c:otherwise>
+                <div class="logout-area">
+                    <div>
+                        <b>${sessionScope.loginMember.memberName}님</b> 방문을 환영합니다.
+                    </div>
+                    <div>
+                        <a href="">마이페이지</a>
+                        <a href="${pageContext.request.contextPath}/logout.me">로그아웃</a>
+                    </div>
                 </div>
-                <div>
-                    <a href="">마이페이지</a>
-                    <a href="">로그아웃</a>
-                </div>
-            </div>
-        </c:if>
+            </c:otherwise>
+        </c:choose>
     </div>
 
     <script>

@@ -115,7 +115,7 @@
             <li style="color: ${color}">${color}</li>
         </c:forEach>
     </ul>
-
+    
     <%
         ArrayList<Person> list = new ArrayList<>();
     	list.add(new Person("송하영", 29, "여자"));
@@ -127,7 +127,7 @@
 	<c:set var="personList" value="<%=list %>" scope="request" />
     <table>
         <thead>
-            <tr>
+             <tr>
                 <th>번호</th>
                 <th>이름</th>
                 <th>나이</th>

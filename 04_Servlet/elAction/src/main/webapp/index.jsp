@@ -44,7 +44,7 @@
         JSP에서 자주 사용하는 기능(반복문, 조건문, 포맷팅 등)을 태그 형태로 제공하는 라이브러리 <br>
         자바코드를 직접 작성하지 않고도 로직을 구현할 수 있어서 코드 가독성이 향상된다.
     </p>
-
+    
     <h3>JSTL 라이브러리 추가 방법</h3>
     1) maven repository 사이트 접속
     2) jakarta.sevlet.jsp.jstl , jakarta.servlet.jsp.jstl-api 다운로드

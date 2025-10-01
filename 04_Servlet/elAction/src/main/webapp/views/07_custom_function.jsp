@@ -21,7 +21,7 @@
   	대문자 변환 : ${fn:toUpperCase(str)}<br>
 	소문자 변환 : ${fn:toLowerCase(str)}<br>
 	
-	공백제거 : ${fn:trim("   hello    ")} 또는 ${"   hello    ".trim()}
+	공백제거 : ${fn:trim("   hello    ")} 또는 <%= "   hello    ".trim() %>
   	<!-- 더 많은 jstl function기능이 있지만 대부분 자바의 기본 메서드로 대체가 가능하므로 기본 메서드를 사용하는게 좋을 것 같다. -->
 </body>
 </html>

@@ -57,36 +57,39 @@ public class MemberDao {
 		return result;
 	}
 
-	 public ArrayList<Member> loginMember(Member m, Connection conn) {
+	 public Member loginMember(String userId, String userPwd, Connection conn) {
 	    	ResultSet rset = null;
-	        ArrayList<Member> list = new ArrayList<>();
 	        PreparedStatement pstmt = null;
 	        String sql = prop.getProperty("loginMember");
+	        Member loginMember = null;
 	        
 	        try {
 	            pstmt = conn.prepareStatement(sql);
-	            pstmt.setString(1, m.getMemberId());
-	            pstmt.setString(2, m.getMemberPwd());
+	            pstmt.setString(1, userId);
+	            pstmt.setString(2, userPwd);
 	            rset = pstmt.executeQuery();
 	  
-	            while(rset.next()) {
-	            	new Member();
-	                m.setMemberNo(rset.getInt("MEMBER_NO"));
-	                m.setMemberId(rset.getString("MEMBER_ID"));
-	                m.setMemberPwd(rset.getString("MEMBER_PWD"));
-	                m.setMemberName(rset.getString("MEMBER_NAME"));
-	                m.setPhone(rset.getString("PHONE"));
-	                m.setEmail(rset.getString("EMAIL"));
-	                m.setAddress(rset.getString("ADDRESS"));
-	                m.setInterest(rset.getString("INTEREST"));
-	                m.setEnrollDate(rset.getDate("ENROLL_DATE"));
-	                m.setModifyDate(rset.getDate("MODIFY_DATE"));
-	                m.setStatus(rset.getString("STATUS"));
-	                list.add(m);
+	            if(rset.next()) {
+	                loginMember = new Member(
+                                            rset.getInt("MEMBER_NO"), 
+                                            rset.getString("MEMBER_ID"), 
+                                            rset.getString("MEMBER_PWD"), 
+                                            rset.getString("MEMBER_NAME"), 
+                                            rset.getString("PHONE"), 
+                                            rset.getString("EMAIL"), 
+                                            rset.getString("ADDRESS"), 
+                                            rset.getString("INTEREST"), 
+                                            rset.getDate("ENROLL_DATE"), 
+                                            rset.getDate("MODIFY_DATE"), 
+                                            rset.getString("STATUS")
+                                        );
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
 	        }
-	        return list;
+	        return loginMember;
 	    }
 }

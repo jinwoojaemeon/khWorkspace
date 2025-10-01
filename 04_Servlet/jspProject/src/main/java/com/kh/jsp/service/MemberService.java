@@ -23,12 +23,12 @@ public class MemberService {
 		return result;
 	}
 
-	 public List<Member> loginMember(Member m) {
+	 public Member loginMember(String userId, String userPwd) {
         Connection conn = getConnection();
         
-        List<Member> result = new MemberDao().loginMember(m, conn);
+        Member loginMember = new MemberDao().loginMember(userId, userPwd, conn);
       
         close(conn);
-	    return result;
+	    return loginMember;
 	 }
 }

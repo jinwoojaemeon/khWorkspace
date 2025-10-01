@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 import com.kh.jsp.model.vo.Member;
 import com.kh.jsp.service.MemberService;
@@ -32,17 +31,15 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
-		Member m = Member.loginMember(userId, userPwd);
 
-		List<Member> loginMemberArr = new MemberService().loginMember(m);
-        Member loginMember = loginMemberArr.get(0);
+		Member loginMember = new MemberService().loginMember(userId, userPwd);
 		
 		if(loginMember != null) {
 			request.getSession().setAttribute("loginMember", loginMember);
 			response.sendRedirect(request.getContextPath());
 		} else {
 			request.setAttribute("errorMsg", "로그인에 실패하였습니다.");
-			request.getRequestDispatcher("/views/common/error.jsp");
+			request.getRequestDispatcher("/views/common/error.jsp").forward(request, response);
 		}
 	}
 

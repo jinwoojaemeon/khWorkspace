@@ -1,0 +1,2 @@
+lombok > lombok project download > devtools에 설치 > cmd > cd devtool >java -jar ./lombok.jar 입력 -> 설치(install/...) 버튼 누르기 > 설치가 완료되면 이클립스 재시작
+project-> properties > annotation Processing enable 체크 

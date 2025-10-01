@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +49,13 @@
             width:50%;
             float: left;
         }
+        
+        .logout-area {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
         .logout-area > div{
             display: flex; 
             justify-content: flex-start; /* 좌측 정렬 */
@@ -72,51 +80,67 @@
             width: 100%;
             height: 100%;
             line-height: 50px;
+            text-align: center;
             display: inline-block;
         }
     </style>
 </head>
 <body>
+    <c:if test="${not empty alertMsg}">
+        <script>
+            alert("${alertMsg}");
+        </script>
+        <c:remove var="alertMsg" scope="session"/>
+    </c:if>
     <h1 align="center">Welcome KH World</h1>
+    
     <div class="login-area">
         <!-- 로그인 전 -->
-        <form action="">
-            <table>
-                <tr>
-                    <th>아이디</th>
-                    <td><input type="text" name="userId" required></td>
-                </tr>
-                <tr>
-                    <th>비밀번호</th>
-                    <td><input type="password" name="userPwd" required></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" value="로그인">
-                        <input type="button" value="회원가입" onclick="enrollPage();">
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <c:if test="${empty loginMember}">
+            <form action="${pageContext.request.contextPath}/login.me" method="post">
+                <table>
+                    <tr>
+                        <th>아이디</th>
+                        <td><input type="text" name="userId" required></td>
+                    </tr>
+                    <tr>
+                        <th>비밀번호</th>
+                        <td><input type="password" name="userPwd" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="로그인">
+                            <input type="button" value="회원가입" onclick="enrollPage();">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </c:if>
 
-        <script>
-            function enrollPage(){
-                // location.href = "http://localhost:8000/jsp/views/member/enrollForm.jsp"; 
-                // 내부 디렉터리 구조를 유추할 수 있는 단서가 될 수 있기 때문에 디렉터리 구조를 url에 직접 노출하지 않고
-                // 서블릿을 통해 요청하는 매핑 주소를 사용하는 것이 좋다.
-                location.href = "${pageContext.request.contextPath}/enrollForm.me"; // 서버에서 사용하는 코드? jsp>el: server side 랜더링
-                // 단순한 페이지 요청도 servlet을 거쳐가도록 할 것이다. (url에는 서버 요청을 위한 매핑값이 나타나도록)
-            }
-        </script>
         <!-- 로그인 후 -->
-        <!--<div class="logout-area"></div>>
-            <b>jaemeon님</b> 방문을 환영합니다. <br>
-            <div>
-                <a href="">마이페이지</a>
-                <a href="">로그아웃</a>
+        <c:if test="${not empty loginMember}">
+            <div class="logout-area">
+                <div>
+                    <b>${loginMember.memberName}님</b> 방문을 환영합니다.
+                </div>
+                <div>
+                    <a href="">마이페이지</a>
+                    <a href="">로그아웃</a>
+                </div>
             </div>
-        </div>-->
+        </c:if>
     </div>
+
+    <script>
+        function enrollPage(){
+            // location.href = "http://localhost:8000/jsp/views/member/enrollForm.jsp"; 
+            // 내부 디렉터리 구조를 유추할 수 있는 단서가 될 수 있기 때문에 디렉터리 구조를 url에 직접 노출하지 않고 
+            // 서블릿을 통해 요청하는 매핑 주소를 사용하는 것이 좋다.
+            location.href = "${pageContext.request.contextPath}/enrollForm.me"; // 서버에서 사용하는 코드? jsp>el: server side 랜더링
+            // 단순한 페이지 요청도 servlet을 거쳐가도록 할 것이다. (url에는 서버 요청을 위한 매핑값이 나타나도록)
+        }
+    </script>
+    
     <nav class="main-nav">
         <ul>
             <li><a href="">HOME</a></li>

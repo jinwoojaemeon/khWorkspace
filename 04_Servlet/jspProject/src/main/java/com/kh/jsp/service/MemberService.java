@@ -1,0 +1,34 @@
+package com.kh.jsp.service;
+
+import static com.kh.jsp.common.JDBCTemplate.*;
+
+import java.sql.Connection;
+
+import com.kh.jsp.model.dao.MemberDao;
+import com.kh.jsp.model.vo.Member;
+import java.util.List;
+
+public class MemberService {
+	
+	public int insertMember(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().insertMember(m, conn);
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	 public List<Member> loginMember(Member m) {
+        Connection conn = getConnection();
+        
+        List<Member> result = new MemberDao().loginMember(m, conn);
+      
+        close(conn);
+	    return result;
+	 }
+}

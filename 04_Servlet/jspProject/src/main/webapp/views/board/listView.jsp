@@ -9,7 +9,6 @@
     <title>일반게시판</title>
 
     <style>
-
         .board-container {
             max-width: 1000px;
             margin: 50px auto;
@@ -89,7 +88,7 @@
             <h2>일반게시판</h2>
 
             <div class="write-btn-area">
-                <a class="btn btn-primary" href="">글쓰기</a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/enrollForm.bo">글쓰기</a>
             </div>
 
             <table class="board-table">

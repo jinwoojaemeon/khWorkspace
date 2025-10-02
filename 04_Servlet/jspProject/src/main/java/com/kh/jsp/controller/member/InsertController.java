@@ -39,7 +39,7 @@ public class InsertController extends HttpServlet {
 		String email = request.getParameter("email");
 		String address = request.getParameter("address");
 		String[] interestArr = request.getParameterValues("interest");
-        // String[] -> String 
+        // String[] -> String ( 데이터베이스에 넣기 위해 문자열로 변환 )
 		String interest = "";
 		if(interestArr != null){
 			interest = String.join(",", interestArr);

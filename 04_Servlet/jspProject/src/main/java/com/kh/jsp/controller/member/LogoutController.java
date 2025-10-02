@@ -29,8 +29,9 @@ public class LogoutController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(); 
-		session.invalidate();
-		response.sendRedirect(request.getContextPath());
+		//session.invalidate();  // 세션 만료 ( 세션 영역에 저장된 모든 데이터 삭제 후 새로운 세션 아이디 발급 )
+		session.removeAttribute("loginMember");  // 세션 영역에 저장된 데이터 중 특정 키에 해당하는 데이터만 삭제
+		response.sendRedirect(request.getContextPath());  // 메인 페이지로 리다이렉트
 	}
 
 	/**

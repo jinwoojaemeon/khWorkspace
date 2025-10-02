@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 /*
  * lombok은 자바에서 반복적으로 작성해야하는 코드를 자동으로 생성해주는 라이브러리이다.
  * getter/setter, toString, equals, hashCode
@@ -56,6 +57,23 @@ public class Member {
         Member m = new Member();
         m.setMemberId(userId);
         m.setMemberPwd(userPwd);
+        return m;
+    }
+
+
+    public static Member createUpdateMember(String userId, 
+                                          String userName, 
+                                          String phone, 
+                                          String email, 
+                                          String address, 
+                                          String interest) {
+        Member m = new Member();
+        m.setMemberId(userId);
+        m.setMemberName(userName);
+        m.setPhone(phone);
+        m.setEmail(email);
+        m.setAddress(address);
+        m.setInterest(interest);
         return m;
     }
 }

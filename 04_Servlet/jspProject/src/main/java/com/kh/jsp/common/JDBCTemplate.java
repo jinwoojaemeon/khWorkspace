@@ -55,7 +55,7 @@ public class JDBCTemplate {
 	}
 	
 	// 3. Connection 객체를 전달받아 상태를 확인 후 rollback 하는 매서드
-		public static void rollback(Connection conn) {
+		public static void rollback(Connection conn) { 	 	
 			try {
 				if(conn != null && !conn.isClosed()) {
 					conn.rollback();

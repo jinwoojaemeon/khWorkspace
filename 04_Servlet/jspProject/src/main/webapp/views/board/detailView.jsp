@@ -121,7 +121,7 @@
 		}
 	</style>
 </head>
-<body onload="init(${board.boardNo})">
+<body>
 	<jsp:include page="/views/common/menubar.jsp" />
 
 	<div class="board-container">
@@ -131,36 +131,32 @@
 			<table class="detail-table">
 				<tr>
 					<th>카테고리</th>
-					<td></td>
+					<td>${b.categoryName}</td>
 					<th>제목</th>
-					<td colspan="3"></td>
+					<td colspan="3">${b.boardTitle}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td></td>
+					<td>${b.writerName}</td>
 					<th>작성일</th>
-					<td></td>
+					<td>${b.createDate}</td>
+					<th>조회수</th>
+					<td>${b.count}</td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td colspan="3">
+					<td colspan="5">
 						<div class="content-area">
-							
+							${b.boardContent}
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>첨부파일</th>
-					<td colspan="3">
-						첨부파일이 없습니다.
 					</td>
 				</tr>
 			</table>
 
 			<div class="button-group">
-				<a class="btn btn-primary">목록가기</a>
-				<a class="btn btn-warning">수정하기</a>
-				<a class="btn btn-danger">삭제하기</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo">목록가기</a>
+				<a class="btn btn-warning" href="${pageContext.request.contextPath}/updateForm.bo?bno=${b.boardNo}">수정하기</a>
+				<a class="btn btn-danger" href="${pageContext.request.contextPath}/delete.bo?bno=${b.boardNo}">삭제하기</a>
 			</div>
 		</div>
 

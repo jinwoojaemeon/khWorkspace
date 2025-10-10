@@ -78,6 +78,13 @@
         .pagination .btn {
             min-width: 40px;
         }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -103,22 +110,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>운동</td>
-                        <td>안녕하세요.</td>
-                        <td>user01</td>
-                        <td>123</td>
-                        <td>2025-03-12</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>기타</td>
-                        <td>문의 남깁니다.</td>
-                        <td>user02</td>
-                        <td>13</td>
-                        <td>2025-01-08</td>
-                    </tr>
+                    <c:choose>
+                        <c:when test="${empty list}">
+                            <tr>
+                                <td colspan="6" class="empty-state">
+                                    게시글이 없습니다. 첫 게시글을 작성해보세요!
+                                </td>
+                            </tr>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="board" items="${list}">
+                                <tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${board.boardNo}'">
+                                    <td>${board.boardNo}</td>
+                                    <td>${board.categoryName}</td>
+                                    <td>${board.boardTitle}</td>
+                                    <td>${board.writerName}</td>
+                                    <td>${board.count}</td>
+                                    <td>${board.createDate}</td>
+                                </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </tbody>
             </table>
 

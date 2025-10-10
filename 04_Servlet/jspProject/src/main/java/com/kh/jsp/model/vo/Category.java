@@ -11,18 +11,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category {
- /* Category Table 구조
-  * CATEGORY_NO CATEGORY_NAME
-  * 10	공통
-	20	운동
-	30	등산
-	40	게임
-	50	낚시
-	60	요리
-	70	기타
-  * */
- 	private int categoryNo;
- 	private String categoryName;
 
+public class Category {
+    private int categoryNo;        // CATEGORY_NO
+    private String categoryName;   // CATEGORY_NAME
 }

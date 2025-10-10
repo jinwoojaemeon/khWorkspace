@@ -15,23 +15,15 @@ import java.sql.Date;
 @AllArgsConstructor
 
 public class Board {
-    private int boardNo;
-    private String boardType;
-    private int categoryNo;
-    private String boardTitle;
-    private String boardContent;
-    private String boardWriter;
-    private int count;
-    private Date createDate;
-    private String status;
-
-    public static Board insertBoard(String category, String title, String content, String upfile, String memberId) {
-        Board b = new Board();
-        //b.setCategoryNo(category);  // to-do
-        b.setBoardTitle(title);
-        b.setBoardContent(content);
-        b.setBoardWriter(upfile);
-        b.setBoardWriter(memberId);
-        return b;
-    }
+    private int boardNo;           // BOARD_NO
+    private int boardType;         // BOARD_TYPE (1: 일반, 2: 사진)
+    private int categoryNo;        // CATEGORY_NO
+    private String categoryName;   // 조인용 (CATEGORY 테이블에서 가져옴)
+    private String boardTitle;     // BOARD_TITLE
+    private String boardContent;   // BOARD_CONTENT
+    private int boardWriter;       // BOARD_WRITER (회원번호)
+    private String writerName;     // 조인용 (MEMBER 테이블에서 가져옴)
+    private int count;             // COUNT (조회수)
+    private Date createDate;       // CREATE_DATE
+    private String status;         // STATUS
 }

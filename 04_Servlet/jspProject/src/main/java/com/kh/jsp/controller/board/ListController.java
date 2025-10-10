@@ -6,6 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
+import com.kh.jsp.model.vo.Board;
+import com.kh.jsp.service.BoardService;
 
 /**
  * Servlet implementation class ListController
@@ -19,7 +23,6 @@ public class ListController extends HttpServlet {
      */
     public ListController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -27,6 +30,9 @@ public class ListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// board 목록을 가져와서 응답 페이지로 전달 
+		List<Board> list = new BoardService().selectBoardList();
+		
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/board/listView.jsp").forward(request, response);		
 	}
 
@@ -34,7 +40,6 @@ public class ListController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -88,30 +88,41 @@
 		<div class="board-card">
 			<h2>일반게시글 수정하기</h2>
 
-			<form action="" method="" >
+			<form action="${pageContext.request.contextPath}/update.bo" method="post">
+				<input type="hidden" name="boardNo" value="${b.boardNo}">
 				<table class="form-table">
 					<tr>
 						<th>카테고리</th>
 						<td>
-							<select name="category">
+							<select name="category" required>
+								<option value="">카테고리를 선택하세요</option>
+								<c:forEach var="category" items="${categoryList}">
+									<option value="${category.categoryNo}" 
+										<c:if test="${category.categoryNo == b.categoryNo}">selected</c:if>>
+										${category.categoryName}
+									</option>
+								</c:forEach>
 							</select>
 						</td>
 					</tr>
 					<tr>
 						<th>제목</th>
 						<td>
-							<input type="text" name="title" required value="">
+							<input type="text" name="title" required value="${b.boardTitle}">
 						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea name="content" rows="10"></textarea>
+							<textarea name="content" rows="10" required>${b.boardContent}</textarea>
 						</td>
 					</tr>
 					<tr>
 						<th>첨부파일</th>
 						<td>
+							<div class="existing-file">
+								현재 첨부파일: 없음
+							</div>
 							<input type="file" name="upfile">
 						</td>
 					</tr>
@@ -119,7 +130,7 @@
 
 				<div class="button-group">
 					<button type="submit" class="btn btn-primary">수정하기</button>
-					<button type="reset" class="btn btn-secondary">취소하기</button>
+					<button type="button" class="btn btn-secondary" onclick="history.back();">취소하기</button>
 				</div>
 			</form>
 		</div>

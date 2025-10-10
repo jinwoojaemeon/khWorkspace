@@ -134,18 +134,56 @@
                 </tbody>
             </table>
 
+            <!-- 페이지네이션 정보 표시 -->
+            <div style="text-align: center; margin-bottom: 1rem; color: #666;">
+                총 ${totalCount}개의 게시글 (${currentPage}/${totalPages} 페이지)
+            </div>
+
+            <!-- 페이지네이션 -->
             <div class="pagination">
-                <button class="btn btn-primary">
-                &lt; 이전
-                </button>
-              	<button class="btn btn-outline-primary" >1</button>
-              	<button class="btn btn-outline-primary" >2</button>
-              	<button class="btn btn-outline-primary" >3</button>
-              	<button class="btn btn-outline-primary" >4</button>
-              	<button class="btn btn-outline-primary" >5</button>
-           	    <button class="btn btn-primary">
-                &lt; 다음
-                </button>
+                <!-- 이전 버튼 -->
+                <c:choose>
+                    <c:when test="${hasPrev == 1}">
+                        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/list.bo?page=${startPage - 1}'">
+                            &lt; 이전
+                        </button>
+                    </c:when>
+                    <c:otherwise>
+                        <button class="btn btn-secondary" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            &lt; 이전
+                        </button>
+                    </c:otherwise>
+                </c:choose>
+                
+                <!-- 페이지 번호들 -->
+                <c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
+                    <c:choose>
+                        <c:when test="${pageNum == currentPage}">
+                            <button class="btn btn-primary" style="background-color: #007bff; border-color: #007bff;">
+                                ${pageNum}
+                            </button>
+                        </c:when>
+                        <c:otherwise>
+                            <button class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/list.bo?page=${pageNum}'">
+                                ${pageNum}
+                            </button>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+                
+                <!-- 다음 버튼 -->
+                <c:choose>
+                    <c:when test="${hasNext == 1}">
+                        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/list.bo?page=${endPage + 1}'">
+                            다음 &gt;
+                        </button>
+                    </c:when>
+                    <c:otherwise>
+                        <button class="btn btn-secondary" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            다음 &gt;
+                        </button>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

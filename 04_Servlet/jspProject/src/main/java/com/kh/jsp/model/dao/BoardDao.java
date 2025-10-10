@@ -29,15 +29,22 @@ public class BoardDao {
         }
     }
     
-    // 게시글 목록 조회
-    public List<Board> selectBoardList(Connection conn) {
+    // 게시글 목록 조회 (페이지네이션)
+    public List<Board> selectBoardList(Connection conn, int currentPage) {
         List<Board> list = new ArrayList<>();
         PreparedStatement pstmt = null;
         ResultSet rset = null;
         String sql = prop.getProperty("selectBoardList");
         
+        // 페이지네이션 계산
+        int pageSize = 10;
+        int startRow = (currentPage - 1) * pageSize + 1;
+        int endRow = currentPage * pageSize;
+        
         try {
             pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, startRow);
+            pstmt.setInt(2, endRow);
             rset = pstmt.executeQuery();
             
             while(rset.next()) {
@@ -60,6 +67,30 @@ public class BoardDao {
         }
         
         return list;
+    }
+    
+    // 게시글 총 개수 조회
+    public int selectBoardCount(Connection conn) {
+        int count = 0;
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("selectBoardCount");
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            rset = pstmt.executeQuery();
+            
+            if(rset.next()) {
+                count = rset.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(pstmt);
+        }
+        
+        return count;
     }
     
     // 카테고리 목록 조회

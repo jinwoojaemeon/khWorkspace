@@ -11,12 +11,43 @@ import com.kh.jsp.model.vo.Category;
 
 public class BoardService {
     
-    // 게시글 목록 조회
-    public List<Board> selectBoardList() {
+    // 게시글 목록 조회 (페이지네이션)
+    public List<Board> selectBoardList(int currentPage) {
         Connection conn = getConnection();
-        List<Board> list = new BoardDao().selectBoardList(conn);
+        List<Board> list = new BoardDao().selectBoardList(conn, currentPage);
         close(conn);
         return list;
+    }
+    
+    // 게시글 총 개수 조회
+    public int selectBoardCount() {
+        Connection conn = getConnection();
+        int count = new BoardDao().selectBoardCount(conn);
+        close(conn);
+        return count;
+    }
+    
+    // 페이지네이션 정보 계산
+    public int[] calculatePagination(int currentPage, int totalCount) {
+        int pageSize = 10; // 한 페이지당 게시글 수
+        int paginationSize = 5; // 페이지네이션에 보여줄 페이지 수
+        
+        // 총 페이지 수 계산
+        int totalPages = (totalCount + pageSize - 1) / pageSize; // 올림 계산
+        
+        // 현재 페이지 유효성 검사
+        if(currentPage < 1) currentPage = 1;
+        if(currentPage > totalPages) currentPage = totalPages;
+        
+        // 페이지네이션 시작/끝 페이지 계산
+        int startPage = ((currentPage - 1) / paginationSize) * paginationSize + 1;
+        int endPage = Math.min(startPage + paginationSize - 1, totalPages);
+        
+        // 이전/다음 버튼 활성화 여부
+        int hasPrev = (startPage > 1) ? 1 : 0;
+        int hasNext = (endPage < totalPages) ? 1 : 0;
+        
+        return new int[]{currentPage, totalPages, startPage, endPage, hasPrev, hasNext};
     }
     
     // 카테고리 목록 조회

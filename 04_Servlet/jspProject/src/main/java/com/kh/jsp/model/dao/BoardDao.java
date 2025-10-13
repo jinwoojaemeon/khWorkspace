@@ -1,5 +1,7 @@
 package com.kh.jsp.model.dao;
 
+import static com.kh.jsp.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,221 +9,179 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
-import static com.kh.jsp.common.JDBCTemplate.close;
+import com.kh.jsp.common.JDBCTemplate;
 import com.kh.jsp.model.vo.Board;
 import com.kh.jsp.model.vo.Category;
 
 public class BoardDao {
-    private Properties prop = new Properties();
-    
-    public BoardDao() {
-        try {
-            String path = BoardDao.class.getResource("/db/sql/board-mapper.xml").getPath();
-            System.out.println("board-mapper.xml 경로: " + path);
-            prop.loadFromXML(new FileInputStream(path));
-            System.out.println("board-mapper.xml 로드 성공");
-        } catch (IOException e) {
-            System.out.println("board-mapper.xml 로드 실패: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-    
-    // 게시글 목록 조회 (페이지네이션)
-    public List<Board> selectBoardList(Connection conn, int currentPage) {
-        List<Board> list = new ArrayList<>();
-        PreparedStatement pstmt = null;
-        ResultSet rset = null;
-        String sql = prop.getProperty("selectBoardList");
-        
-        // 페이지네이션 계산
-        int pageSize = 10;
-        int startRow = (currentPage - 1) * pageSize + 1;
-        int endRow = currentPage * pageSize;
-        
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, startRow);
-            pstmt.setInt(2, endRow);
-            rset = pstmt.executeQuery();
-            
-            while(rset.next()) {
-                Board b = new Board();
-                b.setBoardNo(rset.getInt("BOARD_NO"));
-                b.setBoardTitle(rset.getString("BOARD_TITLE"));
-                b.setBoardWriter(rset.getInt("BOARD_WRITER"));
-                b.setWriterName(rset.getString("MEMBER_NAME"));
-                b.setCount(rset.getInt("COUNT"));
-                b.setCreateDate(rset.getDate("CREATE_DATE"));
-                b.setCategoryName(rset.getString("CATEGORY_NAME"));
-                
-                list.add(b);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(pstmt);
-        }
-        
-        return list;
-    }
-    
-    // 게시글 총 개수 조회
-    public int selectBoardCount(Connection conn) {
-        int count = 0;
-        PreparedStatement pstmt = null;
-        ResultSet rset = null;
-        String sql = prop.getProperty("selectBoardCount");
-        
-        try {
-            pstmt = conn.prepareStatement(sql);
-            rset = pstmt.executeQuery();
-            
-            if(rset.next()) {
-                count = rset.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(pstmt);
-        }
-        
-        return count;
-    }
-    
-    // 카테고리 목록 조회
-    public List<Category> selectCategoryList(Connection conn) {
-        List<Category> list = new ArrayList<>();
-        PreparedStatement pstmt = null;
-        ResultSet rset = null;
-        String sql = prop.getProperty("selectCategoryList");
-        
-        try {
-            pstmt = conn.prepareStatement(sql);
-            rset = pstmt.executeQuery();
-            
-            while(rset.next()) {
-                Category c = new Category();
-                c.setCategoryNo(rset.getInt("CATEGORY_NO"));
-                c.setCategoryName(rset.getString("CATEGORY_NAME"));
-                list.add(c);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(pstmt);
-        }
-        
-        return list;
-    }
-    
-    // 게시글 작성
-    public int insertBoard(Board b, Connection conn) {
-        PreparedStatement pstmt = null;
-        String sql = prop.getProperty("insertBoard");
-        int result = 0;
-        
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, b.getCategoryNo());
-            pstmt.setString(2, b.getBoardTitle());
-            pstmt.setString(3, b.getBoardContent());
-            pstmt.setInt(4, b.getBoardWriter());
-            
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(pstmt);
-        }
-        return result;
-    }
-    
-    // 게시글 상세 조회
-    public Board selectBoard(Connection conn, int boardNo) {
-        Board b = null;
-        PreparedStatement pstmt = null;
-        ResultSet rset = null;
-        String sql = prop.getProperty("selectBoard");
-        
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, boardNo);
-            rset = pstmt.executeQuery();
-            
-            if(rset.next()) {
-                b = new Board();
-                b.setBoardNo(rset.getInt("BOARD_NO"));
-                b.setBoardType(rset.getInt("BOARD_TYPE"));
-                b.setCategoryNo(rset.getInt("CATEGORY_NO"));
-                b.setCategoryName(rset.getString("CATEGORY_NAME"));
-                b.setBoardTitle(rset.getString("BOARD_TITLE"));
-                b.setBoardContent(rset.getString("BOARD_CONTENT"));
-                b.setBoardWriter(rset.getInt("BOARD_WRITER"));
-                b.setWriterName(rset.getString("MEMBER_NAME"));
-                b.setCount(rset.getInt("COUNT"));
-                b.setCreateDate(rset.getDate("CREATE_DATE"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(rset);
-            close(pstmt);
-        }
-        
-        return b;
-    }
-    
-    // 조회수 증가
-    public int increaseCount(Connection conn, int boardNo) {
-        PreparedStatement pstmt = null;
-        String sql = prop.getProperty("increaseCount");
-        int result = 0;
-        
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, boardNo);
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(pstmt);
-        }
-        
-        return result;
-    }
-    
-    // 게시글 수정
-    public int updateBoard(Connection conn, Board b) {
-        PreparedStatement pstmt = null;
-        String sql = prop.getProperty("updateBoard");
-        int result = 0;
-        
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, b.getCategoryNo());
-            pstmt.setString(2, b.getBoardTitle());
-            pstmt.setString(3, b.getBoardContent());
-            pstmt.setInt(4, b.getBoardNo());
-            pstmt.setInt(5, b.getBoardWriter());
-            
-            result = pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            close(pstmt);
-        }
-        
-        return result;
-    }
+	private Properties prop = new Properties();
+	
+	public BoardDao() {
+		super();
+		
+		String path = JDBCTemplate.class.getResource("/db/sql/board-mapper.xml").getPath();
+		
+		try {
+			prop.loadFromXML(new FileInputStream(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<Board> selectAllBoard(Connection conn){
+		//select -> ResultSet(여러개) -> ArrayList
+		ArrayList<Board> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Board b = new Board();
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setCategoryName(rset.getString("CATEGORY_NAME"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setMemberId(rset.getString("MEMBER_ID"));
+				b.setCount(rset.getInt("COUNT"));
+				b.setCreateDate(rset.getString("CREATE_DATE"));
+				
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public int increaseCount(Connection conn, int boardNo) {
+		//boardNo에 해당하는 board -> update -> int(1 또는 0)
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");		
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public Board selectBoardByBoardNo(Connection conn, int boardNo){
+		//select -> ResultSet(한개) -> Board
+		Board b = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectBoardByBoardNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				b = new Board();
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setCategoryNo(rset.getInt("CATEGORY_No"));
+				b.setCategoryName(rset.getString("CATEGORY_NAME"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setBoardContent(rset.getString("BOARD_CONTENT"));
+				b.setMemberId(rset.getString("MEMBER_ID"));
+				b.setCreateDate(rset.getString("CREATE_DATE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
+	
+	public ArrayList<Category> selectAllCategory(Connection conn){
+		//select -> ResultSet(여러개) -> ArrayList
+		ArrayList<Category> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Category category = new Category(
+							rset.getInt("CATEGORY_NO"),
+							rset.getString("CATEGORY_NAME")
+						);
+				
+				list.add(category);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public int updateBoard(Connection conn, Board board) {
+		//boardNo에 해당하는 board -> update -> int(1 또는 0)
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateBoard");		
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board.getCategoryNo());
+			pstmt.setString(2, board.getBoardTitle());
+			pstmt.setString(3, board.getBoardContent());
+			pstmt.setInt(4, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
     
     // 게시글 삭제
-    public int deleteBoard(Connection conn, int boardNo, int boardWriter) {
+    public int deleteBoard(Connection conn, int boardNo) {
         PreparedStatement pstmt = null;
         String sql = prop.getProperty("deleteBoard");
         int result = 0;
@@ -229,7 +189,29 @@ public class BoardDao {
         try {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, boardNo);
-            pstmt.setInt(2, boardWriter);
+            
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        
+        return result;
+    }
+    
+    // 게시글 작성
+    public int insertBoard(Connection conn, Board board) {
+        PreparedStatement pstmt = null;
+        String sql = prop.getProperty("insertBoard");
+        int result = 0;
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, board.getCategoryNo());
+            pstmt.setString(2, board.getBoardTitle());
+            pstmt.setString(3, board.getBoardContent());
+            pstmt.setInt(4, board.getBoardWriter());
             
             result = pstmt.executeUpdate();
         } catch (SQLException e) {

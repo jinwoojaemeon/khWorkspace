@@ -82,20 +82,15 @@
 		<div class="board-card">
 			<h2>일반게시글 작성하기</h2>
 
-			<form action="${pageContext.request.contextPath}/insert.bo" method="post">
+			<form action="${pageContext.request.contextPath}/insert.bo" method="post" >
 				<table class="form-table">
 					<tr>
 						<th>카테고리</th>
 						<td>
-							<select name="category" required>
-								<option value="">카테고리를 선택하세요</option>
-								<option value="10">공통</option>
-								<option value="20">운동</option>
-								<option value="30">등산</option>
-								<option value="40">게임</option>
-								<option value="50">낚시</option>
-								<option value="60">요리</option>
-								<option value="70">기타</option>
+							<select name="category">	
+								<c:forEach var="c" items="${categories}">
+									<option value="${c.categoryNo}">${c.categoryName}</option>
+								</c:forEach>					
 							</select>
 						</td>
 					</tr>

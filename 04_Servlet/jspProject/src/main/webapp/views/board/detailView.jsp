@@ -131,32 +131,38 @@
 			<table class="detail-table">
 				<tr>
 					<th>카테고리</th>
-					<td>${b.categoryName}</td>
+					<td>${board.categoryName}</td>
 					<th>제목</th>
-					<td colspan="3">${b.boardTitle}</td>
+					<td colspan="3">${board.boardTitle}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${b.writerName}</td>
+					<td>${board.memberId}</td>
 					<th>작성일</th>
-					<td>${b.createDate}</td>
-					<th>조회수</th>
-					<td>${b.count}</td>
+					<td>${board.createDate}</td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td colspan="5">
+					<td colspan="3">
 						<div class="content-area">
-							${b.boardContent}
+							${board.boardContent}
 						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>첨부파일</th>
+					<td colspan="3">
+						첨부파일이 없습니다.
 					</td>
 				</tr>
 			</table>
 
 			<div class="button-group">
-				<a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo">목록가기</a>
-				<a class="btn btn-warning" href="${pageContext.request.contextPath}/updateForm.bo?bno=${b.boardNo}">수정하기</a>
-				<a class="btn btn-danger" href="${pageContext.request.contextPath}/delete.bo?bno=${b.boardNo}">삭제하기</a>
+				<a class="btn btn-primary">목록가기</a>
+				<c:if test="${loginMember != null && loginMember.memberId == board.memberId}">
+					<a class="btn btn-warning" href="${pageContext.request.contextPath}/updateForm.bo?bno=${board.boardNo}">수정하기</a>
+					<a class="btn btn-danger" href="${pageContext.request.contextPath}//delete.bo?bno=${board.boardNo}">삭제하기</a>
+				</c:if>
 			</div>
 		</div>
 

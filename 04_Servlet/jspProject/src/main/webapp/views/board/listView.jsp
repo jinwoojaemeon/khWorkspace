@@ -9,6 +9,7 @@
     <title>일반게시판</title>
 
     <style>
+
         .board-container {
             max-width: 1000px;
             margin: 50px auto;
@@ -78,13 +79,6 @@
         .pagination .btn {
             min-width: 40px;
         }
-
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #999;
-            font-size: 18px;
-        }
     </style>
 </head>
 <body>
@@ -94,9 +88,11 @@
         <div class="board-card">
             <h2>일반게시판</h2>
 
-            <div class="write-btn-area">
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/enrollForm.bo">글쓰기</a>
-            </div>
+			<c:if test="${not empty loginMember}">
+	            <div class="write-btn-area">
+	                <a class="btn btn-primary" href="${pageContext.request.contextPath}/enrollForm.bo">글쓰기</a>
+	            </div>
+            </c:if>
 
             <table class="board-table">
                 <thead>
@@ -110,80 +106,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:choose>
-                        <c:when test="${empty list}">
-                            <tr>
-                                <td colspan="6" class="empty-state">
-                                    게시글이 없습니다. 첫 게시글을 작성해보세요!
-                                </td>
-                            </tr>
-                        </c:when>
-                        <c:otherwise>
-                            <c:forEach var="board" items="${list}">
-                                <tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${board.boardNo}'">
-                                    <td>${board.boardNo}</td>
-                                    <td>${board.categoryName}</td>
-                                    <td>${board.boardTitle}</td>
-                                    <td>${board.writerName}</td>
-                                    <td>${board.count}</td>
-                                    <td>${board.createDate}</td>
-                                </tr>
-                            </c:forEach>
-                        </c:otherwise>
-                    </c:choose>
+                 	<c:forEach var="b" items="${list}">
+	                 	 <tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}'">
+	                        <td>${b.boardNo}</td>
+	                        <td>${b.categoryName}</td>
+	                        <td>${b.boardTitle}</td>
+	                        <td>${b.memberId}</td>
+	                        <td>${b.count}</td>
+	                        <td>${b.createDate}</td>
+                    	</tr>
+                 	</c:forEach>
                 </tbody>
             </table>
 
-            <!-- 페이지네이션 정보 표시 -->
-            <div style="text-align: center; margin-bottom: 1rem; color: #666;">
-                총 ${totalCount}개의 게시글 (${currentPage}/${totalPages} 페이지)
-            </div>
-
-            <!-- 페이지네이션 -->
             <div class="pagination">
-                <!-- 이전 버튼 -->
-                <c:choose>
-                    <c:when test="${hasPrev == 1}">
-                        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/list.bo?page=${startPage - 1}'">
-                            &lt; 이전
-                        </button>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-secondary" disabled style="opacity: 0.5; cursor: not-allowed;">
-                            &lt; 이전
-                        </button>
-                    </c:otherwise>
-                </c:choose>
-                
-                <!-- 페이지 번호들 -->
-                <c:forEach var="pageNum" begin="${startPage}" end="${endPage}">
-                    <c:choose>
-                        <c:when test="${pageNum == currentPage}">
-                            <button class="btn btn-primary" style="background-color: #007bff; border-color: #007bff;">
-                                ${pageNum}
-                            </button>
-                        </c:when>
-                        <c:otherwise>
-                            <button class="btn btn-outline-primary" onclick="location.href='${pageContext.request.contextPath}/list.bo?page=${pageNum}'">
-                                ${pageNum}
-                            </button>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-                
-                <!-- 다음 버튼 -->
-                <c:choose>
-                    <c:when test="${hasNext == 1}">
-                        <button class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/list.bo?page=${endPage + 1}'">
-                            다음 &gt;
-                        </button>
-                    </c:when>
-                    <c:otherwise>
-                        <button class="btn btn-secondary" disabled style="opacity: 0.5; cursor: not-allowed;">
-                            다음 &gt;
-                        </button>
-                    </c:otherwise>
-                </c:choose>
+                <button class="btn btn-primary">
+                &lt; 이전
+                </button>
+              	<button class="btn btn-outline-primary" >1</button>
+              	<button class="btn btn-outline-primary" >2</button>
+              	<button class="btn btn-outline-primary" >3</button>
+              	<button class="btn btn-outline-primary" >4</button>
+              	<button class="btn btn-outline-primary" >5</button>
+           	    <button class="btn btn-primary">
+                &lt; 다음
+                </button>
             </div>
         </div>
     </div>

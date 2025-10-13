@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class EnrollFornController
+ * Servlet implementation class EnrollFromController
  */
 @WebServlet("/enrollForm.me")
 public class EnrollFormController extends HttpServlet {

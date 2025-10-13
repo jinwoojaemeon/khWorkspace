@@ -1,0 +1,251 @@
+# 🚀 JSP 커뮤니티
+> 회원 관리와 게시판 기능을 갖춘 JSP 기반 웹 애플리케이션
+
+## 📘 개요 (Overview)
+
+	본 프로젝트는 **Servlet과 JSP를 이용한 MVC 패턴 기반의 웹 애플리케이션**으로,  
+	회원 관리(로그인·회원가입) 및 게시판 CRUD 기능을 중심으로 구성되었습니다.  
+	Oracle 데이터베이스와 JDBC를 통해 데이터 연동을 수행하며,  
+	Eclipse + Tomcat 환경에서 실행 가능합니다.
+
+## 🧱 기술 스택 (Tech Stack)
+| 구분 | 사용 기술 |
+|------|------------|
+| Frontend | HTML, CSS, JavaScript, JSP |
+| Backend | Java (Servlet, JDBC)|
+| Server| Apache Tomcat |
+| Database | Oracle |
+| Tools | Eclipse, Git, GitHub |
+
+## 🛠️ 설치 및 실행 (Installation & Run)
+# 1. 프로젝트 클론
+git clone https://github.com/jinwoojaemeon/JSP-Servletproject.git
+
+# 2. 이클립스(Eclipse)에서 Import
+- File > Import > Existing Projects into Workspace
+- 복제한 프로젝트 폴더 선택 후 Import
+
+# 3. 데이터베이스(Oracle) 설정
+- Oracle 실행 후 데이터베이스 및 테이블 생성
+- src/main/webapp/WEB-INF/classes/sql 폴더 내 SQL 스크립트 실행
+- JDBC 연결 정보(application.properties 또는 JDBCTemplate.java) 수정
+
+# 4. Tomcat 서버 설정
+- Eclipse > Servers > New > Server > Apache Tomcat 선택
+- 프로젝트를 서버에 Add 후 실행
+
+# 5. 웹 애플리케이션 실행
+- 브라우저에서 접속
+http://localhost:8080/프로젝트명
+
+## 📂 프로젝트 구조 (Directory Structure)
+project/<br>
+ ├── src/<br>
+ │   ├── com/project/controller/     # Servlet 컨트롤러<br>
+ │   ├── com/project/model/dao/      # 데이터 접근 로직 (DAO)<br>
+ │   ├── com/project/model/vo/       # VO (Value Object)<br>
+ │   ├── com/project/service/        # 비즈니스 로직<br>
+ │   └── com/project/common/         # 공용 유틸 (JDBCTemplate 등)<br>
+ ├── webapp/<br>
+ │   ├── WEB-INF/<br>
+ │   │   ├── views/                  # JSP 뷰 페이지<br>
+ │   │   └── web.xml                 # 배포 서술자<br>
+ │   ├── resources/                  # CSS, JS, 이미지<br>
+ │   └── index.jsp                   # 메인 페이지<br>
+ └── README.md
+
+## 🌟 주요 기능 (Key Features)
+✅ 회원가입 / 로그인 / 로그아웃 기능 <br>
+✅ 게시글 등록, 조회, 수정, 삭제 (CRUD) <br>
+✅ Oracle DB 연동을 통한 데이터 관리 <br>
+✅ MVC 패턴 기반 구조로 모듈화된 개발 <br>
+✅ JSP include를 통한 공통 레이아웃 구성
+
+## 📸 화면 미리보기 (Preview)
+
+| 기능 | 미리보기 |
+|------|-----------|
+| 로그인 화면 | ![Login Page](<img width="323" height="80" alt="image" src="https://github.com/user-attachments/assets/44d3aa56-9ae3-4ce1-8091-6b30e4171e5c" />) |
+| 회원가입 화면 | ![Register Page](<img width="310" height="545" alt="image" src="https://github.com/user-attachments/assets/0f79c1ce-22d4-4bec-b5ea-012265c379a6" />) |
+| 게시판 목록 | ![Board List](<img width="852" height="832" alt="image" src="https://github.com/user-attachments/assets/cb834e0a-7375-4a63-a231-afd6a01de650" />) |
+| 게시글 작성 | ![Post Write](<img width="686" height="683" alt="image" src="https://github.com/user-attachments/assets/f92b8b12-2599-480c-90a3-607d852dead0" />) |
+
+
+## 💡 학습 포인트 (Learning Points)
+
+- JSP & Servlet 기반 MVC 구조 설계 방법 학습
+- JDBC를 통한 데이터베이스 연결 및 SQL 처리 로직 구현
+- Tomcat 서버를 활용한 배포 및 실행 환경 이해
+- JSP 내 JSTL / EL 사용으로 동적 페이지 구현
+
+---
+
+## 📋 구성 클래스 및 역할
+
+### **🏠 메인 진입점**
+- **`src/main/webapp/index.jsp`** — 메인 페이지 (실행 화면)
+  - `menubar.jsp`를 include하여 공통 레이아웃 구성
+  - 로그인/비로그인 상태에 따른 UI 분기 처리
+
+### **👤 회원 관리 (Member Management)**
+
+#### **com.kh.jsp.controller.member 패키지**
+- **`LoginController`** (`/login.me`)
+  - `doGet()` — 로그인 처리 및 세션 관리
+  - 로그인 성공 시 세션에 사용자 정보 저장, 실패 시 에러 페이지 이동
+- **`InsertController`** (`/insert.me`)
+  - `doGet()` — 회원가입 처리
+  - 폼 데이터 수집 및 Member 객체 생성 후 DB 저장
+- **`EnrollFormController`** (`/enrollForm.me`)
+  - `doGet()` — 회원가입 폼 페이지로 이동
+- **`MyPageController`** (`/myPage.me`)
+  - `doGet()` — 마이페이지 조회 및 수정 폼 제공
+- **`UpdateController`** (`/update.me`)
+  - `doGet()` — 회원 정보 수정 처리
+- **`UpdatePwdController`** (`/updatePwd.me`)
+  - `doGet()` — 비밀번호 변경 처리
+- **`DeleteController`** (`/delete.me`)
+  - `doGet()` — 회원 탈퇴 처리 (상태 변경)
+- **`LogoutController`** (`/logout.me`)
+  - `doGet()` — 로그아웃 처리 및 세션 무효화
+
+#### **com.kh.jsp.service.MemberService**
+- `loginMember(String userId, String userPwd): Member` — 로그인 인증
+- `insertMember(Member m): int` — 회원가입 처리
+- `updateMember(Member m): int` — 회원 정보 수정
+- `updatePwd(String userId, String userPwd, String newPwd): int` — 비밀번호 변경
+- `deleteMember(String userId, String userPwd): int` — 회원 탈퇴
+
+#### **com.kh.jsp.model.vo.Member**
+- 회원 정보 VO 클래스 (Lombok 사용)
+- `insertCreateMember()` — 회원가입용 객체 생성
+- `loginMember()` — 로그인용 객체 생성
+- `createUpdateMember()` — 수정용 객체 생성
+
+### **📝 게시판 관리 (Board Management)**
+
+#### **com.kh.jsp.controller.board 패키지**
+- **`ListController`** (`/list.bo`)
+  - `doGet()` — 게시글 목록 조회 및 페이지네이션 처리
+  - 개별 메서드로 페이지네이션 정보 계산 (가독성 향상)
+- **`DetailController`** (`/detail.bo`)
+  - `doGet()` — 게시글 상세 조회 및 조회수 증가
+- **`BoardEnrollFormController`** (`/enrollForm.bo`)
+  - `doGet()` — 게시글 작성 폼 페이지로 이동
+- **`BoardInsertController`** (`/insert.bo`)
+  - `doGet()` — 게시글 작성 처리 (로그인 체크 포함)
+- **`UpdateFormController`** (`/updateForm.bo`)
+  - `doGet()` — 게시글 수정 폼 페이지로 이동
+- **`UpdateController`** (`/update.bo`)
+  - `doGet()` — 게시글 수정 처리
+- **`DeleteController`** (`/delete.bo`)
+  - `doGet()` — 게시글 삭제 처리
+
+#### **com.kh.jsp.service.BoardService**
+- `selectBoardList(int currentPage): List<Board>` — 게시글 목록 조회 (페이지네이션)
+- `selectBoardCount(): int` — 게시글 총 개수 조회
+- `calculateTotalPages(int totalCount): int` — 총 페이지 수 계산
+- `calculateStartPage(int currentPage, int totalPages): int` — 시작 페이지 계산
+- `calculateEndPage(int startPage, int totalPages): int` — 끝 페이지 계산
+- `hasPreviousPage(int startPage): int` — 이전 버튼 활성화 여부
+- `hasNextPage(int endPage, int totalPages): int` — 다음 버튼 활성화 여부
+- `validateCurrentPage(int currentPage, int totalPages): int` — 현재 페이지 유효성 검사
+- `insertBoard(Board b): int` — 게시글 작성
+- `selectBoard(int boardNo): Board` — 게시글 상세 조회 (조회수 증가)
+- `selectBoardForUpdate(int boardNo): Board` — 게시글 수정용 조회 (조회수 증가 없음)
+- `updateBoard(Board b): int` — 게시글 수정
+- `deleteBoard(int boardNo, int boardWriter): int` — 게시글 삭제
+- `selectCategoryList(): List<Category>` — 카테고리 목록 조회
+
+#### **com.kh.jsp.model.vo.Board**
+- 게시글 정보 VO 클래스 (Lombok 사용)
+- 게시글 번호, 제목, 내용, 작성자, 조회수, 작성일 등 포함
+
+### **🔧 공통 유틸리티**
+- **`com.kh.jsp.common.JDBCTemplate`** — JDBC 연결 및 트랜잭션 관리
+- **`com.kh.jsp.model.dao.MemberDao`** — 회원 관련 DB 접근 로직
+- **`com.kh.jsp.model.dao.BoardDao`** — 게시판 관련 DB 접근 로직
+
+### **🎨 뷰 페이지**
+- **`views/common/menubar.jsp`** — 공통 네비게이션 및 로그인 폼
+- **`views/member/enrollForm.jsp`** — 회원가입 폼
+- **`views/member/myPage.jsp`** — 마이페이지
+- **`views/board/listView.jsp`** — 게시글 목록
+- **`views/board/detailView.jsp`** — 게시글 상세보기
+- **`views/board/enrollForm.jsp`** — 게시글 작성 폼
+- **`views/board/updateForm.jsp`** — 게시글 수정 폼
+- **`views/common/error.jsp`** — 에러 페이지
+
+---
+
+## 🎨 UI/UX 디자인 특징
+
+### **🏠 전체 디자인 컨셉**
+- **모던한 카드 기반 레이아웃**: 각 페이지가 카드 형태로 구성되어 깔끔하고 현대적인 느낌
+- **Bootstrap 5.3.3 활용**: 반응형 디자인과 일관된 UI 컴포넌트 사용
+- **Noto Sans KR 폰트**: 한글 가독성을 위한 구글 웹폰트 적용
+- **일관된 색상 체계**: 메인 컬러 `#4b89fc` (파란색) 기반의 통일된 디자인
+
+
+### **🧭 공통 네비게이션 (menubar.jsp)**
+- **상단 헤더**: "Welcome KH World" 타이틀과 하단 보더라인
+- **로그인 영역**: 
+  - 비로그인 시: 아이디/비밀번호 입력 폼 + 로그인/회원가입 버튼
+  - 로그인 시: 환영 메시지 + 마이페이지/로그아웃 버튼
+- **네비게이션 바**: 다크 테마의 수평 메뉴 (HOME, 공지사항, 일반게시판, 사진게시판)
+- **호버 효과**: 메뉴 항목에 노란색(`#ffc107`) 호버 효과
+
+
+
+
+### **👤 회원 관리 페이지**
+
+#### **회원가입 폼 (enrollForm.jsp)**
+- **중앙 정렬 레이아웃**: `flexbox`를 활용한 수직 중앙 정렬
+- **테이블 기반 폼**: 깔끔한 2열 구조 (입력필드 + 버튼)
+- **중복확인 기능**: 아이디 입력란 옆 중복확인 버튼
+- **관심분야 체크박스**: 7개 항목의 다중 선택 (운동, 등산, 낚시, 요리, 게임, 영화, 기타)
+- **버튼 그룹**: 회원가입/다시입력 버튼의 중앙 정렬
+
+
+
+
+#### **마이페이지 (myPage.jsp)**
+- **카드 디자인**: 흰색 배경에 그림자 효과가 있는 카드 레이아웃
+- **정보 표시**: 읽기 전용 필드(아이디, 이름)와 수정 가능 필드 구분
+- **관심분야 표시**: JavaScript로 기존 선택값 자동 체크
+- **모달 팝업**: 
+  - 비밀번호 변경: 현재/새 비밀번호 입력 폼
+  - 회원탈퇴: 경고 메시지와 비밀번호 확인
+- **버튼 색상 구분**: 정보수정(초록), 비밀번호변경(노랑), 회원탈퇴(빨강)
+
+
+
+
+### **📝 게시판 관리 페이지**
+
+#### **게시글 목록 (listView.jsp)**
+- **테이블 디자인**: 
+  - 헤더: 파란색 배경(`#4b89fc`)의 고정 헤더
+  - 행 호버 효과: 마우스 오버 시 배경색 변경 + 살짝 위로 이동 애니메이션
+- **글쓰기 버튼**: 우상단의 파란색 "글쓰기" 버튼
+- **빈 상태 처리**: 게시글이 없을 때 안내 메시지
+- **페이지네이션**: 
+  - 현재 페이지는 진한 파란색으로 강조
+  - 이전/다음 버튼의 활성화/비활성화 상태 구분
+  - 페이지 정보 표시 (총 게시글 수, 현재 페이지)
+
+
+ 
+
+#### **게시글 작성 폼 (enrollForm.jsp)**
+- **카테고리 선택**: 드롭다운으로 7개 카테고리 선택 (공통, 운동, 등산, 게임, 낚시, 요리, 기타)
+- **제목/내용 입력**: 
+  - 제목: 한 줄 텍스트 입력
+  - 내용: 10줄 높이의 텍스트에리어 (크기 조절 불가)
+- **첨부파일**: 파일 업로드 기능
+- **버튼 그룹**: 작성하기(파란색)/취소하기(회색) 버튼
+
+
+
+

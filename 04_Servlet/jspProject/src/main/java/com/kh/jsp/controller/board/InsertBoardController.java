@@ -1,7 +1,14 @@
 package com.kh.jsp.controller.board;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
+import org.apache.commons.fileupload2.core.DiskFileItemFactory;
+import org.apache.commons.fileupload2.core.FileItem;
+import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
+
+import com.kh.jsp.model.vo.Attachment;
 import com.kh.jsp.model.vo.Board;
 import com.kh.jsp.model.vo.Member;
 import com.kh.jsp.service.BoardService;
@@ -12,6 +19,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import java.util.List;
 
 /**
  * Servlet implementation class InsertBoardController
@@ -32,43 +41,102 @@ public class InsertBoardController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 게시글 추가
+		// enctype이 multipart/form-data일 때 request로 값 추출이 불가능하다. --> 라이브러리 사용
 		
-		// 로그인 체크
-		HttpSession session = request.getSession();
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		/*
+		 *  commons-fileupload2-core  : 멀티 파트에 요청에 대한 처리 기능을 구현하는 라이브러리 (파일을 받을 수 있게) 
+		 *  commons-fileupload2-jakarta : javax.servlet -> jakarta.servlet 패키지를 사용하게 하는 라이브러리 
+		 *  commons-io-2.20.0.jar  : 파일 읽기 스기에 대한 스트림을 구현하고 있는 라이브러리
+		 */
+		// enctype이 multipart/form-data로 전송되었는지를 체크해준다.
+		System.out.println();
 		
-		if(loginMember == null) {
-			session.setAttribute("alertMsg", "로그인이 필요합니다.");
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
-		
-		// 전달받은 데이터를 추출
-		int category = Integer.parseInt(request.getParameter("category"));
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		int boardWriter = loginMember.getMemberNo(); // 로그인한 회원번호
-		
-		// Board 객체 생성
-		Board b = new Board();
-		b.setBoardType(1);  // 일반 게시판
-		b.setCategoryNo(category);
-		b.setBoardTitle(title);
-		b.setBoardContent(content);
-		b.setBoardWriter(boardWriter);
-		
-		// 게시글 작성
-		int result = new BoardService().insertBoard(b);
-		
-		if(result > 0) { // 작성성공
-			request.getSession().setAttribute("alertMsg", "성공적으로 게시글을 작성하였습니다.");
+		if(JakartaServletFileUpload.isMultipartContent(request)) {
+			// 로그인 체크
+			HttpSession session = request.getSession();
 			
-			response.sendRedirect(request.getContextPath() + "/list.bo");
-		} else { // 작성실패
-			request.setAttribute("errorMsg", "게시글 작성에 실패하였습니다.");
-			request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
+			// 1. 파일 용량 제한(byte 기준) 
+			int fileMaxSize = 1024 * 1024 * 50; // 50MB
+			int requestMaxSize = 1024 * 1024 * 60; // 전체 요청 크기 제한
+			
+			// 2. 전달된 파일을 저장시킬 폴더 경로 가져오기
+			String savePath = request.getServletContext().getRealPath("/resources/board-file/"); // 저장할 물리적 경로 설정
+			
+			// 3. DiskFileItemFactory : 파일을 임시로 저장하는 객체 생성 
+			DiskFileItemFactory factory = DiskFileItemFactory.builder().get(); // builder : 객체를 만드는데 쓰는 패턴?
+			
+			// 4. JakartaServletFileUpload : http 요청으로 전달된 파일 데이터를 파싱 -> 개별 fileItem 객체로 변환 
+			JakartaServletFileUpload upload = new JakartaServletFileUpload(factory); 
+			
+			upload.setFileSizeMax(fileMaxSize);
+			upload.setSizeMax(requestMaxSize);
+			
+			List<FileItem> formItems = upload.parseRequest(request); // enctype이 mulit-part인걸 파싱 
+			// 전달받은 데이터를 추출
+			
+			Member loginMember = (Member)session.getAttribute("loginMember");
+			
+			// Board 객체 생성
+			Board b = new Board();
+			b.setBoardType(1);  // 일반 게시판
+			Attachment at = null;
+			
+			b.setBoardWriter(loginMember.getMemberNo());
+			
+			for(FileItem item : formItems) {
+				System.out.println(item);
+				//업로드된 데이터가 일반 폼 필드인지, 파일인지 구분할 수 있음.
+				if(item.isFormField()) {//일반파라미터
+					switch(item.getFieldName()) {
+						case "category":
+							int categoryNo = Integer.parseInt(item.getString(Charset.forName("UTF-8")));
+							b.setCategoryNo(categoryNo);
+							break;
+						case "title":
+							b.setBoardTitle(item.getString(Charset.forName("UTF-8")));
+							break;
+						case "content":
+							b.setBoardContent(item.getString(Charset.forName("UTF-8")));
+							break;
+					}
+				} else { //파일
+					String originName = item.getName(); //파일의 원래 이름
+					
+					if(originName.length() > 0) { //파일업로드가 실제로 되었을 때
+						//파일명이 겹치면 덮어씌우기 때문에 고유한 파일명을 만들어주자
+						String tmpName = "kh_" + System.currentTimeMillis() + ( (int)(Math.random() * 100000) + 1);
+						String type = originName.substring(originName.lastIndexOf(".")); //확장자 추출
+						String changeName = tmpName + type; //서버에 저장할 파일명
+						
+						File f = new File(savePath, changeName);
+						item.write(f.toPath()); //지정한 경로에 파일이 업로드
+						
+						at = new Attachment();
+						at.setOriginName(originName);
+						at.setChangeName(changeName);
+						at.setFilePath("resources/board-file/");
+					}
+				}
+			}
+			
+			// b -> O
+			// at ->  O , X
+			
+			int result = new BoardService().insertBoard(b, at);
+			
+			if(result > 0) { //성공
+				session.setAttribute("alertMsg", "일반게시글 작성 성공");
+				response.sendRedirect(request.getContextPath() + "/list.bo");
+			} else { //실패
+				if(at != null){
+					new File(savePath + at.getChangeName()).delete();
+				}
+				
+				request.setAttribute("errorMsg", "일반게시글 작성 실패");
+				request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
+			}
 		}
+		
 	}
 
 	/**

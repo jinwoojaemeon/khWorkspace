@@ -106,32 +106,60 @@
                     </tr>
                 </thead>
                 <tbody>
-                 	<c:forEach var="b" items="${list}">
-	                 	 <tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}'">
-	                        <td>${b.boardNo}</td>
-	                        <td>${b.categoryName}</td>
-	                        <td>${b.boardTitle}</td>
-	                        <td>${b.memberId}</td>
-	                        <td>${b.count}</td>
-	                        <td>${b.createDate}</td>
-                    	</tr>
-                 	</c:forEach>
+                 	<c:choose>
+                 		<c:when test="${empty list}">
+                 			<tr>
+                 				<td colspan="6" style="text-align: center; padding: 50px;">
+                 					등록된 게시글이 없습니다.
+                 				</td>
+                 			</tr>
+                 		</c:when>
+                 		<c:otherwise>
+                 			<c:forEach var="b" items="${list}">
+		                 	 <tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}'">
+		                        <td>${b.boardNo}</td>
+		                        <td>${b.categoryName}</td>
+		                        <td>${b.boardTitle}</td>
+		                        <td>${b.memberId}</td>
+		                        <td>${b.count}</td>
+		                        <td>${b.createDate}</td>
+	                    	</tr>
+	                 		</c:forEach>
+                 		</c:otherwise>
+                 	</c:choose>
                 </tbody>
             </table>
 
-            <div class="pagination">
-                <button class="btn btn-primary">
-                &lt; 이전
-                </button>
-              	<button class="btn btn-outline-primary" >1</button>
-              	<button class="btn btn-outline-primary" >2</button>
-              	<button class="btn btn-outline-primary" >3</button>
-              	<button class="btn btn-outline-primary" >4</button>
-              	<button class="btn btn-outline-primary" >5</button>
-           	    <button class="btn btn-primary">
-                &lt; 다음
-                </button>
-            </div>
+            <!-- 페이지네이션은 게시글이 있을 때만 표시 -->
+            <c:if test="${listCount > 0}">
+                <div class="pagination">
+                    <!-- 이전 버튼 -->
+                    <c:if test="${startPage > 1}">
+                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${startPage - 1}">
+                            &lt; 이전
+                        </a>
+                    </c:if>
+                    
+                    <!-- 페이지 번호들 -->
+                    <c:forEach var="p" begin="${startPage}" end="${endPage}">
+                        <c:choose>
+                            <c:when test="${p == currentPage}">
+                                <button class="btn btn-primary" disabled>${p}</button>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${p}">${p}</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    
+                    <!-- 다음 버튼 -->
+                    <c:if test="${endPage < maxPage}">
+                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${endPage + 1}">
+                            다음 &gt;
+                        </a>
+                    </c:if>
+                </div>
+            </c:if>
         </div>
     </div>
 </body>

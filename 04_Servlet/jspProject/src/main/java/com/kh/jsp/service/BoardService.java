@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.jsp.model.dao.BoardDao;
+import com.kh.jsp.model.vo.Attachment;
 import com.kh.jsp.model.vo.Board;
 import com.kh.jsp.model.vo.Category;
 
@@ -42,6 +43,15 @@ public class BoardService {
 	
 		close(conn);
 		return board;
+	}
+	
+	public Attachment selectAttachmentByBoardNo(int boardNo) {
+		Connection conn = getConnection();
+		
+		Attachment attachment = new BoardDao().selectAttachmentByBoardNo(conn, boardNo);
+	
+		close(conn);
+		return attachment;
 	}
 	
 	public ArrayList<Category> selectAllCategory() {
@@ -89,17 +99,44 @@ public class BoardService {
     }
     
     // 게시글 작성
-    public int insertBoard(Board board) {
+    public int insertBoard(Board b, Attachment at) {
+		Connection conn = getConnection();
+		
+		BoardDao bDao = new BoardDao();
+		
+		int result = bDao.insertBoard(conn, b);
+		
+		if(at != null) {
+			result *= bDao.insertAttachment(conn, at);
+		}
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+    
+    // 페이지네이션을 위한 게시글 목록 조회
+    public ArrayList<Board> selectBoardList(int currentPage, int boardLimit) {
         Connection conn = getConnection();
-        int result = new BoardDao().insertBoard(conn, board);
         
-        if(result > 0) {
-            commit(conn);
-        } else {
-            rollback(conn);
-        }
-        
+        ArrayList<Board> list = new BoardDao().selectBoardList(conn, currentPage, boardLimit);
         close(conn);
-        return result;
+        
+        return list;
+    }
+    
+    // 전체 게시글 수 조회
+    public int selectListCount() {
+        Connection conn = getConnection();
+        
+        int listCount = new BoardDao().selectListCount(conn);
+        close(conn);
+        
+        return listCount;
     }
 }

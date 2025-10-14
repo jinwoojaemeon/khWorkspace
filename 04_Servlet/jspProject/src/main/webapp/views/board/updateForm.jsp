@@ -123,7 +123,9 @@
 					<tr>
 						<th>첨부파일</th>
 						<td>
+							<c:if test="${} }"
 							<input type="file" name="upfile">
+							</c:if>
 						</td>
 					</tr>
 				</table>

@@ -112,6 +112,7 @@ public class InsertBoardController extends HttpServlet {
 						item.write(f.toPath()); //지정한 경로에 파일이 업로드
 						
 						at = new Attachment();
+						at.setRefBoardNo(0); // 게시글 삽입 후 설정됨
 						at.setOriginName(originName);
 						at.setChangeName(changeName);
 						at.setFilePath("resources/board-file/");

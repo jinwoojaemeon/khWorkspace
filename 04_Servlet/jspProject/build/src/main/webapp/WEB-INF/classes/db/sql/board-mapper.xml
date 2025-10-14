@@ -30,7 +30,7 @@
 			FILE_PATH
 		) VALUES(
 			SEQ_FNO.NEXTVAL,
-			SEQ_BNO.CURRVAL,
+			?,
 			?,
 			?,
 			?
@@ -74,7 +74,7 @@
 	</entry>
 	
 	<entry key="selectListCount">
-		SELECT COUNT(*)
+		SELECT COUNT(*) 
 		FROM BOARD B
 		JOIN CATEGORY USING(CATEGORY_NO)
 		JOIN MEMBER M ON(BOARD_WRITER = MEMBER_NO)
@@ -133,6 +133,14 @@
         UPDATE BOARD
         SET STATUS = 'N'
         WHERE BOARD_NO = ?
+          AND STATUS = 'Y'
+    </entry>
+    
+    <!-- 첨부파일 삭제 -->
+    <entry key="deleteAttachment">
+        UPDATE ATTACHMENT
+        SET STATUS = 'N'
+        WHERE REF_BNO = ?
           AND STATUS = 'Y'
     </entry>
 </properties>

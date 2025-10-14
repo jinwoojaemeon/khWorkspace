@@ -131,19 +131,19 @@
             </table>
 
             <!-- 페이지네이션은 게시글이 있을 때만 표시 -->
-            <c:if test="${listCount > 0}">
+            <c:if test="${pi.listCount > 0}">
                 <div class="pagination">
                     <!-- 이전 버튼 -->
-                    <c:if test="${startPage > 1}">
-                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${startPage - 1}">
+                    <c:if test="${pi.startPage > 1}">
+                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${pi.startPage - 1}">
                             &lt; 이전
                         </a>
                     </c:if>
                     
                     <!-- 페이지 번호들 -->
-                    <c:forEach var="p" begin="${startPage}" end="${endPage}">
+                    <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
                         <c:choose>
-                            <c:when test="${p == currentPage}">
+                            <c:when test="${p == pi.currentPage}">
                                 <button class="btn btn-primary" disabled>${p}</button>
                             </c:when>
                             <c:otherwise>
@@ -153,8 +153,8 @@
                     </c:forEach>
                     
                     <!-- 다음 버튼 -->
-                    <c:if test="${endPage < maxPage}">
-                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${endPage + 1}">
+                    <c:if test="${pi.endPage < pi.maxPage}">
+                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${pi.endPage + 1}">
                             다음 &gt;
                         </a>
                     </c:if>

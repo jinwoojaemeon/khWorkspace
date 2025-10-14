@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.jsp.common.vo.PageInfo;
 import com.kh.jsp.model.dao.BoardDao;
 import com.kh.jsp.model.vo.Attachment;
 import com.kh.jsp.model.vo.Board;
@@ -106,7 +107,9 @@ public class BoardService {
 		
 		int result = bDao.insertBoard(conn, b);
 		
-		if(at != null) {
+		if(at != null && result > 0) {
+			// 게시글 삽입 성공 후 첨부파일의 refBoardNo 설정
+			at.setRefBoardNo(b.getBoardNo());
 			result *= bDao.insertAttachment(conn, at);
 		}
 		
@@ -138,5 +141,54 @@ public class BoardService {
         close(conn);
         
         return listCount;
+    }
+    
+    // PageInfo를 활용한 게시글 목록 조회 (개선된 메서드)
+    public ArrayList<Board> selectBoardListWithPageInfo(PageInfo pi) {
+        Connection conn = getConnection();
+        
+        ArrayList<Board> list = new BoardDao().selectBoardList(conn, pi.getCurrentPage(), pi.getBoardLimit());
+        close(conn);
+        
+        return list;
+    }
+    
+    // 게시글과 첨부파일 업데이트
+    public int updateBoardWithAttachment(int boardNo, int categoryNo, String boardTitle, String boardContent, 
+                                       Attachment newAt, Attachment originAt) {
+        Connection conn = getConnection();
+        BoardDao bDao = new BoardDao();
+        
+        // 1. 게시글 업데이트
+        Board board = new Board();
+        board.setBoardNo(boardNo);
+        board.setCategoryNo(categoryNo);
+        board.setBoardTitle(boardTitle);
+        board.setBoardContent(boardContent);
+        
+        int result = bDao.updateBoard(conn, board);
+        
+        if(result > 0) {
+            // 2. 첨부파일 처리
+            if(newAt != null) {
+                // 새로운 파일이 업로드된 경우
+                if(originAt != null) {
+                    // 기존 파일이 있으면 삭제
+                    result *= bDao.deleteAttachment(conn, boardNo);
+                }
+                // 새로운 파일 정보 삽입
+                result *= bDao.insertAttachment(conn, newAt);
+            }
+            // 새로운 파일이 없고 기존 파일도 없으면 아무것도 하지 않음
+        }
+        
+        if(result > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
+        
+        close(conn);
+        return result;
     }
 }

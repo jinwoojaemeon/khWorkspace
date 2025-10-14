@@ -237,20 +237,29 @@ public class BoardDao {
     // 게시글 작성
     public int insertBoard(Connection conn, Board board) {
         PreparedStatement pstmt = null;
+        ResultSet rset = null;
         String sql = prop.getProperty("insertBoard");
         int result = 0;
         
         try {
-            pstmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql, new String[]{"BOARD_NO"});
             pstmt.setInt(1, board.getCategoryNo());
             pstmt.setString(2, board.getBoardTitle());
             pstmt.setString(3, board.getBoardContent());
             pstmt.setInt(4, board.getBoardWriter());
             
             result = pstmt.executeUpdate();
+            
+            if(result > 0) {
+                rset = pstmt.getGeneratedKeys();
+                if(rset.next()) {
+                    board.setBoardNo(rset.getInt(1));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            close(rset);
             close(pstmt);
         }
         
@@ -269,9 +278,10 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, at.getOriginName());
-			pstmt.setString(2, at.getChangeName());
-			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(1, at.getRefBoardNo());
+			pstmt.setString(2, at.getOriginName());
+			pstmt.setString(3, at.getChangeName());
+			pstmt.setString(4, at.getFilePath());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -347,5 +357,25 @@ public class BoardDao {
         }
         
         return listCount;
+    }
+    
+    // 첨부파일 삭제 (상태를 'N'으로 변경)
+    public int deleteAttachment(Connection conn, int boardNo) {
+        PreparedStatement pstmt = null;
+        String sql = prop.getProperty("deleteAttachment");
+        int result = 0;
+        
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, boardNo);
+            
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        
+        return result;
     }
 }

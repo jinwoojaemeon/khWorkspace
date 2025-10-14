@@ -11,10 +11,11 @@
 ## 🧱 기술 스택 (Tech Stack)
 | 구분 | 사용 기술 |
 |------|------------|
-| Frontend | HTML, CSS, JavaScript, JSP |
+| Frontend | HTML, CSS, JavaScript, JSP, JSTL |
 | Backend | Java (Servlet, JDBC)|
 | Server| Apache Tomcat |
 | Database | Oracle |
+| File Upload | Apache Commons FileUpload2 |
 | Tools | Eclipse, Git, GitHub |
 
 ## 🛠️ 설치 및 실행 (Installation & Run)
@@ -57,6 +58,8 @@ project/<br>
 ## 🌟 주요 기능 (Key Features)
 ✅ 회원가입 / 로그인 / 로그아웃 기능 <br>
 ✅ 게시글 등록, 조회, 수정, 삭제 (CRUD) <br>
+✅ **파일 업로드 기능** (commons-fileupload2 라이브러리 활용) <br>
+✅ **페이지네이션** (PageInfo 클래스 기반) <br>
 ✅ Oracle DB 연동을 통한 데이터 관리 <br>
 ✅ MVC 패턴 기반 구조로 모듈화된 개발 <br>
 ✅ JSP include를 통한 공통 레이아웃 구성
@@ -73,10 +76,15 @@ project/<br>
 
 ## 💡 학습 포인트 (Learning Points)
 
-- JSP & Servlet 기반 MVC 구조 설계 방법 학습
-- JDBC를 통한 데이터베이스 연결 및 SQL 처리 로직 구현
-- Tomcat 서버를 활용한 배포 및 실행 환경 이해
-- JSP 내 JSTL / EL 사용으로 동적 페이지 구현
+- **JSP & Servlet 기반 MVC 구조** 설계 방법 학습
+- **JDBC를 통한 데이터베이스 연결** 및 SQL 처리 로직 구현
+- **Apache Commons FileUpload2** 라이브러리를 활용한 파일 업로드 구현
+- **multipart/form-data** 방식의 파일 전송 처리
+- **페이지네이션 시스템** 설계 및 구현 (PageInfo 클래스 활용)
+- **트랜잭션 관리**를 통한 데이터 일관성 보장
+- **Tomcat 서버**를 활용한 배포 및 실행 환경 이해
+- **JSP 내 JSTL / EL** 사용으로 동적 페이지 구현
+- **Oracle 시퀀스** 활용 및 생성된 키 반환 처리
 
 ---
 
@@ -126,55 +134,87 @@ project/<br>
 
 #### **com.kh.jsp.controller.board 패키지**
 - **`ListController`** (`/list.bo`)
-  - `doGet()` — 게시글 목록 조회 및 페이지네이션 처리
-  - 개별 메서드로 페이지네이션 정보 계산 (가독성 향상)
+  - `doGet()` — 게시글 목록 조회 및 **PageInfo 기반 페이지네이션** 처리
 - **`DetailController`** (`/detail.bo`)
-  - `doGet()` — 게시글 상세 조회 및 조회수 증가
-- **`BoardEnrollFormController`** (`/enrollForm.bo`)
-  - `doGet()` — 게시글 작성 폼 페이지로 이동
-- **`BoardInsertController`** (`/insert.bo`)
-  - `doGet()` — 게시글 작성 처리 (로그인 체크 포함)
+  - `doGet()` — 게시글 상세 조회, 첨부파일 조회 및 조회수 증가
+- **`EnrollFormController`** (`/enrollForm.bo`)
+  - `doGet()` — 게시글 작성 폼 페이지로 이동 (카테고리 목록 조회)
+- **`InsertBoardController`** (`/insert.bo`)
+  - `doGet()` — **파일 업로드 기능을 포함한** 게시글 작성 처리
+  - commons-fileupload2 라이브러리 활용한 multipart 요청 처리
 - **`UpdateFormController`** (`/updateForm.bo`)
-  - `doGet()` — 게시글 수정 폼 페이지로 이동
+  - `doGet()` — 게시글 수정 폼 페이지로 이동 (기존 첨부파일 정보 포함)
 - **`UpdateController`** (`/update.bo`)
-  - `doGet()` — 게시글 수정 처리
+  - `doGet()` — **파일 업로드 기능을 포함한** 게시글 수정 처리
+  - 기존 파일 삭제 및 새 파일 업로드 처리
 - **`DeleteController`** (`/delete.bo`)
   - `doGet()` — 게시글 삭제 처리
 
 #### **com.kh.jsp.service.BoardService**
-- `selectBoardList(int currentPage): List<Board>` — 게시글 목록 조회 (페이지네이션)
-- `selectBoardCount(): int` — 게시글 총 개수 조회
-- `calculateTotalPages(int totalCount): int` — 총 페이지 수 계산
-- `calculateStartPage(int currentPage, int totalPages): int` — 시작 페이지 계산
-- `calculateEndPage(int startPage, int totalPages): int` — 끝 페이지 계산
-- `hasPreviousPage(int startPage): int` — 이전 버튼 활성화 여부
-- `hasNextPage(int endPage, int totalPages): int` — 다음 버튼 활성화 여부
-- `validateCurrentPage(int currentPage, int totalPages): int` — 현재 페이지 유효성 검사
-- `insertBoard(Board b): int` — 게시글 작성
-- `selectBoard(int boardNo): Board` — 게시글 상세 조회 (조회수 증가)
-- `selectBoardForUpdate(int boardNo): Board` — 게시글 수정용 조회 (조회수 증가 없음)
-- `updateBoard(Board b): int` — 게시글 수정
-- `deleteBoard(int boardNo, int boardWriter): int` — 게시글 삭제
-- `selectCategoryList(): List<Category>` — 카테고리 목록 조회
+- `selectBoardListWithPageInfo(PageInfo pi): List<Board>` — **PageInfo 기반** 게시글 목록 조회
+- `selectListCount(): int` — 게시글 총 개수 조회
+- `insertBoard(Board b, Attachment at): int` — **첨부파일을 포함한** 게시글 작성
+- `updateBoardWithAttachment(int boardNo, int categoryNo, String boardTitle, String boardContent, Attachment newAt, Attachment originAt): int` — **첨부파일을 포함한** 게시글 수정
+- `selectBoardByBoardNo(int boardNo): Board` — 게시글 상세 조회
+- `selectAttachmentByBoardNo(int boardNo): Attachment` — 첨부파일 조회
+- `selectAllCategory(): List<Category>` — 카테고리 목록 조회
+- `updateBoard(int boardNo, int categoryNo, String boardTitle, String boardContent): int` — 게시글 수정
+- `deleteBoard(int boardNo): int` — 게시글 삭제
+- `increaseCount(int boardNo): int` — 조회수 증가
 
-#### **com.kh.jsp.model.vo.Board**
-- 게시글 정보 VO 클래스 (Lombok 사용)
-- 게시글 번호, 제목, 내용, 작성자, 조회수, 작성일 등 포함
+#### **com.kh.jsp.model.vo 패키지**
+- **`Board`** — 게시글 정보 VO 클래스 (Lombok 사용)
+- **`Attachment`** — 첨부파일 정보 VO 클래스 (Lombok 사용)
+  - 원본 파일명, 변경된 파일명, 파일 경로, 업로드 날짜 등 포함
+- **`Category`** — 카테고리 정보 VO 클래스
+- **`Member`** — 회원 정보 VO 클래스 (Lombok 사용)
+
+#### **com.kh.jsp.common.vo 패키지**
+- **`PageInfo`** — **페이지네이션 정보 VO 클래스**
+  - 현재 페이지, 총 게시글 수, 페이지 제한, 게시글 제한
+  - 최대 페이지, 시작 페이지, 끝 페이지 자동 계산
 
 ### **🔧 공통 유틸리티**
 - **`com.kh.jsp.common.JDBCTemplate`** — JDBC 연결 및 트랜잭션 관리
 - **`com.kh.jsp.model.dao.MemberDao`** — 회원 관련 DB 접근 로직
 - **`com.kh.jsp.model.dao.BoardDao`** — 게시판 관련 DB 접근 로직
+  - `insertBoard(Connection conn, Board board): int` — 게시글 삽입 (생성된 키 반환)
+  - `insertAttachment(Connection conn, Attachment at): int` — 첨부파일 삽입
+  - `deleteAttachment(Connection conn, int boardNo): int` — 첨부파일 삭제 (논리적 삭제)
+  - `selectAttachmentByBoardNo(Connection conn, int boardNo): Attachment` — 첨부파일 조회
 
 ### **🎨 뷰 페이지**
 - **`views/common/menubar.jsp`** — 공통 네비게이션 및 로그인 폼
 - **`views/member/enrollForm.jsp`** — 회원가입 폼
 - **`views/member/myPage.jsp`** — 마이페이지
-- **`views/board/listView.jsp`** — 게시글 목록
-- **`views/board/detailView.jsp`** — 게시글 상세보기
-- **`views/board/enrollForm.jsp`** — 게시글 작성 폼
-- **`views/board/updateForm.jsp`** — 게시글 수정 폼
+- **`views/board/listView.jsp`** — 게시글 목록 (**PageInfo 기반 페이지네이션**)
+- **`views/board/detailView.jsp`** — 게시글 상세보기 (첨부파일 다운로드 포함)
+- **`views/board/enrollForm.jsp`** — 게시글 작성 폼 (**파일 업로드 기능**)
+- **`views/board/updateForm.jsp`** — 게시글 수정 폼 (**기존 파일 표시 및 새 파일 업로드**)
 - **`views/common/error.jsp`** — 에러 페이지
+
+---
+
+## 🚀 핵심 구현 기능
+
+### **📁 파일 업로드 시스템**
+- **Apache Commons FileUpload2 라이브러리** 활용
+- **multipart/form-data** 방식으로 파일 전송
+- **고유 파일명 생성**: `kh_타임스탬프_랜덤값.확장자` 형식
+- **파일 크기 제한**: 개별 파일 50MB, 전체 요청 60MB
+- **기존 파일 관리**: 수정 시 기존 파일 자동 삭제 후 새 파일 업로드
+- **에러 처리**: 실패 시 업로드된 파일 자동 정리
+
+### **📄 페이지네이션 시스템**
+- **PageInfo 클래스** 기반의 체계적인 페이지네이션
+- **자동 계산**: 최대 페이지, 시작 페이지, 끝 페이지 자동 계산
+- **재사용성**: 다른 컨트롤러에서도 쉽게 활용 가능
+- **일관성**: 모든 페이지네이션 정보를 하나의 객체로 관리
+
+### **🔄 트랜잭션 관리**
+- **게시글과 첨부파일**을 하나의 트랜잭션으로 처리
+- **데이터 일관성** 보장
+- **롤백 처리**: 실패 시 모든 변경사항 취소
 
 ---
 
@@ -243,8 +283,16 @@ project/<br>
 - **제목/내용 입력**: 
   - 제목: 한 줄 텍스트 입력
   - 내용: 10줄 높이의 텍스트에리어 (크기 조절 불가)
-- **첨부파일**: 파일 업로드 기능
+- **첨부파일**: **multipart/form-data 방식의 파일 업로드 기능**
 - **버튼 그룹**: 작성하기(파란색)/취소하기(회색) 버튼
+
+#### **게시글 수정 폼 (updateForm.jsp)**
+- **기존 정보 표시**: 카테고리, 제목, 내용의 기존 값 자동 입력
+- **첨부파일 관리**: 
+  - 기존 파일이 있는 경우: 파일명 표시 + 새 파일 업로드 옵션
+  - 기존 파일이 없는 경우: 새 파일 업로드 옵션
+  - 사용자 안내 메시지: "새로운 파일을 선택하면 기존 파일이 교체됩니다"
+- **버튼 그룹**: 수정하기(파란색)/취소하기(회색) 버튼
 
 
 

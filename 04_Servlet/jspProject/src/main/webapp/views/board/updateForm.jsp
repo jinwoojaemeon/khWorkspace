@@ -88,7 +88,7 @@
 		<div class="board-card">
 			<h2>일반게시글 수정하기</h2>
 
-			<form action="${pageContext.request.contextPath}/update.bo" method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/update.bo" method="post" enctype="multipart/form-data" >
 				<input type="hidden" name="bno" value="${board.boardNo}">
 				<table class="form-table">
 					<tr>
@@ -123,23 +123,11 @@
 					<tr>
 						<th>첨부파일</th>
 						<td>
-							<c:choose>
-								<c:when test="${at != null}">
-									<div class="existing-file">
-										기존파일: ${at.originName}
-									</div>
-									<input type="file" name="upfile">
-									<small style="color: #666; display: block; margin-top: 0.5rem;">
-										새로운 파일을 선택하면 기존 파일이 교체됩니다.
-									</small>
-								</c:when>
-								<c:otherwise>
-									<input type="file" name="upfile">
-									<small style="color: #666; display: block; margin-top: 0.5rem;">
-										첨부파일이 없습니다. 파일을 선택하여 추가할 수 있습니다.
-									</small>
-								</c:otherwise>
-							</c:choose>
+							<c:if test="${at != null}">
+								기존파일 : ${at.originName} <br><br>
+								<input type="hidden" name="originFileNo" value="${at.fileNo}">
+							</c:if>
+							<input type="file" name="upfile">
 						</td>
 					</tr>
 				</table>

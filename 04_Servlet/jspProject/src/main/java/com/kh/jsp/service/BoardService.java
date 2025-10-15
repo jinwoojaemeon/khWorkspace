@@ -1,23 +1,35 @@
 package com.kh.jsp.service;
 
-import static com.kh.jsp.common.JDBCTemplate.*;
+import static com.kh.jsp.common.JDBCTemplate.close;
+import static com.kh.jsp.common.JDBCTemplate.commit;
+import static com.kh.jsp.common.JDBCTemplate.getConnection;
+import static com.kh.jsp.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.kh.jsp.common.vo.PageInfo;
 import com.kh.jsp.model.dao.BoardDao;
 import com.kh.jsp.model.vo.Attachment;
 import com.kh.jsp.model.vo.Board;
 import com.kh.jsp.model.vo.Category;
+import com.kh.jsp.model.vo.Reply;
 
 public class BoardService {
-    
-	public ArrayList<Board> selectAllBoard(){
+	
+	public int selectAllBoardCount(){
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new BoardDao().selectAllBoard(conn);
+		int listCount = new BoardDao().selectAllBoardCount(conn);
+		close(conn);
+		
+		return listCount;
+	}
+	
+	public ArrayList<Board> selectAllBoard(PageInfo pi){
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().selectAllBoard(conn, pi);
 		close(conn);
 		
 		return list;
@@ -46,13 +58,13 @@ public class BoardService {
 		return board;
 	}
 	
-	public Attachment selectAttachmentByBoardNo(int boardNo) {
+	public Attachment selectAttachment(int boardNo) {
 		Connection conn = getConnection();
 		
-		Attachment attachment = new BoardDao().selectAttachmentByBoardNo(conn, boardNo);
-	
+		Attachment at = new BoardDao().selectAttachment(conn, boardNo);
+		
 		close(conn);
-		return attachment;
+		return at;
 	}
 	
 	public ArrayList<Category> selectAllCategory() {
@@ -64,15 +76,23 @@ public class BoardService {
 		return categroyList;
 	}
 	
-	public int updateBoard(int boardNo,int categoryNo,String boardTitle,String boardContent) {
+	public int updateBoard(Board b, Attachment at) {
+		//새로운 첨부파일이 존재하지 않을 때  -> (b, null) -> board update
+		//새로운 첨부파일이 존재하고 기존첨부파일이 존재할 때 -> (b, at(fileNo)) -> board update, attachment update
+		//새로운 첨부파일이 존재하고 기존첨부파일이 존재하지 않을 때 -> (b, at(refBoardNo)) -> board update, attachment insert
+	
 		Connection conn = getConnection();
-		Board b = new Board();
-		b.setBoardNo(boardNo);
-		b.setCategoryNo(categoryNo);
-		b.setBoardTitle(boardTitle);
-		b.setBoardContent(boardContent);
+		BoardDao boardDao = new BoardDao();
 		
-		int result = new BoardDao().updateBoard(conn, b);
+		int result = boardDao.updateBoard(conn, b);
+		
+		if(at != null) {
+			if(at.getFileNo() != 0) { //기존첨부파일이 존재할 때
+				result *= boardDao.updateAttachment(conn, at);
+			} else { //기존첨부파일이 존재하지 않을 때
+				result *= boardDao.insertNewAttachment(conn, at);
+			}
+		}
 		
 		if(result > 0) {
 			commit(conn);
@@ -83,8 +103,8 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
-    
-    // 게시글 삭제
+	
+	 // 게시글 삭제
     public int deleteBoard(int boardNo) {
         Connection conn = getConnection();
         int result = new BoardDao().deleteBoard(conn, boardNo);
@@ -98,18 +118,15 @@ public class BoardService {
         close(conn);
         return result;
     }
-    
-    // 게시글 작성
-    public int insertBoard(Board b, Attachment at) {
+	
+	public int insertBoard(Board b, Attachment at) {
 		Connection conn = getConnection();
 		
 		BoardDao bDao = new BoardDao();
 		
 		int result = bDao.insertBoard(conn, b);
 		
-		if(at != null && result > 0) {
-			// 게시글 삽입 성공 후 첨부파일의 refBoardNo 설정
-			at.setRefBoardNo(b.getBoardNo());
+		if(at != null) {
 			result *= bDao.insertAttachment(conn, at);
 		}
 		
@@ -122,73 +139,30 @@ public class BoardService {
 		close(conn);
 		return result;
 	}
-    
-    // 페이지네이션을 위한 게시글 목록 조회
-    public ArrayList<Board> selectBoardList(int currentPage, int boardLimit) {
-        Connection conn = getConnection();
-        
-        ArrayList<Board> list = new BoardDao().selectBoardList(conn, currentPage, boardLimit);
-        close(conn);
-        
-        return list;
-    }
-    
-    // 전체 게시글 수 조회
-    public int selectListCount() {
-        Connection conn = getConnection();
-        
-        int listCount = new BoardDao().selectListCount(conn);
-        close(conn);
-        
-        return listCount;
-    }
-    
-    // PageInfo를 활용한 게시글 목록 조회 (개선된 메서드)
-    public ArrayList<Board> selectBoardListWithPageInfo(PageInfo pi) {
-        Connection conn = getConnection();
-        
-        ArrayList<Board> list = new BoardDao().selectBoardList(conn, pi.getCurrentPage(), pi.getBoardLimit());
-        close(conn);
-        
-        return list;
-    }
-    
-    // 게시글과 첨부파일 업데이트
-    public int updateBoardWithAttachment(int boardNo, int categoryNo, String boardTitle, String boardContent, 
-                                       Attachment newAt, Attachment originAt) {
-        Connection conn = getConnection();
-        BoardDao bDao = new BoardDao();
-        
-        // 1. 게시글 업데이트
-        Board board = new Board();
-        board.setBoardNo(boardNo);
-        board.setCategoryNo(categoryNo);
-        board.setBoardTitle(boardTitle);
-        board.setBoardContent(boardContent);
-        
-        int result = bDao.updateBoard(conn, board);
-        
-        if(result > 0) {
-            // 2. 첨부파일 처리
-            if(newAt != null) {
-                // 새로운 파일이 업로드된 경우
-                if(originAt != null) {
-                    // 기존 파일이 있으면 삭제
-                    result *= bDao.deleteAttachment(conn, boardNo);
-                }
-                // 새로운 파일 정보 삽입
-                result *= bDao.insertAttachment(conn, newAt);
-            }
-            // 새로운 파일이 없고 기존 파일도 없으면 아무것도 하지 않음
-        }
-        
-        if(result > 0) {
-            commit(conn);
-        } else {
-            rollback(conn);
-        }
-        
-        close(conn);
-        return result;
-    }
+	
+	public int insertReply(Reply r) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().insertReply(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<Reply> selectReplyByBoardNo(int boardNo){
+		Connection conn = getConnection();
+		
+		ArrayList<Reply> list = new BoardDao().selectReplyByBoardNo(conn, boardNo);
+		
+		close(conn);
+		return list;
+	}
+	
+
 }

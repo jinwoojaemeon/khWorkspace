@@ -33,23 +33,25 @@ public class DetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//board정보를 조회해서 detailView.jsp을 응답
 		
-				int boardNo = Integer.parseInt(request.getParameter("bno"));
-				BoardService boardService = new BoardService();
-				
-				//board의 조회수 1 증가
-				int result = boardService.increaseCount(boardNo);
-				Board board = boardService.selectBoardByBoardNo(boardNo);
-				
-				if(result > 0 && board != null) {
-					//at조회 -> request담기
-					Attachment at = boardService.selectAttachmentByBoardNo(boardNo);
-					request.setAttribute("board", board);
-					request.setAttribute("at", at);
-					request.getRequestDispatcher("views/board/detailView.jsp").forward(request, response);
-				} else {
-					request.setAttribute("errorMsg", "정상적인 접근이 아닙니다.");
-					request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
-				}
+		int boardNo = Integer.parseInt(request.getParameter("bno"));
+		BoardService boardService = new BoardService();
+		
+		//board의 조회수 1 증가
+		int result = boardService.increaseCount(boardNo);
+		Board board = boardService.selectBoardByBoardNo(boardNo);
+		
+		if(result > 0 && board != null) {
+			//at조회 -> request담기
+			Attachment at = boardService.selectAttachment(board.getBoardNo());
+			
+			request.setAttribute("board", board);
+			request.setAttribute("at", at);
+			
+			request.getRequestDispatcher("views/board/detailView.jsp").forward(request, response);
+		} else {
+			request.setAttribute("errorMsg", "정상적인 접근이 아닙니다.");
+			request.getRequestDispatcher("views/common/error.jsp").forward(request, response);
+		}
 	}
 
 	/**

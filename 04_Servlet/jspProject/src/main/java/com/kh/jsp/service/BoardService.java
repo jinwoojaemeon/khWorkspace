@@ -164,5 +164,67 @@ public class BoardService {
 		return list;
 	}
 	
+	public int deleteReply(int replyNo) {
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteReply(conn, replyNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	public ArrayList<Board> selectThumbnailList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().selectThumbnailList(conn);
+		
+		close(conn);
+		return list;
+	}
+	
+	public int insertThumbnailBoard(Board b, ArrayList<Attachment> list) {
+		Connection conn = getConnection();
+		
+		BoardDao bDao = new BoardDao();
+		
+		int result = bDao.insertThumbnailBoard(conn, b);
+		
+		if(result > 0 && !list.isEmpty()) {
+			for(Attachment at : list) {
+				result *= bDao.insertThumbnailAttachment(conn, at);
+			}
+		}
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
 
+	public ArrayList<Attachment> selectAttachmentList(int boardNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Attachment> list = new BoardDao().selectAttachmentList(conn, boardNo);
+		
+		close(conn);
+		return list;
+	}
+	
+	public Board selectThumbnailBoardByBoardNo(int boardNo) {
+		Connection conn = getConnection();
+		
+		Board board = new BoardDao().selectThumbnailBoardByBoardNo(conn, boardNo);
+	
+		close(conn);
+		return board;
+	}
 }

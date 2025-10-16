@@ -59,7 +59,9 @@ project/<br>
 ✅ 회원가입 / 로그인 / 로그아웃 기능 <br>
 ✅ 게시글 등록, 조회, 수정, 삭제 (CRUD) <br>
 ✅ **파일 업로드 기능** (commons-fileupload2 라이브러리 활용) <br>
+✅ **썸네일 게시글 기능** (다중 이미지 업로드 및 관리) <br>
 ✅ **페이지네이션** (PageInfo 클래스 기반) <br>
+✅ **댓글 시스템** (Ajax 기반 실시간 댓글) <br>
 ✅ Oracle DB 연동을 통한 데이터 관리 <br>
 ✅ MVC 패턴 기반 구조로 모듈화된 개발 <br>
 ✅ JSP include를 통한 공통 레이아웃 구성
@@ -85,6 +87,9 @@ project/<br>
 - **Tomcat 서버**를 활용한 배포 및 실행 환경 이해
 - **JSP 내 JSTL / EL** 사용으로 동적 페이지 구현
 - **Oracle 시퀀스** 활용 및 생성된 키 반환 처리
+- **Ajax 기반 댓글 시스템** 구현으로 실시간 상호작용 학습
+- **다중 파일 업로드** 처리 및 파일 레벨 관리 시스템
+- **JavaScript FileReader API**를 활용한 이미지 미리보기 구현
 
 ---
 
@@ -133,13 +138,15 @@ project/<br>
 ### **📝 게시판 관리 (Board Management)**
 
 #### **com.kh.jsp.controller.board 패키지**
+
+##### **일반 게시판**
 - **`ListController`** (`/list.bo`)
   - `doGet()` — 게시글 목록 조회 및 **PageInfo 기반 페이지네이션** 처리
 - **`DetailController`** (`/detail.bo`)
   - `doGet()` — 게시글 상세 조회, 첨부파일 조회 및 조회수 증가
 - **`EnrollFormController`** (`/enrollForm.bo`)
   - `doGet()` — 게시글 작성 폼 페이지로 이동 (카테고리 목록 조회)
-- **`InsertBoardController`** (`/insert.bo`)
+- **`InsertController`** (`/insert.bo`)
   - `doGet()` — **파일 업로드 기능을 포함한** 게시글 작성 처리
   - commons-fileupload2 라이브러리 활용한 multipart 요청 처리
 - **`UpdateFormController`** (`/updateForm.bo`)
@@ -150,22 +157,54 @@ project/<br>
 - **`DeleteController`** (`/delete.bo`)
   - `doGet()` — 게시글 삭제 처리
 
+##### **썸네일 게시판**
+- **`ThumbnailListController`** (`/list.th`)
+  - `doGet()` — 썸네일 게시글 목록 조회 (썸네일 이미지 포함)
+- **`ThumbnailDetailController`** (`/detail.th`)
+  - `doGet()` — 썸네일 게시글 상세 조회, 다중 이미지 조회 및 조회수 증가
+- **`ThumbnailEnrollController`** (`/enrollForm.th`)
+  - `doGet()` — 썸네일 게시글 작성 폼 페이지로 이동
+- **`ThumbnailInsertController`** (`/insert.th`)
+  - `doGet()` — **다중 이미지 업로드 기능을 포함한** 썸네일 게시글 작성 처리
+  - 대표이미지(FILE_LEVEL=1)와 상세이미지(FILE_LEVEL=2) 구분 저장
+
+##### **댓글 시스템 (Ajax)**
+- **`AjaxReplyListController`** (`/rlist.bo`)
+  - `doPost()` — Ajax 기반 댓글 목록 조회
+- **`AjaxReplyInsertController`** (`/rinsert.bo`)
+  - `doPost()` — Ajax 기반 댓글 작성
+- **`AjaxDeleteReplyController`** (`/rdelete.bo`)
+  - `doPost()` — Ajax 기반 댓글 삭제
+
 #### **com.kh.jsp.service.BoardService**
-- `selectBoardListWithPageInfo(PageInfo pi): List<Board>` — **PageInfo 기반** 게시글 목록 조회
-- `selectListCount(): int` — 게시글 총 개수 조회
+
+##### **일반 게시판 서비스**
+- `selectAllBoard(PageInfo pi): ArrayList<Board>` — **PageInfo 기반** 게시글 목록 조회
+- `selectAllBoardCount(): int` — 게시글 총 개수 조회
 - `insertBoard(Board b, Attachment at): int` — **첨부파일을 포함한** 게시글 작성
-- `updateBoardWithAttachment(int boardNo, int categoryNo, String boardTitle, String boardContent, Attachment newAt, Attachment originAt): int` — **첨부파일을 포함한** 게시글 수정
+- `updateBoard(Board b, Attachment at): int` — **첨부파일을 포함한** 게시글 수정
 - `selectBoardByBoardNo(int boardNo): Board` — 게시글 상세 조회
-- `selectAttachmentByBoardNo(int boardNo): Attachment` — 첨부파일 조회
-- `selectAllCategory(): List<Category>` — 카테고리 목록 조회
-- `updateBoard(int boardNo, int categoryNo, String boardTitle, String boardContent): int` — 게시글 수정
+- `selectAttachment(int boardNo): Attachment` — 첨부파일 조회
+- `selectAllCategory(): ArrayList<Category>` — 카테고리 목록 조회
 - `deleteBoard(int boardNo): int` — 게시글 삭제
 - `increaseCount(int boardNo): int` — 조회수 증가
+
+##### **썸네일 게시판 서비스**
+- `selectThumbnailList(): ArrayList<Board>` — 썸네일 게시글 목록 조회
+- `selectThumbnailBoardByBoardNo(int boardNo): Board` — 썸네일 게시글 상세 조회
+- `insertThumbnailBoard(Board b, ArrayList<Attachment> list): int` — **다중 이미지를 포함한** 썸네일 게시글 작성
+- `selectAttachmentList(int boardNo): ArrayList<Attachment>` — 첨부파일 리스트 조회
+
+##### **댓글 서비스**
+- `insertReply(Reply r): int` — 댓글 작성
+- `selectReplyByBoardNo(int boardNo): ArrayList<Reply>` — 댓글 목록 조회
+- `deleteReply(int replyNo): int` — 댓글 삭제
 
 #### **com.kh.jsp.model.vo 패키지**
 - **`Board`** — 게시글 정보 VO 클래스 (Lombok 사용)
 - **`Attachment`** — 첨부파일 정보 VO 클래스 (Lombok 사용)
-  - 원본 파일명, 변경된 파일명, 파일 경로, 업로드 날짜 등 포함
+  - 원본 파일명, 변경된 파일명, 파일 경로, 파일 레벨, 업로드 날짜 등 포함
+- **`Reply`** — 댓글 정보 VO 클래스 (Lombok 사용)
 - **`Category`** — 카테고리 정보 VO 클래스
 - **`Member`** — 회원 정보 VO 클래스 (Lombok 사용)
 
@@ -184,14 +223,25 @@ project/<br>
   - `selectAttachmentByBoardNo(Connection conn, int boardNo): Attachment` — 첨부파일 조회
 
 ### **🎨 뷰 페이지**
+
+#### **공통 페이지**
 - **`views/common/menubar.jsp`** — 공통 네비게이션 및 로그인 폼
+- **`views/common/error.jsp`** — 에러 페이지
+
+#### **회원 관리 페이지**
 - **`views/member/enrollForm.jsp`** — 회원가입 폼
 - **`views/member/myPage.jsp`** — 마이페이지
+
+#### **일반 게시판 페이지**
 - **`views/board/listView.jsp`** — 게시글 목록 (**PageInfo 기반 페이지네이션**)
-- **`views/board/detailView.jsp`** — 게시글 상세보기 (첨부파일 다운로드 포함)
+- **`views/board/detailView.jsp`** — 게시글 상세보기 (첨부파일 다운로드 및 댓글 포함)
 - **`views/board/enrollForm.jsp`** — 게시글 작성 폼 (**파일 업로드 기능**)
 - **`views/board/updateForm.jsp`** — 게시글 수정 폼 (**기존 파일 표시 및 새 파일 업로드**)
-- **`views/common/error.jsp`** — 에러 페이지
+
+#### **썸네일 게시판 페이지**
+- **`views/board/thumbnailListView.jsp`** — 썸네일 게시글 목록 (썸네일 이미지 그리드)
+- **`views/board/thumbnailDetailView.jsp`** — 썸네일 게시글 상세보기 (대표이미지 + 상세이미지)
+- **`views/board/thumbnailEnrollForm.jsp`** — 썸네일 게시글 작성 폼 (**다중 이미지 업로드 기능**)
 
 ---
 
@@ -205,6 +255,21 @@ project/<br>
 - **기존 파일 관리**: 수정 시 기존 파일 자동 삭제 후 새 파일 업로드
 - **에러 처리**: 실패 시 업로드된 파일 자동 정리
 
+### **🖼️ 썸네일 게시판 시스템**
+- **다중 이미지 업로드**: 대표이미지(1개) + 상세이미지(최대 3개)
+- **파일 레벨 구분**: 
+  - `FILE_LEVEL = 1`: 대표이미지 (썸네일)
+  - `FILE_LEVEL = 2`: 상세이미지
+- **이미지 미리보기**: JavaScript FileReader API를 활용한 실시간 미리보기
+- **그리드 레이아웃**: 썸네일 목록을 카드 형태의 그리드로 표시
+- **별도 저장 경로**: `resources/thumbnail-file/` 폴더에 썸네일 이미지 저장
+
+### **💬 Ajax 댓글 시스템**
+- **실시간 댓글**: 페이지 새로고침 없이 댓글 작성/삭제
+- **JSON 통신**: Gson 라이브러리를 활용한 JSON 데이터 교환
+- **비동기 처리**: Ajax를 통한 서버와의 비동기 통신
+- **사용자 경험**: 즉시 반영되는 댓글 시스템으로 향상된 UX
+
 ### **📄 페이지네이션 시스템**
 - **PageInfo 클래스** 기반의 체계적인 페이지네이션
 - **자동 계산**: 최대 페이지, 시작 페이지, 끝 페이지 자동 계산
@@ -213,8 +278,9 @@ project/<br>
 
 ### **🔄 트랜잭션 관리**
 - **게시글과 첨부파일**을 하나의 트랜잭션으로 처리
+- **다중 이미지 처리**: 썸네일 게시글의 여러 이미지를 하나의 트랜잭션으로 처리
 - **데이터 일관성** 보장
-- **롤백 처리**: 실패 시 모든 변경사항 취소
+- **롤백 처리**: 실패 시 모든 변경사항 취소 및 업로드된 파일 자동 정리
 
 ---
 
@@ -293,6 +359,26 @@ project/<br>
   - 기존 파일이 없는 경우: 새 파일 업로드 옵션
   - 사용자 안내 메시지: "새로운 파일을 선택하면 기존 파일이 교체됩니다"
 - **버튼 그룹**: 수정하기(파란색)/취소하기(회색) 버튼
+
+#### **썸네일 게시글 작성 폼 (thumbnailEnrollForm.jsp)**
+- **이미지 업로드 영역**: 
+  - 대표이미지: 클릭하여 선택하는 큰 영역 (필수)
+  - 상세이미지: 3개의 작은 영역 (선택사항)
+- **실시간 미리보기**: JavaScript FileReader API로 선택한 이미지 즉시 표시
+- **드래그 앤 드롭 스타일**: 점선 테두리와 호버 효과로 직관적인 UI
+- **파일 선택 숨김**: 실제 file input은 숨기고 커스텀 UI로 대체
+
+#### **썸네일 게시글 목록 (thumbnailListView.jsp)**
+- **그리드 레이아웃**: 카드 형태의 썸네일 이미지 그리드
+- **반응형 디자인**: 화면 크기에 따라 자동으로 열 개수 조정
+- **호버 효과**: 마우스 오버 시 카드가 살짝 위로 이동하는 애니메이션
+- **이미지 최적화**: object-fit: cover로 일관된 이미지 비율 유지
+
+#### **썸네일 게시글 상세보기 (thumbnailDetailView.jsp)**
+- **대표이미지 영역**: 큰 크기로 대표이미지 표시
+- **상세이미지 영역**: 여러 상세이미지를 가로로 나열
+- **이미지 확대 효과**: 호버 시 이미지가 살짝 확대되는 효과
+- **일관된 디자인**: 일반 게시판과 동일한 테이블 레이아웃 유지
 
 
 

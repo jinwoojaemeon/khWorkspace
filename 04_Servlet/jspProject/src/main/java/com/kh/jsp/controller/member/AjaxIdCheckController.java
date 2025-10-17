@@ -12,7 +12,7 @@ import com.kh.jsp.service.MemberService;
 /**
  * Servlet implementation class AjaxIdCheckController
  */
-@WebServlet("/idDuplicateCheck.me")
+@WebServlet("/idDulpicateCheck.me")
 public class AjaxIdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

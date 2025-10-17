@@ -106,60 +106,50 @@
                     </tr>
                 </thead>
                 <tbody>
-                 	<c:choose>
-                 		<c:when test="${empty list}">
-                 			<tr>
-                 				<td colspan="6" style="text-align: center; padding: 50px;">
-                 					등록된 게시글이 없습니다.
-                 				</td>
-                 			</tr>
-                 		</c:when>
-                 		<c:otherwise>
-                 			<c:forEach var="b" items="${list}">
-		                 	 <tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}'">
-		                        <td>${b.boardNo}</td>
-		                        <td>${b.categoryName}</td>
-		                        <td>${b.boardTitle}</td>
-		                        <td>${b.memberId}</td>
-		                        <td>${b.count}</td>
-		                        <td>${b.createDate}</td>
-	                    	</tr>
-	                 		</c:forEach>
-                 		</c:otherwise>
-                 	</c:choose>
+                 	<c:forEach var="b" items="${list}">
+	                 	 <tr onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${b.boardNo}'">
+	                        <td>${b.boardNo}</td>
+	                        <td>${b.categoryName}</td>
+	                        <td>${b.boardTitle}</td>
+	                        <td>${b.memberId}</td>
+	                        <td>${b.count}</td>
+	                        <td>${b.createDate}</td>
+                    	</tr>
+                 	</c:forEach>
                 </tbody>
             </table>
 
-            <!-- 페이지네이션은 게시글이 있을 때만 표시 -->
-            <c:if test="${pi.listCount > 0}">
-                <div class="pagination">
-                    <!-- 이전 버튼 -->
-                    <c:if test="${pi.startPage > 1}">
-                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${pi.startPage - 1}">
-                            &lt; 이전
-                        </a>
-                    </c:if>
-                    
-                    <!-- 페이지 번호들 -->
-                    <c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage}">
-                        <c:choose>
-                            <c:when test="${p == pi.currentPage}">
-                                <button class="btn btn-primary" disabled>${p}</button>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${p}">${p}</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                    
-                    <!-- 다음 버튼 -->
-                    <c:if test="${pi.endPage < pi.maxPage}">
-                        <a class="btn btn-primary" href="${pageContext.request.contextPath}/list.bo?currentPage=${pi.endPage + 1}">
-                            다음 &gt;
-                        </a>
-                    </c:if>
-                </div>
-            </c:if>
+            <div class="pagination">
+            	<c:if test="${pi.currentPage > 1}">
+	                <button class="btn btn-primary"
+	                		onclick="location.href='${pageContext.request.contextPath}/list.bo?cpage=${pi.currentPage - 1}'">
+	                	&lt; 이전
+	                </button>
+                </c:if>
+                
+                <c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}">
+                	<c:choose>
+                		<c:when test="${i == pi.currentPage}">
+                		    <button class="btn btn-outline-primary" disabled>
+		                		${i}
+		                	</button>
+                		</c:when>
+                		<c:otherwise>
+		                	<button class="btn btn-outline-primary" 
+		                		onclick="location.href='${pageContext.request.contextPath}/list.bo?cpage=${i}'">
+		                		${i}
+		                	</button>
+                		</c:otherwise>
+                	</c:choose>
+                </c:forEach>    	
+              	
+              	<c:if test="${pi.currentPage < pi.maxPage}">
+	                <button class="btn btn-primary"
+	                		onclick="location.href='${pageContext.request.contextPath}/list.bo?cpage=${pi.currentPage + 1}'">
+	                	다음 &gt;
+	                </button>
+                </c:if>
+            </div>
         </div>
     </div>
 </body>

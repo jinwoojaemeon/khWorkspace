@@ -446,9 +446,9 @@ mybatisProject/<br>
 ## 🚀 배포 및 실행
 
 ### **개발 환경**
-- **Java**: JDK 11 이상
+- **Java**: JDK 17 
 - **IDE**: Eclipse IDE
-- **서버**: Apache Tomcat 9.0 이상
+- **서버**: Apache Tomcat 11.0 이상
 - **데이터베이스**: Oracle 11g 이상
 
 ### **실행 방법**

@@ -84,10 +84,10 @@ mybatisProject/<br>
 
 | 기능 | 미리보기 |
 |------|-----------|
-| 메인 화면 | ![Main Page](https://via.placeholder.com/800x400/4b89fc/ffffff?text=Welcome+KH+World) |
-| 로그인 화면 | ![Login Page](https://via.placeholder.com/400x300/4b89fc/ffffff?text=Login+Form) |
-| 게시판 목록 | ![Board List](https://via.placeholder.com/800x600/4b89fc/ffffff?text=Board+List+with+Search) |
-| 게시글 작성 | ![Post Write](https://via.placeholder.com/600x500/4b89fc/ffffff?text=Write+Post+with+File+Upload) |
+| 메인 화면 | ![Main Page](assets/main-page.html) |
+| 로그인 화면 | ![Login Page](assets/login-page.html) |
+| 게시판 목록 | ![Board List](assets/board-list.html) |
+| 게시글 작성 | ![Post Write](assets/post-write.html) |
 
 ## 💡 학습 포인트 (Learning Points)
 

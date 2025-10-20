@@ -49,6 +49,26 @@
 		AND BOARD_TYPE = 1
 	</select>
 	
+	<select id="selectSearchBoardCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD B
+		JOIN MEMBER M ON(B.BOARD_WRITER = M.MEMBER_NO)
+		WHERE B.STATUS = 'Y'
+		AND B.BOARD_TYPE = 1
+		<choose>
+			<when test="condition eq 'writer'">
+				AND M.MEMBER_ID 
+			</when>
+			<when test="condition eq 'content'">
+				AND B.BOARD_CONTENT
+			</when>
+			<when test="condition eq 'title'">
+				AND B.BOARD_TITLE
+			</when>
+		</choose>
+		   LIKE '%${keyword}%'
+	</select>
+	
 	<select id="selectAllBoard" resultMap="boardResultMap">
 		SELECT  BOARD_NO, 
 				CATEGORY_NAME,
@@ -64,6 +84,33 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 	
+	<select id="selectSearchBoard" resultMap="boardResultMap">
+		SELECT B.BOARD_NO,
+				C.CATEGORY_NAME,
+				B.BOARD_TITLE,
+				M.MEMBER_ID,
+				B.COUNT,
+				TO_CHAR(B.CREATE_DATE, 'YYYY-MM-DD') AS "CREATE_DATE"
+		FROM BOARD B
+		JOIN CATEGORY C ON(B.CATEGORY_NO = C.CATEGORY_NO)
+		JOIN MEMBER M ON(B.BOARD_WRITER = M.MEMBER_NO)
+		WHERE B.STATUS = 'Y'
+		AND B.BOARD_TYPE = 1
+		<choose>
+			<when test="condition eq 'writer'">
+				AND M.MEMBER_ID 
+			</when>
+			<when test="condition eq 'content'">
+				AND B.BOARD_CONTENT
+			</when>
+			<when test="condition eq 'title'">
+				AND B.BOARD_TITLE
+			</when>
+		</choose>
+		LIKE '%${keyword}%'
+		ORDER BY B.BOARD_NO DESC
+	</select>
+
 	<update id="increaseCount">
 		UPDATE BOARD
 		SET COUNT = COUNT + 1

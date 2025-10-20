@@ -1,6 +1,7 @@
 package com.kh.mybatis.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -16,6 +17,17 @@ public class BoardDao {
 		return sqlSession.selectOne("BoardMapper.selectAllBoardCount");
 	}
 	
+	public int selectAllBoardCount(SqlSession sqlSession, HashMap<String, String> searchMap){
+		return sqlSession.selectOne("BoardMapper.selectSearchBoardCount", searchMap);
+	}
+
+	public ArrayList<Board> selectAllBoard(SqlSession sqlSession, HashMap<String, String> searchMap, PageInfo pi){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		ArrayList<Board> list = (ArrayList)sqlSession.selectList("BoardMapper.selectSearchBoard", searchMap, rowBounds);
+		return list;
+	}
+
 	public ArrayList<Board> selectAllBoard(SqlSession sqlSession, PageInfo pi){
 		//mybatis에서 자체적으로 페이징처리를 위해 RowBounds라는 class를 제공한다.
 		//offset : 몇 개의 게시글을 건너뛰고 조회할 것인가
@@ -31,6 +43,8 @@ public class BoardDao {
 		
 		return list;
 	}
+
+	
 	
 	public int increaseCount(SqlSession sqlSession, int boardNo) {
 		return sqlSession.update("BoardMapper.increaseCount", boardNo);

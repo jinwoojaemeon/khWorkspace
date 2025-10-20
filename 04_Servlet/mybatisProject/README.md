@@ -84,10 +84,10 @@ mybatisProject/<br>
 
 | 기능 | 미리보기 |
 |------|-----------|
-| 메인 화면 | ![Main Page](assets/main-page.html) |
-| 로그인 화면 | ![Login Page](assets/login-page.html) |
-| 게시판 목록 | ![Board List](assets/board-list.html) |
-| 게시글 작성 | ![Post Write](assets/post-write.html) |
+| 메인 화면 | ![Main Page](assets/images/main-page.png) |
+| 회원가입 화면 | ![Login Page](assets/images/enroll-Page.png) |
+| 게시판 목록 | ![Board List](assets/images/board-list.png) |
+| 썸네일 게시판 | ![Post Write](assets/images/thumbnail-board.png) |
 
 ## 💡 학습 포인트 (Learning Points)
 

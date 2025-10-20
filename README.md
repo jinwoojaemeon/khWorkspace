@@ -363,43 +363,10 @@
   - 동적 SQL 활용
   - 매핑 자동화
 
-#### 3. EL & JSTL 프로젝트 (elAction/)
-**⚡ Expression Language & JSTL 학습 프로젝트**
 
-- **학습 내용**
-  - EL 기본 문법 및 연산자
-  - JSTL Core 태그 라이브러리
-  - JSTL Format 태그 라이브러리
-  - 커스텀 태그 및 함수
-  - JSP 액션 태그 (include, forward)
-
-- **구현 파일**
-  - `01_el_basic.jsp` - EL 기본 사용법
-  - `02_el_operation.jsp` - EL 연산자
-  - `03_action_include.jsp` - include 액션
-  - `04_action_forward.jsp` - forward 액션
-  - `05_custom_core.jsp` - 커스텀 코어 태그
-  - `06_custom_fmt.jsp` - 커스텀 포맷 태그
-  - `07_custom_function.jsp` - 커스텀 함수
-
-#### 4. JSP 기본 학습 프로젝트 (jsp/)
-**📚 JSP 기본 개념 학습**
-
-- **학습 내용**
-  - JSP 스크립팅 요소 (Scriptlet, Expression, Declaration)
-  - JSP 지시어 (page, include, taglib)
-  - 내장 객체 사용법
-
-- **구현 파일**
-  - `01_scripting_elements.jsp` - 스크립팅 요소
-  - `02_directive.jsp` - 지시어
-  - `pizza/` - 피자 주문 시스템 예제
 
 ### 서버 설정
 - `Servers/` - Tomcat 서버 설정 파일들
-
-### 학습 노트
-- `2025-09-26.txt` ~ `2025-10-10.txt` - 학습 일지
 
 ---
 

@@ -71,12 +71,12 @@
                 <!--로그인 전-->
                 <form action="${pageContext.request.contextPath}/login.me" method="post" class="d-flex gap-2 align-items-end">
                     <div class="form-group">
-                        <label for="userId" class="form-label small">아이디</label>
-                        <input type="text" name="memberId" id="userId" class="form-control form-control-sm" required style="width: 120px;">
+                        <label for="memberId" class="form-label small">아이디</label>
+                        <input type="text" name="memberId" id="memberId" class="form-control form-control-sm" required style="width: 120px;">
                     </div>
                     <div class="form-group">
-                        <label for="userPwd" class="form-label small">비밀번호</label>
-                        <input type="password" name="memberPwd" id="userPwd" class="form-control form-control-sm" required style="width: 120px;">
+                        <label for="memberPwd" class="form-label small">비밀번호</label>
+                        <input type="password" name="memberPwd" id="memberPwd" class="form-control form-control-sm" required style="width: 120px;">
                     </div>
                     <div class="d-flex flex-column gap-1">
                         <button type="submit" class="btn btn-primary btn-sm">로그인</button>

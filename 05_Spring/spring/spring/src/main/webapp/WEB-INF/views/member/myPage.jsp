@@ -94,11 +94,11 @@
 				<table class="form-table">
 					<tr>
 						<td>* 아이디</td>
-						<td><input type="text" name="userId" maxlength="15" readonly value="${loginMember.memberId}"></td>
+						<td><input type="text" name="memberId" maxlength="15" readonly value="${loginMember.memberId}"></td>
 					</tr>
 					<tr>
 						<td>* 이름</td>
-						<td><input type="text" maxlength="8" readonly value="${loginMember.memberName}"></td>
+						<td><input type="text" name="memberName" maxlength="8" readonly value="${loginMember.memberName}"></td>
 					</tr>
 					<tr>
 						<td>전화번호</td>
@@ -184,7 +184,7 @@
 					<form action="${pageContext.request.contextPath}/updatePwd.me" method="post">
 						<div class="mb-3">
 							<label for="currentPwd" class="form-label">현재 비밀번호</label>
-							<input type="password" class="form-control" id="currentPwd" name="userPwd" required>
+							<input type="password" class="form-control" id="currentPwd" name="currentPwd" required>
 						</div>
 						<div class="mb-3">
 							<label for="newPwd" class="form-label">변경할 비밀번호</label>
@@ -224,7 +224,7 @@
 						</div>
 						<div class="mb-3">
 							<label for="deletePwd" class="form-label">비밀번호</label>
-							<input type="password" class="form-control" id="deletePwd" name="userPwd" required>
+							<input type="password" class="form-control" id="deletePwd" name="memberPwd" required>
 						</div>
 						<div class="d-grid">
 							<button type="submit" class="btn btn-danger">탈퇴하기</button>

@@ -167,6 +167,13 @@ public class MemberController {
         return mv;
     }
 
+    @GetMapping("logout.me")
+    public String logout(HttpSession httpSession){
+        httpSession.removeAttribute("loginMember");
+        httpSession.setAttribute("alertMsg", "로그아웃에 성공하였습니다");
+        return "redirect:/";
+    }
+
     @GetMapping("enrollForm.me")
     public String enrollForm() {
         return "member/enrollForm";
@@ -197,6 +204,74 @@ public class MemberController {
             return "redirect:/";
         } else{
             model.addAttribute("errorMsg", "회원가입에 실패하였습니다");
+            return "common/error";
+        }
+    }
+    @GetMapping("myPage.me")
+    public String myPage(HttpSession httpSession, Model model){
+        Member loginMember = (Member) httpSession.getAttribute("loginMember");
+        if(loginMember == null){
+            return "redirect:/";
+        }
+        model.addAttribute("loginMember", loginMember);
+        return "member/myPage";
+    }
+
+    @PostMapping("update.me")
+    public String updateMember(Member member, HttpSession httpSession, Model model){
+        int result = memberService.updateMember(member);
+        if(result > 0){
+            httpSession.setAttribute("alertMsg", "회원정보 수정에 성공하였습니다");
+            httpSession.setAttribute("loginMember", member);
+            return "redirect:/myPage.me";
+        } else{
+            model.addAttribute("errorMsg", "회원정보 수정에 실패하였습니다");
+            return "common/error";
+        }
+    }
+
+    @PostMapping("updatePwd.me")
+    public String updatePwd(@RequestParam("currentPwd") String currentPwd, @RequestParam("updatePwd") String updatePwd, HttpSession httpSession, Model model){
+        Member loginMember = (Member) httpSession.getAttribute("loginMember");
+        System.out.println(loginMember);
+        if(loginMember == null){
+            return "redirect:/";
+        }
+        if(!bCryptPasswordEncoder.matches(currentPwd, loginMember.getMemberPwd())){
+            model.addAttribute("errorMsg", "비밀번호를 확인해주세요");
+            return "common/error";
+        }
+
+        String newPwd = bCryptPasswordEncoder.encode(updatePwd);
+        int result = memberService.updatePwd(loginMember.getMemberId(), newPwd);
+        if(result > 0){
+            httpSession.setAttribute("alertMsg", "비밀번호 변경에 성공하였습니다");
+            httpSession.setAttribute("loginMember", loginMember);
+            return "redirect:/myPage.me";
+        } else{
+            model.addAttribute("errorMsg", "비밀번호 변경에 실패하였습니다");
+            return "common/error";
+        }
+        
+    }
+
+    @PostMapping("delete.me")
+    public String deleteMember(@RequestParam("memberPwd") String memberPwd, HttpSession httpSession, Model model){
+        Member loginMember = (Member) httpSession.getAttribute("loginMember");
+        if(loginMember == null){
+            return "redirect:/";
+        }
+        if(!bCryptPasswordEncoder.matches(memberPwd, loginMember.getMemberPwd())){
+            model.addAttribute("errorMsg", "비밀번호를 확인해주세요");
+            return "common/error";
+        }
+        int result = memberService.deleteMember(loginMember.getMemberId());
+        if(result > 0){
+            httpSession.setAttribute("alertMsg", "회원탈퇴에 성공하였습니다");
+            httpSession.removeAttribute("loginMember");
+            return "redirect:/";
+        } else{
+            model.addAttribute("errorMsg", "회원탈퇴에 실패하였습니다");
             return "common/error";
         }
     }

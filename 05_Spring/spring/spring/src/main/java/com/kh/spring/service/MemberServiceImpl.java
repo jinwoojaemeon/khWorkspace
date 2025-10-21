@@ -36,4 +36,19 @@ public class MemberServiceImpl implements MemberService {
         */
         return memberMapper.addMember(member);
     }
+
+    @Override
+    public int updateMember(Member member) {
+        return memberMapper.updateMember(member);
+    }
+
+    @Override
+    public int updatePwd(String memberId, String newPwd) {
+        return memberMapper.updatePwd(memberId, newPwd);
+    }
+
+    @Override
+    public int deleteMember(String memberId) {
+        return memberMapper.deleteMember(memberId);
+    }
 }

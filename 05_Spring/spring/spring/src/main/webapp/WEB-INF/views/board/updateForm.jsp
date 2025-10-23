@@ -94,8 +94,8 @@
 					<tr>
 						<th>카테고리</th>
 						<td>
-							<select name="category">
-								<c:forEach var="c" items="${categories}">
+							<select name="categoryNo">
+								<c:forEach var="c" items="${categoryList}">
 									<c:choose>
 										<c:when test="${c.categoryNo == board.categoryNo}">
 											<option value="${c.categoryNo}" selected>${c.categoryName}</option>
@@ -111,13 +111,13 @@
 					<tr>
 						<th>제목</th>
 						<td>
-							<input type="text" name="title" required value="${board.boardTitle}">
+							<input type="text" name="boardTitle" required value="${board.boardTitle}">
 						</td>
 					</tr>
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea name="content" rows="10">${board.boardContent}</textarea>
+							<textarea name="boardContent" rows="10">${board.boardContent}</textarea>
 						</td>
 					</tr>
 					<tr>
@@ -134,7 +134,7 @@
 
 				<div class="button-group">
 					<button type="submit" class="btn btn-primary">수정하기</button>
-					<button type="reset" class="btn btn-secondary">취소하기</button>
+					<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/detail.bo?bno=${board.boardNo}'">취소하기</button>
 				</div>
 			</form>
 		</div>

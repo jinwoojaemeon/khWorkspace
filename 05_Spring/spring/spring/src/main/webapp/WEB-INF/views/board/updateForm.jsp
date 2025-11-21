@@ -95,7 +95,7 @@
 						<th>카테고리</th>
 						<td>
 							<select name="categoryNo">
-								<c:forEach var="c" items="${categoryList}">
+								<c:forEach var="c" items="${categories}">
 									<c:choose>
 										<c:when test="${c.categoryNo == board.categoryNo}">
 											<option value="${c.categoryNo}" selected>${c.categoryName}</option>
@@ -123,9 +123,9 @@
 					<tr>
 						<th>첨부파일</th>
 						<td>
-							<c:if test="${at != null}">
-								기존파일 : ${at.originName} <br><br>
-								<input type="hidden" name="originFileNo" value="${at.fileNo}">
+							<c:if test="${attachment != null}">
+								기존파일 : ${attachment.originName} <br><br>
+								<input type="hidden" name="originFileNo" value="${attachment.fileNo}">
 							</c:if>
 							<input type="file" name="upfile">
 						</td>

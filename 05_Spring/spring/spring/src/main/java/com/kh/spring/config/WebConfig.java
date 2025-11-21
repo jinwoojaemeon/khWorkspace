@@ -29,6 +29,9 @@ public class WebConfig implements WebMvcConfigurer {
                       "/idDulpicateCheck.me",
                       "/insert.me",
                       "/list.bo",
+                      "/detail.bo",
+                      "/List.th",
+                      "/detail.th",
                       "/static/**"
                 );
     }

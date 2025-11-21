@@ -1,267 +1,230 @@
 package com.kh.spring.controller;
 
-import com.kh.spring.service.BoardService;
-import com.kh.spring.common.vo.PageInfo;
-import com.kh.spring.model.vo.Attachment;
 import com.kh.spring.model.vo.Board;
 import com.kh.spring.model.vo.Category;
+import com.kh.spring.model.vo.Member;
 import com.kh.spring.model.vo.Reply;
+import com.kh.spring.service.BoardService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BoardController {
+
     private final BoardService boardService;
 
+    @Autowired
     public BoardController(BoardService boardService) {
         this.boardService = boardService;
     }
 
-    // 게시글 목록
+    //게시글 목록 조회
     @GetMapping("list.bo")
-    public ModelAndView listBoard(@RequestParam(value = "cpage", required = false) Integer cpage, ModelAndView mv){
-        int currentPage = cpage != null ? cpage : 1;
-        int listCount = boardService.selectAllBoardCount();
-        PageInfo pi = new PageInfo(currentPage, listCount, 5, 5);
-        ArrayList<Board> list = boardService.selectAllBoard(pi);
-        mv.addObject("list", list);
-        mv.addObject("pi", pi);
-        mv.setViewName("board/listView");
-        return mv;
+    public String selectBoardList(@RequestParam(value = "cpage", defaultValue = "1") int cuurentPage, Model model) {
+        Map<String, Object> result = boardService.getBoardList(cuurentPage);
+
+        model.addAttribute("list", result.get("list"));
+        model.addAttribute("pi",  result.get("pi"));
+
+        return "board/listView";
     }
 
     // 게시글 검색
     @GetMapping("search.bo")
-    public ModelAndView searchBoard(@RequestParam(value = "cpage", required = false) Integer cpage, 
-                                   @RequestParam(value = "condition") String condition, 
-                                   @RequestParam(value = "keyword") String keyword, 
-                                   ModelAndView mv){
-        int currentPage = cpage != null ? cpage : 1;
-        int listCount = boardService.selectSearchBoardCount(condition, keyword);
-        PageInfo pi = new PageInfo(currentPage, listCount, 5, 5);
-        ArrayList<Board> list = boardService.selectSearchBoard(pi, condition, keyword);
-        mv.addObject("list", list);
-        mv.addObject("pi", pi);
-        mv.addObject("condition", condition);
-        mv.addObject("keyword", keyword);
-        mv.setViewName("board/listView");
-        return mv;
+    public String searchBoard(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+                             @RequestParam(value = "condition") String condition,
+                             @RequestParam(value = "keyword") String keyword,
+                             Model model) {
+        Map<String, Object> result = boardService.getSearchBoardList(currentPage, condition, keyword);
+        model.addAttribute("list", result.get("list"));
+        model.addAttribute("pi", result.get("pi"));
+        model.addAttribute("condition", condition);
+        model.addAttribute("keyword", keyword);
+        return "board/listView";
     }
 
-    // 게시글 상세보기
-    @GetMapping("detail.bo")
-    public ModelAndView detailBoard(@RequestParam("bno") int boardNo, ModelAndView mv){
-        Board board = boardService.selectBoardByBoardNo(boardNo);
-        Attachment attachment = boardService.selectAttachment(boardNo);
-        ArrayList<Reply> replyList = boardService.selectReplyByBoardNo(boardNo);
-        
-        if(board != null) {
-            boardService.increaseCount(boardNo);
-            mv.addObject("board", board);
-            mv.addObject("attachment", attachment);
-            mv.addObject("replyList", replyList);
-            mv.setViewName("board/detailView");
+    @GetMapping("/enrollForm.bo")
+    public String enrollForm(Model model) {
+        List<Category> categories = boardService.getCategories();
+
+        model.addAttribute("categories", categories);
+
+        return "board/enrollForm";
+    }
+
+    //spring boot에는 spring-boot-starter-web의존을 추가하면
+    @PostMapping("/insert.bo")
+    public String insertBoard(Board board,
+                              @RequestParam(value = "upfile", required = false) MultipartFile upfile,
+                              HttpSession session, Model model) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        board.setBoardWriter(loginMember.getMemberNo());
+
+        int result = boardService.insertBoard(board, upfile);
+
+        if(result > 0){
+            session.setAttribute("alertMsg", "게시글이 등록되었습니다.");
+            return "redirect:/list.bo";
         } else {
-            mv.addObject("errorMsg", "게시글 조회 실패");
-            mv.setViewName("common/error");
+            model.addAttribute("errorMsg", "게시글 등록에 실패하였습니다.");
+            return "common/error";
         }
-        return mv;
     }
 
-    // 게시글 작성 폼
-    @GetMapping("enrollForm.bo")
-    public ModelAndView enrollFormBoard(ModelAndView mv){
-        ArrayList<Category> categoryList = boardService.selectAllCategory();
-        mv.addObject("categoryList", categoryList);
-        mv.setViewName("board/enrollForm");
-        return mv;
-    }
+    @GetMapping("/detail.bo")
+    public String detailBoard(@RequestParam(value = "bno", required = true) int boardNo, Model model) {
+        Map<String,Object> result = boardService.getBoardByIdWithCount(boardNo);
 
-    // 게시글 작성 처리
-    @PostMapping("insert.bo")
-    public String insertBoard(Board board, 
-                            @RequestParam(value = "upfile", required = false) MultipartFile upfile,
-                            RedirectAttributes redirectAttributes){
-        
-        // 임시로 작성자 번호 설정 (실제로는 세션에서 가져와야 함)
-        board.setBoardWriter(1);
-        
-        Attachment attachment = null;
-        
-        // 파일이 업로드된 경우
-        if(upfile != null && !upfile.isEmpty()) {
-            attachment = new Attachment();
-            attachment.setOriginName(upfile.getOriginalFilename());
-            attachment.setChangeName("kh_" + System.currentTimeMillis() + "_" + (int)(Math.random() * 100000) + ".jpg");
-            attachment.setFilePath("resources/board-file/");
-            
-            // 실제 파일 저장 로직 (여기서는 간단히 처리)
-            try {
-                // 파일 저장 경로 설정
-                String savePath = "C:/workspace/05_Spring/spring/spring/src/main/webapp/resources/board-file/";
-                upfile.transferTo(new java.io.File(savePath + attachment.getChangeName()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        
-        int result = boardService.insertBoard(board, attachment);
-        
-        if(result > 0) {
-            redirectAttributes.addFlashAttribute("alertMsg", "게시글 작성 성공");
-            return "redirect:list.bo";
+        if(result.get("board") != null){
+            model.addAttribute("board", result.get("board"));
+            model.addAttribute("attachment", result.get("attachment"));
+
+            return "board/detailView";
         } else {
-            redirectAttributes.addFlashAttribute("errorMsg", "게시글 작성 실패");
-            return "redirect:enrollForm.bo";
+            model.addAttribute("errorMsg", "게시글 조회 실패");
+            return "common/error";
         }
     }
 
-    // 게시글 수정 폼
-    @GetMapping("updateForm.bo")
-    public ModelAndView updateFormBoard(@RequestParam("bno") int boardNo, ModelAndView mv){
-        Board board = boardService.selectBoardByBoardNo(boardNo);
-        Attachment attachment = boardService.selectAttachment(boardNo);
-        ArrayList<Category> categoryList = boardService.selectAllCategory();
-        
-        if(board != null) {
-            mv.addObject("board", board);
-            mv.addObject("attachment", attachment);
-            mv.addObject("categoryList", categoryList);
-            mv.setViewName("board/updateForm");
-        } else {
-            mv.addObject("errorMsg", "게시글 조회 실패");
-            mv.setViewName("common/error");
-        }
-        return mv;
+    //게시글 수정
+    @GetMapping("/updateForm.bo")
+    public String updateForm(@RequestParam("bno") int boardNo, Model model) {
+        List<Category> categories = boardService.getCategories();
+        Map<String, Object> result = boardService.getBoardById(boardNo);
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("board", result.get("board"));
+        model.addAttribute("attachment", result.get("attachment"));
+
+        return "board/updateForm";
     }
 
-    // 게시글 수정 처리
-    @PostMapping("update.bo")
-    public String updateBoard(Board board, 
-                            @RequestParam(value = "upfile", required = false) MultipartFile upfile,
-                            @RequestParam(value = "originFileNo", required = false) Integer originFileNo,
-                            RedirectAttributes redirectAttributes){
-        
-        Attachment attachment = null;
-        
-        // 파일이 업로드된 경우
-        if(upfile != null && !upfile.isEmpty()) {
-            attachment = new Attachment();
-            attachment.setOriginName(upfile.getOriginalFilename());
-            attachment.setChangeName("kh_" + System.currentTimeMillis() + "_" + (int)(Math.random() * 100000) + ".jpg");
-            attachment.setFilePath("resources/board-file/");
-            
-            if(originFileNo != null) {
-                attachment.setFileNo(originFileNo); // 기존 파일이 있는 경우
-            }
-            
-            // 실제 파일 저장 로직
-            try {
-                String savePath = "C:/workspace/05_Spring/spring/spring/src/main/webapp/resources/board-file/";
-                upfile.transferTo(new java.io.File(savePath + attachment.getChangeName()));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        
-        int result = boardService.updateBoard(board, attachment);
-        
-        if(result > 0) {
-            redirectAttributes.addFlashAttribute("alertMsg", "게시글 수정 성공");
-            return "redirect:detail.bo?bno=" + board.getBoardNo();
+    //게시글 수정
+    @PostMapping("/update.bo")
+    public String updateBoard(Board board,
+                              @RequestParam(value = "originFileNo", required = false) Integer originFileNo,
+                              @RequestParam(value = "upfile", required = false) MultipartFile upfile,
+                              HttpSession session, Model model) {
+        //전달받은 내용을 토대로 수정, 결과페이지로 리턴
+        int result = boardService.updateBoard(board, upfile, originFileNo);
+
+        if(result > 0){
+            session.setAttribute("alertMsg", "게시글이 수정되었습니다.");
+            return "redirect:/detail.bo?bno=" + board.getBoardNo();
         } else {
-            redirectAttributes.addFlashAttribute("errorMsg", "게시글 수정 실패");
-            return "redirect:updateForm.bo?bno=" + board.getBoardNo();
+            model.addAttribute("errorMsg", "게시글 수정 실패");
+            return "common/error";
         }
+    }
+
+    //댓글 작성(AJAX)
+    @PostMapping("/rinsert.bo")
+    @ResponseBody
+    public String insertReply(@RequestParam("boardNo") int boardNo,
+                              @RequestParam("content") String content,
+                              HttpSession session) {
+        Member m = (Member)session.getAttribute("loginMember");
+
+        Reply reply = new Reply();
+        reply.setRefBoardNo(boardNo);
+        reply.setReplyContent(content);
+        reply.setReplyWriter(m.getMemberNo());
+
+        int result = boardService.insertReply(reply);
+
+        return result > 0 ? "1" : "0";
+    }
+
+    /*
+        spring-boot-starter-web
+        -> jackson라이브러리를 기본적으로 탑제하고 있기 때문에 응답시 객체를 응답한다면 json문자로 변환해준다.
+
+        @ResponseBody -> 응답을 응답바디로 직접 보내도록 지정
+        jackson -> json 문자열로 변환 -> 응답바디에 전달
+     */
+    //댓글목록
+    @GetMapping("/rlist.bo")
+    @ResponseBody
+    public List<Reply> selectReply(@RequestParam("boardNo") int boardNo) {
+       return boardService.getReplyListByBoardNo(boardNo);
+    }
+
+    @GetMapping("rdelete.bo")
+    @ResponseBody
+    public String deleteReply(@RequestParam("replyNo") int replyNo) {
+        int result = boardService.removeReply(replyNo);
+
+        return result > 0 ? "1" : "0";
     }
 
     // 게시글 삭제
     @GetMapping("delete.bo")
-    public String deleteBoard(@RequestParam("bno") int boardNo, RedirectAttributes redirectAttributes){
+    public String deleteBoard(@RequestParam("bno") int boardNo, HttpSession session, Model model) {
         int result = boardService.deleteBoard(boardNo);
         
         if(result > 0) {
-            redirectAttributes.addFlashAttribute("alertMsg", "게시글 삭제 성공");
+            session.setAttribute("alertMsg", "게시글이 삭제되었습니다.");
+            return "redirect:/list.bo";
         } else {
-            redirectAttributes.addFlashAttribute("errorMsg", "게시글 삭제 실패");
+            model.addAttribute("errorMsg", "게시글 삭제 실패");
+            return "common/error";
         }
-        return "redirect:list.bo";
     }
 
     // 썸네일 게시판 목록
     @GetMapping("list.th")
-    public ModelAndView thumbnailListBoard(ModelAndView mv){
-        ArrayList<Board> list = boardService.selectThumbnailList();
-        mv.addObject("list", list);
-        mv.setViewName("board/thumbnailListView");
-        return mv;
+    public String thumbnailListBoard(Model model) {
+        List<Board> list = boardService.getThumbnailList();
+        model.addAttribute("list", list);
+        return "board/thumbnailListView";
     }
 
     // 썸네일 게시판 상세보기
     @GetMapping("detail.th")
-    public ModelAndView thumbnailDetailBoard(@RequestParam("bno") int boardNo, ModelAndView mv){
-        Board board = boardService.selectThumbnailBoardByBoardNo(boardNo);
-        ArrayList<Attachment> attachmentList = boardService.selectAttachmentList(boardNo);
-        
-        if(board != null) {
-            boardService.increaseCount(boardNo);
-            mv.addObject("board", board);
-            mv.addObject("attachmentList", attachmentList);
-            mv.setViewName("board/thumbnailDetailView");
+    public String thumbnailDetailBoard(@RequestParam("bno") int boardNo, Model model) {
+        Map<String, Object> result = boardService.getThumbnailBoardDetail(boardNo);
+        if(result != null && result.get("board") != null) {
+            model.addAttribute("board", result.get("board"));
+            model.addAttribute("attachmentList", result.get("attachmentList"));
+            return "board/thumbnailDetailView";
         } else {
-            mv.addObject("errorMsg", "게시글 조회 실패");
-            mv.setViewName("common/error");
+            model.addAttribute("errorMsg", "게시글 조회 실패");
+            return "common/error";
         }
-        return mv;
     }
 
     // 썸네일 게시판 작성 폼
     @GetMapping("enrollForm.th")
-    public String thumbnailEnrollFormBoard(){
+    public String thumbnailEnrollFormBoard() {
         return "board/thumbnailEnrollForm";
     }
 
     // 썸네일 게시판 작성 처리
     @PostMapping("insert.th")
-    public String insertThumbnailBoard(Board board, @RequestParam("attachmentList") ArrayList<Attachment> attachmentList, 
-                                     RedirectAttributes redirectAttributes){
+    public String insertThumbnailBoard(Board board,
+                                      @RequestParam("attachmentList") List<MultipartFile> attachmentList,
+                                      HttpSession session, Model model) {
+        Member loginMember = (Member) session.getAttribute("loginMember");
+        board.setBoardWriter(loginMember.getMemberNo());
+
         int result = boardService.insertThumbnailBoard(board, attachmentList);
         
         if(result > 0) {
-            redirectAttributes.addFlashAttribute("alertMsg", "썸네일 게시글 작성 성공");
-            return "redirect:list.th";
+            session.setAttribute("alertMsg", "썸네일 게시글이 등록되었습니다.");
+            return "redirect:/list.th";
         } else {
-            redirectAttributes.addFlashAttribute("errorMsg", "썸네일 게시글 작성 실패");
-            return "redirect:enrollForm.th";
+            model.addAttribute("errorMsg", "썸네일 게시글 등록 실패");
+            return "common/error";
         }
-    }
-
-    // 댓글 작성 (Ajax)
-    @PostMapping("rinsert.bo")
-    @ResponseBody
-    public String insertReply(@RequestBody Reply reply){
-        int result = boardService.insertReply(reply);
-        return result > 0 ? "success" : "fail";
-    }
-
-    // 댓글 목록 조회 (Ajax)
-    @PostMapping("rlist.bo")
-    @ResponseBody
-    public ArrayList<Reply> selectReplyList(@RequestParam("bno") int boardNo){
-        return boardService.selectReplyByBoardNo(boardNo);
-    }
-
-    // 댓글 삭제 (Ajax)
-    @PostMapping("rdelete.bo")
-    @ResponseBody
-    public String deleteReply(@RequestParam("replyNo") int replyNo){
-        int result = boardService.deleteReply(replyNo);
-        return result > 0 ? "success" : "fail";
     }
 }

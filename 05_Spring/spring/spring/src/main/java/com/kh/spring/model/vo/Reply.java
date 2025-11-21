@@ -1,10 +1,6 @@
 package com.kh.spring.model.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
@@ -12,11 +8,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Reply {
-	private int replyNo;
-	private String replyContent;
-	private int refBoardNo;
-	private int replyWriter;
-	private String createDate;
-	private String status;
-	private String memberId;
+    private int replyNo;
+    private String replyContent;
+    private int refBoardNo;
+    private int replyWriter;
+    private String createDate;
+    private String status;
+
+    //전달용 변수
+    private String memberId;
 }

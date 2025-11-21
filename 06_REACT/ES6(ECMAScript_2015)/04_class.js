@@ -87,3 +87,10 @@ const car2 = {
     color : "흰색"
 }
 console.log(car2);
+
+// static 키워드 사용 
+class Math{
+    static add(a, b){ return a + b; }
+}
+
+console.log(Math.add(1, 2));

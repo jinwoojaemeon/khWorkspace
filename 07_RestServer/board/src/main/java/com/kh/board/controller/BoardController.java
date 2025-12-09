@@ -35,7 +35,7 @@ public class BoardController {
         for (Board board : boards) {
             result.add(BoardResponse.SimpleDto.of(board));
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);  //ResponseEntity 를 사용하면 http 상태코드를 설정할 수 있게된다.
     }
 
     @PostMapping
@@ -58,6 +58,16 @@ public class BoardController {
             return new ResponseEntity<>("게시글 등록 성공", HttpStatus.OK);
         } else{
             return new ResponseEntity<>("게시글 등록 실패", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping({"/boardDetail/{boardId}", "/api/board/{boardId}"})
+    public String getBoardById(@PathVariable("boardId") String boardId){
+        Board board = boardService.getBoardById(boardId);
+        if(board != null){
+            return "redirect:/boardDetail.html"; 
+        } else {
+            return "redirect:/index.html";
         }
     }
 }

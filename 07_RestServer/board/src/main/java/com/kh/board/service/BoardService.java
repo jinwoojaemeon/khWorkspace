@@ -7,4 +7,5 @@ import java.util.List;
 public interface BoardService {
     public List<Board> findAll();
     int save(Board board);
+    public Board getBoardById(String boardId);
 }

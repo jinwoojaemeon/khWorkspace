@@ -36,4 +36,13 @@
         CURRENT_TIMESTAMP
         )
     </insert>
+    <select id="getBoardById" resultMap="boardResult">
+        SELECT BOARD_ID,
+                TITLE,
+                MEMBER_EMAIL,
+                CREATE_AT,
+                UPDATE_AT
+        FROM BOARD
+        WHERE BOARD_ID = #{boardId}
+    </select>
 </mapper>

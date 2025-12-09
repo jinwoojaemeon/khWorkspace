@@ -370,11 +370,194 @@
 
 ---
 
+## 📁 05_Spring (Spring Framework)
+
+### Spring Boot 프로젝트 (spring/spring/)
+**🌱 Spring Boot 기반 웹 애플리케이션**
+
+- **기술 스택**
+  - Spring Boot 3.5.6
+  - Spring Security
+  - MyBatis 3.0.5
+  - Oracle Database
+  - JSP, JSTL
+  - Maven
+
+- **프로젝트 구조**
+  - `controller/` - Spring MVC 컨트롤러
+    - `HomeController.java` - 메인 페이지 (공공데이터 API 연동)
+    - `BoardController.java` - 게시판 관리
+    - `MemberController.java` - 회원 관리
+  - `service/` - 비즈니스 로직
+    - `BoardService.java` - 게시판 서비스
+    - `MemberService.java` - 회원 서비스
+    - `ToiletService.java` - 공공데이터 API 서비스
+  - `model/` - 데이터 모델
+    - `mapper/` - MyBatis 매퍼 인터페이스
+    - `vo/` - 값 객체 (Board, Member, Reply, Attachment, Category)
+    - `dto/` - 데이터 전송 객체 (Toilet, ToiletListResponse)
+  - `config/` - 설정 클래스
+    - `WebConfig.java` - 웹 설정 (인터셉터 등록)
+    - `securityConfig.java` - Spring Security 설정
+    - `FilterConfig.java` - 필터 설정
+  - `interceptor/` - 인터셉터
+    - `LoginCheckInterceptor.java` - 로그인 체크 인터셉터
+  - `filter/` - 필터
+    - `RequestTimeFilter.java` - 요청 시간 측정 필터
+  - `resources/mappers/` - MyBatis 매퍼 XML
+  - `webapp/WEB-INF/views/` - JSP 뷰 페이지
+
+- **주요 기능**
+  - Spring Boot 기반 웹 애플리케이션 구조
+  - Spring Security를 활용한 보안 설정
+  - MyBatis 연동을 통한 데이터베이스 접근
+  - 인터셉터를 활용한 로그인 체크
+  - 필터를 통한 요청 처리
+  - 공공데이터 API 연동 (서울시 공중화장실 정보)
+  - 게시판 CRUD 기능
+  - 회원 관리 기능
+  - 파일 업로드 기능
+  - 썸네일 게시판 기능
+  - 댓글 시스템
+
+- **핵심 학습 내용**
+  - Spring Boot 프로젝트 설정 및 구조
+  - Spring MVC 패턴 구현
+  - 의존성 주입 (DI) 및 제어의 역전 (IoC)
+  - Spring Security 설정 및 활용
+  - 인터셉터와 필터의 차이 및 활용
+  - MyBatis Spring Boot Starter 연동
+  - 공공데이터 API 연동 및 JSON 파싱
+  - RESTful API 설계
+
+---
+
+## 📁 06_REACT (React 프론트엔드)
+
+### ES6 (ECMAScript 2015) 학습
+- `01_variable.js` - 변수 선언 (let, const)
+- `02_function.js` - 화살표 함수, 기본 매개변수
+- `03_loop.js` - 반복문 (for...of, for...in)
+- `04_class.js` - 클래스 문법
+- `05_etc.js` - 기타 ES6 문법 (템플릿 리터럴, 구조 분해 등)
+- `06_module/` - 모듈 시스템 (export/import)
+
+### React 프로젝트 (react-project/)
+**⚛️ React + Vite 기반 프론트엔드 프로젝트**
+
+- **기술 스택**
+  - React 19.2.0
+  - Vite 7.2.4
+  - styled-components 6.1.19
+  - ESLint
+
+- **프로젝트 구조**
+  - `src/`
+    - `App.jsx` - 메인 컴포넌트
+    - `main.jsx` - 진입점
+    - `components/` - 컴포넌트
+      - `JavaScript.jsx` - JSX 문법 예제
+      - `Style.jsx` - styled-components 예제
+    - `assets/` - 정적 리소스
+    - `index.css` - 전역 스타일
+
+- **주요 기능**
+  - JSX 문법 학습
+  - React 컴포넌트 작성
+  - styled-components를 활용한 스타일링
+  - 상태 관리 (useState)
+  - 조건부 렌더링
+  - 리스트 렌더링
+
+- **React 학습 프로젝트들**
+  - `react01_jsx/` - JSX 기본 학습
+  - `react02_component/` - 컴포넌트 학습
+  - `react03_reactClassComponents/` - 클래스 컴포넌트 학습
+  - `react05_Router/` - React Router 학습
+  - `todoapp/` - Todo 애플리케이션
+  - `user-manager/` - 사용자 관리 애플리케이션
+
+- **핵심 학습 내용**
+  - React 기본 개념 및 JSX 문법
+  - 함수형 컴포넌트와 클래스 컴포넌트
+  - Props와 State
+  - React Hooks (useState, useEffect 등)
+  - 이벤트 처리
+  - 조건부 렌더링 및 리스트 렌더링
+  - React Router를 활용한 라우팅
+  - styled-components를 활용한 CSS-in-JS
+
+---
+
+## 📁 07_RestServer (REST API 서버)
+
+### Spring Boot REST API 프로젝트 (board/)
+**🚀 RESTful API 기반 게시판 서버**
+
+- **기술 스택**
+  - Spring Boot 3.4.12
+  - MyBatis 3.0.5
+  - H2 Database
+  - Gradle
+  - Lombok
+
+- **프로젝트 구조**
+  - `controller/` - REST 컨트롤러
+    - `BoardController.java` - 게시판 API 엔드포인트
+      - `GET /api/board` - 게시글 목록 조회
+      - `POST /api/board` - 게시글 작성
+  - `service/` - 비즈니스 로직
+    - `BoardService.java` - 게시판 서비스 인터페이스
+    - `BoardServiceImpl.java` - 게시판 서비스 구현
+  - `mapper/` - MyBatis 매퍼
+    - `BoardMapper.java` - 게시판 매퍼 인터페이스
+  - `entity/` - 엔티티 클래스
+    - `Board.java` - 게시글 엔티티
+    - `Member.java` - 회원 엔티티
+  - `dto/` - 데이터 전송 객체
+    - `request/` - 요청 DTO
+      - `BoardRequest.java` - 게시글 요청 DTO
+    - `response/` - 응답 DTO
+      - `BoardResponse.java` - 게시글 응답 DTO
+  - `resources/`
+    - `mappers/` - MyBatis 매퍼 XML
+    - `static/` - 정적 리소스 (HTML, CSS, JS)
+      - `index.html` - 프론트엔드 테스트 페이지
+      - `js/index.js` - AJAX를 활용한 API 호출
+
+- **주요 기능**
+  - RESTful API 설계 및 구현
+  - 게시글 CRUD 기능
+  - 파일 업로드 기능
+  - JSON 기반 데이터 통신
+  - H2 인메모리 데이터베이스 활용
+  - AJAX를 활용한 프론트엔드 연동
+
+- **API 엔드포인트**
+  - `GET /api/board` - 게시글 목록 조회
+  - `POST /api/board` - 게시글 작성 (파일 업로드 지원)
+
+- **핵심 학습 내용**
+  - RESTful API 설계 원칙
+  - Spring Boot REST Controller 작성
+  - ResponseEntity를 활용한 HTTP 응답 처리
+  - MultipartFile을 활용한 파일 업로드
+  - DTO 패턴을 활용한 데이터 전송
+  - MyBatis를 활용한 데이터베이스 연동
+  - H2 Database 설정 및 활용
+  - AJAX를 활용한 비동기 통신
+  - CORS 설정 및 처리
+
+---
+
 ## 🎯 학습 순서
 
 1. **01_SQL** - 데이터베이스 기본 개념 및 SQL 문법
 2. **02_JAVA** - 객체지향 프로그래밍 및 JDBC
 3. **03_Front** - HTML, CSS, JavaScript를 통한 프론트엔드 개발
 4. **04_Servlet** - 서버사이드 개발 및 웹 애플리케이션 구축
+5. **05_Spring** - Spring Framework를 활용한 엔터프라이즈 애플리케이션 개발
+6. **06_REACT** - React를 활용한 모던 프론트엔드 개발
+7. **07_RestServer** - RESTful API 서버 구축 및 프론트엔드 연동
 
 각 폴더는 순차적으로 학습할 수 있도록 구성되어 있으며, 실습 파일과 연습문제를 통해 단계별로 실력을 향상시킬 수 있습니다.

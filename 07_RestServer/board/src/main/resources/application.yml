@@ -1,6 +1,7 @@
 spring:
   application:
     name: board
+
   datasource:
     hikari:
       jdbc-url: jdbc:h2:tcp://localhost/C:\khWorkspace\07_RestServer\db\tdb
@@ -11,6 +12,7 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
   servlet:
     multipart:
       max-file-size: 10MB
@@ -21,7 +23,7 @@ server:
 
   servlet:
     encoding:
-      charset: utf-8
+      charset: UTF-8
       enabled: true
       force: true
 

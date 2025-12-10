@@ -6,8 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
-public interface BoardMapper{
+public interface BoardMapper {
     List<Board> findAll();
     int save(Board board);
-    Board getBoardById(String boardId);
+    Board findOne(Long boardId);
 }

@@ -2,18 +2,21 @@ function init(){
     getBoardList(drawBoardList);
 }
 
+function getUrlParam(id){
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(id);
+}
+
 function initBoard(){
-    const path = window.location.pathname;
-    const pathParts = path.split('/');
-    const boardId = pathParts[pathParts.length - 1];
+    const boardId = getUrlParam("board_id");
 
     getBoard(boardId, function(board){
         document.querySelector('#title').value = board.title;
-        document.querySelector('#memberEmail').value = board.memberEmail;
+        document.querySelector('#memberEmail').value = board.member_email;
         document.querySelector('#contents').value = board.contents;
-        document.querySelector('#originFile').value = board.fileName;
-        document.querySelector('#fileName').innerHTML = board.fileName;
-        document.querySelector('#fileName').href = board.fileName;
+        document.querySelector('#originFile').value = board.file_name;
+        document.querySelector('#fileName').innerHTML = board.file_name;
+        document.querySelector('#fileName').href = board.file_name;
     })
 }
 
@@ -28,8 +31,8 @@ function formatDate(date) {
 function getBoard(boardId, callback){
     $.ajax({
         url: "http://localhost:8888/api/board/" + boardId,
-        type: "get",
-        contentType: "application/json",
+        type: "get",                            
+        contentType: "application/json",       
         success: function(response) {
             console.log(response)
             callback(response)
@@ -44,7 +47,7 @@ function getBoardList(callback){
     $.ajax({
         url: "http://localhost:8888/api/board",
         type: "get",
-        contentType: "application/json",
+        contentType: "application/json",       
         success: function(response) {
             callback(response)
         },
@@ -61,7 +64,7 @@ function drawBoardList(boardList){
     if (boardList && boardList.length > 0) {
         boardBody.innerHTML = "";
         for(let board of boardList){
-            boardBody.innerHTML += `<tr onclick="location.href='/boardDetail/${board.board_id}'">
+            boardBody.innerHTML += `<tr onclick="location.href='/boardDetail.html?board_id=${board.board_id}'">
                                         <td>${board.board_id}</td>
                                         <td>${board.title}</td>
                                         <td>${board.member_email}</td>
@@ -127,7 +130,7 @@ function updateBoard(){
         success: function(response) {
             console.log(response)
             alert("글이 성공적으로 수정되었습니다.");
-            window.location.href = "/boardDetail/" + boardId;
+            window.location.href = "/boardDetail/" + boardId; 
         },
         error: function(error) {
             alert("글 등록에 실패했습니다.");
@@ -139,7 +142,7 @@ function updateBoard(){
 function deleteBoard(){
     if(!confirm("글을 정말 삭제하시겠습니까?"))
         return;
-
+    
     const path = window.location.pathname;
     const pathParts = path.split('/');
     const boardId = pathParts[pathParts.length - 1];
@@ -150,7 +153,7 @@ function deleteBoard(){
         type: "DELETE",
         success: function(response) {
             alert("글이 성공적으로 삭제되었습니다.");
-            window.location.href = "/";
+            window.location.href = "/"; 
         },
         error: function(error) {
             alert("글 등록에 실패했습니다.");

@@ -6,6 +6,7 @@ import com.kh.board.entity.Board;
 import com.kh.board.entity.Member;
 import com.kh.board.mapper.BoardMapper;
 import com.kh.board.service.BoardService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,24 +19,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController // 모든 controller 메서드의 리턴을 ResponseBody로 처리하여 데이터를 반환한다.
+@RestController//모든 controller 메서드의 리턴을 ResponseBody로 처리하여 데이터를 반환한다.
 @RequestMapping("/api/board")
 public class BoardController {
 
     private final BoardService boardService;
 
-
-    //@ResponseBody RestController가 대신 인식시켜준다.
+    //@ResponseBody
     @GetMapping
-    public ResponseEntity<List<BoardResponse.SimpleDto>>  getBoards() {
-        // 게시글 목록을 데이터베이스로부터 가져와 반환
+    public ResponseEntity<List<BoardResponse.SimpleDto>> getBoards(){
+        //게시글 목록을 데이터베이스로부터 가져와 반환
         List<Board> boards = boardService.findAll();
 
         List<BoardResponse.SimpleDto> result = new ArrayList<>();
-        for (Board board : boards) {
+        for (Board board : boards){
             result.add(BoardResponse.SimpleDto.of(board));
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);  //ResponseEntity 를 사용하면 http 상태코드를 설정할 수 있게된다.
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping
@@ -45,7 +46,7 @@ public class BoardController {
         }
 
         if(!upfile.isEmpty()){
-            File file = new File("C:\\khWorkspace\\07_RestServer\\board\\src\\main\\resources\\uploads", upfile.getOriginalFilename());
+            File file = new File("C:\\workspace\\07_RestServer\\board\\src\\main\\resources\\uploads", upfile.getOriginalFilename());
             upfile.transferTo(file);
 
             request.setFile_name("/uploads/"+upfile.getOriginalFilename());
@@ -61,13 +62,11 @@ public class BoardController {
         }
     }
 
-    @GetMapping({"/boardDetail/{boardId}", "/api/board/{boardId}"})
-    public String getBoardById(@PathVariable("boardId") String boardId){
-        Board board = boardService.getBoardById(boardId);
-        if(board != null){
-            return "redirect:/boardDetail.html"; 
-        } else {
-            return "redirect:/index.html";
-        }
+    @GetMapping("/{boardId}")
+    public ResponseEntity<BoardResponse.DetailDto> getBoard(@PathVariable Long boardId){
+        Board board = boardService.findOne(boardId);
+        BoardResponse.DetailDto result = BoardResponse.DetailDto.of(board);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

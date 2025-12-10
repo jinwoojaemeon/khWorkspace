@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -6,12 +7,15 @@
     <resultMap id="boardResult" type="Board">
         <result column="BOARD_ID" property="boardId"/>
         <result column="TITLE" property="title"/>
+        <result column="CONTENTS" property="contents"/>
+        <result column="FILE_NAME" property="fileName"/>
         <result column="MEMBER_EMAIL" property="memberEmail"/>
         <result column="CREATE_AT" property="createdAt"/>
         <result column="UPDATE_AT" property="updatedAt"/>
     </resultMap>
-        <select id="findAll" resultMap="boardResult">
-        SELECT BOARD_ID,
+
+    <select id="findAll" resultMap="boardResult">
+        SELECT  BOARD_ID,
                 TITLE,
                 MEMBER_EMAIL,
                 CREATE_AT,
@@ -21,25 +25,27 @@
     <insert id="save">
         INSERT INTO
         BOARD(
-        TITLE,
-        CONTENTS,
-        FILE_NAME,
-        MEMBER_EMAIL,
-        CREATE_AT,
-        UPDATE_AT
+            TITLE,
+            CONTENTS,
+            FILE_NAME,
+            MEMBER_EMAIL,
+            CREATE_AT,
+            UPDATE_AT
         ) VALUES (
-        #{title},
-        #{contents},
-        #{fileName},
-        #{memberEmail},
-        CURRENT_TIMESTAMP,
-        CURRENT_TIMESTAMP
+            #{title},
+            #{contents},
+            #{fileName},
+            #{memberEmail},
+            CURRENT_TIMESTAMP,
+            CURRENT_TIMESTAMP
         )
     </insert>
-    <select id="getBoardById" resultMap="boardResult">
+    <select id="findOne" resultMap="boardResult">
         SELECT BOARD_ID,
                 TITLE,
                 MEMBER_EMAIL,
+                CONTENTS,
+                FILE_NAME,
                 CREATE_AT,
                 UPDATE_AT
         FROM BOARD

@@ -20,7 +20,7 @@ public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int reply_no;
+    private Long reply_no;
 
     @Column(length = 400, nullable = false)
     private String reply_content;

@@ -1,9 +1,10 @@
 spring:
   application:
-    name: board
+    name: jpa
+
   datasource:
     hikari:
-      jdbc-url: jdbc:h2:tcp://localhost/C:\khWorkspace\07_RestServer\db\tdb
+      jdbc-url: jdbc:h2:tcp://localhost/C:\khWorkspace\07_RestServer\jpa/tdb
       driver-class-name: org.h2.Driver
       username: sa
       password: 1234
@@ -11,6 +12,10 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
   jpa:
     hibernate:
       ddl-auto: create
@@ -20,11 +25,6 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
         format_sql: true
 
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 50MB
-
 server:
   port: 8888
 
@@ -33,7 +33,3 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-
-mybatis:
-  type-aliases-package: com.kh.board.entity
-  mapper-locations: mappers/*.xml

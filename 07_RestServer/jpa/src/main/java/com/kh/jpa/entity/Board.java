@@ -3,11 +3,8 @@ package com.kh.jpa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Check;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
@@ -16,39 +13,40 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "BOARD")
 @Check(constraints = "status IN ('Y','N')")
-public class Board {
+public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long board_id;
+    private Long boardId;
 
     @Column(length = 100, nullable = false)
-    private String board_title;
+    private String boardTitle;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_writer", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "board_writer", referencedColumnName = "userId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
 
     @Lob
     @Column(nullable = false)
-    private String board_content;
+    private String boardContent;
 
     @Column(length = 100)
-    private String origin_name;
+    private String originName;
 
     @Column(length = 100)
-    private String change_name;
+    private String changeName;
 
     @Builder.Default
     @Column(columnDefinition = "INT DEFAULT 0")
-    private int count = 0;
+    private Integer count = 0;
 
-    @CreationTimestamp
-    @Column(updatable = false)
-    private LocalDateTime create_date;
-
+    @Enumerated(EnumType.STRING)
     @Builder.Default
     @Column(nullable = false, columnDefinition = "CHAR(1) DEFAULT 'Y'")
-    private String status = "Y";
+    private Status status = Status.Y;
+
+    public enum Status {
+        Y, N;
+    }
 }

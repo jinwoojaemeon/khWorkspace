@@ -17,13 +17,13 @@ import java.io.Serializable;
 public class BoardTag {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_no", referencedColumnName = "board_id", nullable = false)
+    @JoinColumn(name = "board_no", referencedColumnName = "boardId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Board board;
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tag_id", referencedColumnName = "tag_id", nullable = false)
+    @JoinColumn(name = "tag_id", referencedColumnName = "tagId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Tag tag;
 

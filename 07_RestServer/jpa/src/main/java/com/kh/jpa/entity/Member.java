@@ -19,22 +19,22 @@ public class Member {
 
     @Id
     @Column(length = 30)
-    private String user_id;
+    private String userId;
 
     @Column(length = 100, nullable = false)
-    private String user_pwd;
+    private String userPwd;
 
     @Column(length = 15, nullable = false)
-    private String user_name;
+    private String userName;
 
     @Column(length = 254)
     private String email;
 
-    @Column(columnDefinition = "CHAR(1)")
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column
-    private int age;
+    private Integer age;
 
     @Column(length = 13)
     private String phone;
@@ -44,12 +44,21 @@ public class Member {
 
     @CreationTimestamp
     @Column(updatable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime enrollDate;
 
     @UpdateTimestamp
-    private LocalDateTime updated_at;
+    private LocalDateTime modifyDate;
 
+    @Enumerated(EnumType.STRING)
     @Builder.Default
     @Column(nullable = false, columnDefinition = "CHAR(1) DEFAULT 'Y'")
-    private String status = "Y";
+    private Status status = Status.Y;
+
+    public enum Gender {
+        M, F;
+    }
+
+    public enum Status {
+        Y, N;
+    }
 }

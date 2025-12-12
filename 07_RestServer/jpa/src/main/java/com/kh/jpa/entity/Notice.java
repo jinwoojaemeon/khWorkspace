@@ -2,11 +2,8 @@ package com.kh.jpa.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
@@ -14,7 +11,7 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @Table(name = "NOTICE")
-public class Notice {
+public class Notice extends BaseTimeEntity {
 //    NOTICE_NO IDENTITY PRIMARY KEY, -- AUTO_INCREMENT
 //    NOTICE_TITLE VARCHAR(30) NOT NULL,
 //    NOTICE_WRITER VARCHAR(30) NOT NULL,
@@ -24,23 +21,16 @@ public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long notice_id;
+    private Long noticeId;
 
     @Column(length = 30, nullable = false)
-    private String notice_title;
-
-    @Column(length = 30, nullable = false)
-    private String notice_writer;
-
-    @Column(length = 200, nullable = false)
-    private String notice_content;
-
-    @CreationTimestamp
-    @Column(updatable = false)
-    private LocalDateTime create_date;
+    private String noticeTitle;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "notice_writer", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "notice_writer", referencedColumnName = "userId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Member member;
+
+    @Column(length = 200, nullable = false)
+    private String noticeContent;
 }

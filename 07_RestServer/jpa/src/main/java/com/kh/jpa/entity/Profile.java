@@ -20,15 +20,17 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long profile_id;
+    private Long profileId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "userId", nullable = false, unique = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private String user_id;
+    private Member member;
 
-    private String profile_image;
+    @Column(length = 100)
+    private String profileImage;
 
+    @Column(length = 300)
     private String intro;
 
 }
